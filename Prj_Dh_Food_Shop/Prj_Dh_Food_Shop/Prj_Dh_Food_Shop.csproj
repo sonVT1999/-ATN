@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Content\Css\n-custom.css" />
+    <Content Include="Areas\Content\Images\__Banner_Trang_chu_De_dang_mua_sam_san_pham_Dh_Foods.jpg" />
+    <Content Include="Areas\Content\Images\__cau_Chuyen_Thuong_Hieu_Dh_Foods_copy.jpg" />
     <Content Include="Areas\Content\Scripts\Admin\AdminReport.js" />
     <Content Include="Areas\Content\Scripts\Admin\jsWelcomePageAdmin.js" />
     <Content Include="Areas\Content\Scripts\AmChart\charts.js" />
