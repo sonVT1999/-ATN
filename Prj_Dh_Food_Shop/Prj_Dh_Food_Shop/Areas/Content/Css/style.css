@@ -681,6 +681,35 @@ input[type=text], textarea {
     display: block;
 }
 
+.copyright .copy {
+    font-style: italic;
+    color: #999999;
+    font-size: 13px;
+    line-height: 22px;
+}
+
+    .copyright .copy strong {
+        font-style: normal;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+.mainFoot .be {
+    font-size: 15px;
+    line-height: 23px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.mainFoot .be a {
+    color: inherit;
+}
+
+.mainFoot .be a:hover {
+    color: #FFEB3B;
+}
+
 .active-circle {
     width: 80px;
     height: 80px;
@@ -2115,7 +2144,7 @@ h2 {
 
 .header-site {
     color: #fff;
-    background-color: #1c9f9c;
+    background-color: #013427;
     position: fixed;
     z-index: 9999;
     top: 0;
@@ -2143,6 +2172,10 @@ h2 {
     .header-site .header-top {
         display: none;
     }
+}
+
+.bannerProduct:hover {
+    transform: scale(1.08);
 }
 
 .header-site .header-top .header-top__left {
