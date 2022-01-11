@@ -3,15 +3,159 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using Prj_Dh_Food_Shop;
+using System.Text.RegularExpressions;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
     public class UsersController : Controller
     {
+        private Entity_Dh_Food db = new Entity_Dh_Food();
+
         // GET: Users
         public ActionResult Index()
         {
-            return View();
+            var NguoiDung = db.Users.Where(x => x.id != 0);
+            ViewBag.district = new UsersController().getDistricts();
+            return View(db.Users.OrderByDescending(x => x.id));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Users model)
+        {
+            //var sqlEmail = db.Database.SqlQuery<Users> ("select COUNT(phone_number) from Users where phone_number =" + model.phone_number).ToList();
+            db.Users.Add(model);
+            var msg = "";
+            var status = 0;
+            if (model.passwords.Length < 8)
+            {
+                msg = "Tạo mới không thành công! Password phải có nhiều hơn 8 kí tự!";
+                status = -1;
+            }
+            else if (model.phone_number == null || !Regex.Match(model.phone_number, @"^[0-9]+$").Success || model.phone_number.Length != 10)
+            {
+                msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
+                status = -1;
+            }
+            //else if (sqlEmail.Count() > 0)
+            //{
+            //    msg = "Tạo mới không thành công! Số điện thoại của người dùng đã tồn tại!";
+            //    status = -1;
+            //}
+            else
+            {
+                model.is_active = 1;
+                model.create_date = DateTime.Now;
+                db.SaveChanges();
+                msg = "Thêm mới người dùng thành công!";
+                status = 1;
+            }
+            return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
+        }
+        public List<Districts> getDistricts()
+        {
+            var model = db.Districts.ToList();
+            return model;
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            ViewBag.district = new UsersController().getDistricts();
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDetail", users);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            ViewBag.district = new UsersController().getDistricts();
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialEdit", users);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Users users)
+        {
+            var result = db.Users.SingleOrDefault(b => b.id == users.id);
+            ViewBag.district = new UsersController().getDistricts();
+
+            if (result != null)
+            {
+                result.name = users.name;
+                result.username = users.username;
+                result.passwords = users.passwords;
+                result.phone_number = users.phone_number;
+                result.addresss = users.addresss;
+                result.is_active = users.is_active;
+                result.permission = users.permission;
+                result.id_district = users.id_district;
+
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDelete", users);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Orders Od = db.Orders.Where(x => x.id_user == id).FirstOrDefault();
+            Posts posts = db.Posts.Where(x => x.id_user == id).FirstOrDefault();
+            var msgDel = "";
+            var status = 0;
+            if (Od != null)
+            {
+                msgDel = "Người dùng đã, đang xử lý đơn hàng. Không thể xóa!";
+                status = -1;
+            }
+            else if (posts != null)
+            {
+                msgDel = "Người dùng đã đăng bài viết. Không thể xóa!";
+                status = -1;
+            }
+            else
+            {
+                Users users = db.Users.Find(id);
+                db.Users.Remove(users);
+                db.SaveChanges();
+                msgDel = "Xóa người dùng thành công!";
+                status = 1;
+            }
+
+            return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

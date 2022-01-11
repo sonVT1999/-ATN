@@ -1,0 +1,51 @@
+﻿@model Prj_Dh_Food_Shop.Users
+
+<script>
+    function addUser() {
+        var model = {
+            name: $('input[name="name"]').val(),
+            username: $('input[name="username"]').val(),
+            passwords: $('input[name="passwords"]').val(),
+            phone_number: $('input[name="phone_number"]').val(),
+            addresss: $('input[name="addresss"]').val(),
+            permission: $('select[name="permission"]').val(),
+            id_district: $('select[name="id_district"]').val(),
+            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        }
+
+        $.ajax({
+            url: '/Users/Delete',
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msgDel)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Users/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+</script>
+
+<div class="modal-content">
+    <div class="modal-body">
+        <h5>Bạn có chắc chắn muốn xóa người dùng: @Model.name ?</h5>
+    </div>
+    <div class="modal-footer" onsubmit="return false">
+        @using (Html.BeginForm("Delete", "Users", Model.id))
+        {
+            <input type="submit" value="Xóa" class="btn btn-danger">
+            <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+        }
+    </div>
+</div>
+

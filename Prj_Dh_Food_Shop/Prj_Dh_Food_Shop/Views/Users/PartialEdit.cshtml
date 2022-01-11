@@ -1,0 +1,104 @@
+﻿
+@model Prj_Dh_Food_Shop.Users
+@{
+    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+}
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 330px; width: auto; top: 100px; left: 514px;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span class="ui-dialog-title">Chỉnh sửa thông tin người dùng</span>
+    </div>
+    <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
+        </div>
+        @using (Html.BeginForm("Edit", "Users"))
+        {
+            <table class="n-tbl-head-1" style="margin-bottom: 0">
+                <tbody>
+                    <tr style="height: 25px">
+                        <td style="width: 150px">
+                            <span id="Name">Tên người dùng</span> (<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                        </td>
+                        <td style="width: 300px">
+                            <input type="text" value="@Model.name" maxlength="255" placeholder="" name="name" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="UserName">Tài khoản</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.username" maxlength="255" placeholder="" name="username" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Pass">Mật khẩu</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.passwords" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Phone">Số điện thoại</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.phone_number" maxlength="10" placeholder="" name="phone_number" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Address">Địa chỉ</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.addresss" maxlength="255" placeholder="" name="addresss" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Act">Kích hoạt</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <input type="radio" @(Model.is_active == 1 ? "checked=checked" : "") name="is_active" value="1" ><c>Có</c>
+                            <input type="radio" @(Model.is_active != 1 ? "checked=checked" : "") name="is_active" value="0"><c>Không</c>
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Permiss">Quyền</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <select class="m_text" name="permission" required>
+                                <option value="@Model.permission">@Model.permission</option>
+                                <option> Quản lý </option>
+                                <option> Nhân viên </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="District">Quận, huyện</span>:
+                        </td>
+                        <td>
+                            <select class="m_text" name="id_district" required>
+                                <option value="@Model.id_district">@Model.Districts.name</option>
+                                @foreach (Districts item in districts)
+                                {
+                                    <option value=@item.id>@item.name</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 25px;">
+                        <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save">
+                            <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

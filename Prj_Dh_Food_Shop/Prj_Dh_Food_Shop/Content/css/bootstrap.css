@@ -129,8 +129,17 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
+    background-color: #007243;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    border-radius: 6px;
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #007243;
 }
 button[disabled],
 html input[disabled] {
@@ -1100,12 +1109,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #000;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #3c763d;
   text-decoration: underline;
 }
 a:focus {
@@ -2512,9 +2521,9 @@ input[type="search"] {
 }
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 4px 0 0;
-  margin-top: 1px \9;
-  line-height: normal;
+    margin: 4px 10px 7px;
+    margin-top: 1px \9;
+    line-height: normal;
 }
 input[type="file"] {
   display: block;
@@ -2596,7 +2605,7 @@ input[type="search"] {
   input[type="time"],
   input[type="datetime-local"],
   input[type="month"] {
-    line-height: 34px;
+    line-height: 20px;
   }
   input[type="date"].input-sm,
   input[type="time"].input-sm,

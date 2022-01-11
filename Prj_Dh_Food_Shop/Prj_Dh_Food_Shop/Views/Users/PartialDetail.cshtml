@@ -1,0 +1,103 @@
+﻿
+@model Prj_Dh_Food_Shop.Users
+@{
+    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+}
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 330px; width: auto; top: 100px; left: 514px;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span class="ui-dialog-title">Xem thông tin người dùng</span>
+    </div>
+    <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
+        </div>
+        @using (Html.BeginForm("Edit", "Users"))
+        {
+            <table class="n-tbl-head-1" style="margin-bottom: 0">
+                <tbody>
+                    <tr style="height: 25px">
+                        <td style="width: 150px">
+                            <span id="Name">Tên người dùng</span>:
+                        </td>
+                        <td style="width: 300px">
+                            @Model.name
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="UserName">Tài khoản</span>:
+                        </td>
+                        <td>
+                            @Model.username
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Pass">Mật khẩu</span>:
+                        </td>
+                        <td>
+                            @Model.passwords
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Phone">Số điện thoại</span>:
+                        </td>
+                        <td>
+                            @Model.phone_number
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Address">Địa chỉ</span>:
+                        </td>
+                        <td>
+                            @Model.addresss
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Address">Ngày tạo</span>:
+                        </td>
+                        <td>
+                            @Model.create_date
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Act">Kích hoạt</span>:
+                        </td>
+                        <td>
+                            @if (Model.is_active == 1)
+                            {<span>Có</span>}
+                            else
+                            {<span>Không</span>}
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="Permiss">Quyền</span>:
+                        </td>
+                        <td>
+                            @Model.permission
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span id="District">Quận, huyện</span>:
+                        </td>
+                        <td>
+                            @Model.Districts.name
+                        </td>
+                    </tr>
+                    <tr style="height: 25px;">
+                        <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                            <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

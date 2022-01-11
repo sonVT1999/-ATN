@@ -69,8 +69,12 @@ D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.WebPages.Razor.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Newtonsoft.Json.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Antlr3.Runtime.pdb
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csprojAssemblyReference.cache
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csproj.CoreCompileInputs.cache
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csproj.CopyComplete
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.pdb
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.dll
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.dll
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.xml
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.xml
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csprojAssemblyReference.cache

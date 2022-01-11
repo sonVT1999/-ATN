@@ -1,80 +1,283 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<link href="/Content/css/n-custom.css" rel="stylesheet">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="~/Content/css/style.css">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-<h3 class="title1">Tables</h3>
-<div class="bs-example widget-shadow" data-example-id="contextual-table">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Column heading</th>
-                <th>Column heading</th>
-                <th>Column heading</th>
+
+@model IEnumerable<Prj_Dh_Food_Shop.Users>
+@{
+    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+}
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('.btn-load').click(function (e) {
+
+            e.preventDefault();
+
+            var $modal = $('#myModal');
+            var $modalDialog = $('.modal_dialog');
+            var href = $(this).prop('href');
+
+            // không cho phép tắt modal khi click bên ngoài modal
+            var option = { backdrop: 'static' };
+
+            // load modal
+            $modalDialog.load(href, function () {
+                $modal.modal(option, 'show');
+            });
+        });
+
+    });
+
+    function addUser() {
+        var model = {
+            name: $('input[name="name"]').val(),
+            username: $('input[name="username"]').val(),
+            passwords: $('input[name="passwords"]').val(),
+            phone_number: $('input[name="phone_number"]').val(),
+            addresss: $('input[name="addresss"]').val(),
+            permission: $('select[name="permission"]').val(),
+            id_district: $('select[name="id_district"]').val(),
+            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        }
+
+        $.ajax({
+            url: '/Users/Create',
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Users/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+                    
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+</script>
+
+<div id="sitemap">
+    <ul>
+        <li>
+            <a href="#">
+                <span id="ctl00_MainContent_Label5">Quản lý người dùng</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<table style="width: 100%;" class="frmSearch n-tbl-head-1 m-0">
+    <tbody>
+        <tr>
+            <td style="padding-left: 0; width:110px">
+                <span style="float: left; font-weight: bold">Tên người dùng</span>
+            </td>
+            <td>
+                <input name="txbName" type="text" maxlength="255" class="trimspace">
+            </td>
+            <td style="width:120px">
+                <span style="float: left; margin-left: 10px; font-weight: bold">Tên tài khoản</span>
+            </td>
+            <td>
+                <input name="txbUsername" type="text" maxlength="50" class="field trimspace">
+            </td>
+            <td style="width:130px">
+                <span style="float: left; margin-left: 10px; font-weight: bold">Số điện thoại</span>
+            </td>
+            <td style="padding: 0">
+                <input name="txbPhoneNumber" type="text" maxlength="20" class="field trimspace">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 10px" ;="" colspan="8">
+                <div class="topAction_right pr-0" style="float: right">
+                    <input type="submit" name="btnSearch" value="Tìm kiếm" class="myButton btnTrimSpace">
+                    <input type="submit" data-toggle="modal" data-target="#myModalNew" value="Thêm mới" class="myButton">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <div class="table-agile-info">
+        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+            <tr style="background-color: #EDEDED">
+                <th>
+                    Tên người dùng
+                </th>
+                <th>
+                    tài khoản
+                </th>
+                <th>
+                    mật khẩu
+                </th>
+                <th style="text-align: center">
+                    Quyền
+                </th>
+                <th style="text-align: center">
+                    Kích hoạt
+                </th>
+                <th style="text-align: center">
+                    Xem chi tiết
+                </th>
+                <th style="text-align: center">
+                    Sửa
+                </th>
+                <th style="text-align: center">
+                    Xóa
+                </th>
             </tr>
-        </thead>
-        <tbody>
-            <tr class="active">
-                <th scope="row">1</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="success">
-                <th scope="row">3</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="info">
-                <th scope="row">5</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="warning">
-                <th scope="row">7</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="danger">
-                <th scope="row">9</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-        </tbody>
-    </table>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.passwords)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.permission)
+                    </td>
+                    <td style="text-align: center">
+                        @if (item.is_active == 1)
+                        {<span>Có</span>}
+                        else
+                        {<span>Không</span>}
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Users/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Users/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Users/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>
 
+<div id="myModal" class="modal fade" role="dialog">
+    @*partialView*@
+</div>
+
+<div id="myModalNew" class="modal fade" role="dialog">
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+         style="position: absolute; height: 330px; width: auto; top: 100px; left: 514px;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <span class="ui-dialog-title">Thêm người dùng</span>
+        </div>
+        <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+            <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
+            </div>
+            <form role="form" class="form-horizontal" method="post" action="/Users/Create" onsubmit="return false">
+                @Html.AntiForgeryToken()
+                <table class="n-tbl-head-1" style="margin-bottom: 0">
+                    <tbody>
+                        <tr style="height: 25px">
+                            <td style="width: 150px">
+                                <span id="Name">Tên người dùng</span> (<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                            </td>
+                            <td style="width: 300px">
+                                <input type="text" maxlength="255" placeholder="" name="name" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="UserName">Tài khoản</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="username" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="Pass">Mật khẩu</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="Phone">Số điện thoại(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>)</span>:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="10" placeholder="" name="phone_number" class="m_text" />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="Address">Địa chỉ</span>:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="addresss" class="m_text" />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="Permiss">Quyền</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <select class="m_text" name="permission" required>
+                                    <option value="" disabled selected>Chọn quyền</option>
+                                    <option> Quản lý </option>
+                                    <option> Nhân viên </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span id="District">Quận, huyện</span>:
+                            </td>
+                            <td>
+                                <select class="m_text" name="id_district" required>
+                                    <option value="" disabled selected>Chọn tên quận, huyện</option>
+                                    @foreach (Districts item in districts)
+                                    {
+                                        <option value=@item.id>@item.name</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                                <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addUser()">
+                                <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
