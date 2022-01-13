@@ -153,6 +153,7 @@
     <Compile Include="Models\Provinces.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Models_add\Search_Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Content\Css\n-custom.css" />

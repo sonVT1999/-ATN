@@ -1,51 +1,21 @@
 ﻿@model Prj_Dh_Food_Shop.Users
 
-<script>
-    function addUser() {
-        var model = {
-            name: $('input[name="name"]').val(),
-            username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
-            phone_number: $('input[name="phone_number"]').val(),
-            addresss: $('input[name="addresss"]').val(),
-            permission: $('select[name="permission"]').val(),
-            id_district: $('select[name="id_district"]').val(),
-            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
-        }
 
-        $.ajax({
-            url: '/Users/Delete',
-            type: "POST",
-            data: model,
-            success: function (rs) {
-                if (rs != null && rs != undefined && rs != '') {
-                    if (window.confirm(rs.msgDel)) {
-                        if (rs.status == 1)
-                            window.location.href = '/Users/Index';
-                    }
-                    else {
-                        // They clicked no
-                    }
-
-                } else {
-                    toastr.error('Có lỗi xảy ra!');
-                }
-            },
-        });
-    }
-
-</script>
-
-<div class="modal-content">
-    <div class="modal-body">
-        <h5>Bạn có chắc chắn muốn xóa người dùng: @Model.name ?</h5>
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 405px; width: auto; top: 10px; left: 38%;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <span class="ui-dialog-title">Bạn có chắc chắn muốn xóa người dùng: @Model.name ?</span>
+        </div>
     </div>
-    <div class="modal-footer" onsubmit="return false">
-        @using (Html.BeginForm("Delete", "Users", Model.id))
-        {
-            <input type="submit" value="Xóa" class="btn btn-danger">
-            <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
-        }
+    <div class="modal-footer">
+        <form onsubmit="return false">
+            @using (Html.BeginForm("Delete", "Users", Model.id))
+            {
+                <input type="submit" value="Xóa" class="btn btn-danger" onclick="DelUser()">
+                <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+            }
+        </form>
     </div>
 </div>
 

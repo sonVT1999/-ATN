@@ -2763,7 +2763,7 @@ div#vmap {
     height: 223px !important;
 }
 .charts, .row {
-    margin: 1.5em 0 0;
+    margin: 0 0 0;
 }
 }
 @media(max-width:1024px){
