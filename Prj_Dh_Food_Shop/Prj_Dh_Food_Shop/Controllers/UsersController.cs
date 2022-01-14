@@ -23,7 +23,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.txbPhoneNumber = model.txbPhoneNumber == null ? string.Empty : model.txbPhoneNumber.Trim();
 
             model.page = model.page == 0 ? 1 : model.page;
-            model.pageSize = model.pageSize == 0 ? 2 : model.pageSize;
+            model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
 
             var data = from c in db.Users
                        join p in db.Districts on c.id_district equals p.id
@@ -56,7 +56,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Users model)
         {
-            //var sqlEmail = db.Database.SqlQuery<Users> ("select COUNT(phone_number) from Users where phone_number =" + model.phone_number).ToList();
+            var sqlEmail = db.Users.Where(x => x.phone_number == model.phone_number).FirstOrDefault();
             db.Users.Add(model);
             var msg = "";
             var status = 0;
@@ -70,11 +70,11 @@ namespace Prj_Dh_Food_Shop.Controllers
                 msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
                 status = -1;
             }
-            //else if (sqlEmail.Count() > 0)
-            //{
-            //    msg = "Tạo mới không thành công! Số điện thoại của người dùng đã tồn tại!";
-            //    status = -1;
-            //}
+            else if (sqlEmail!=null)
+            {
+                msg = "Tạo mới không thành công! Số điện thoại của người dùng đã tồn tại!";
+                status = -1;
+            }
             else
             {
                 model.is_active = 1;
@@ -124,6 +124,8 @@ namespace Prj_Dh_Food_Shop.Controllers
         [HttpPost]
         public ActionResult Edit(Users users)
         {
+            var msg = "";
+            var status = 0;
             var result = db.Users.SingleOrDefault(b => b.id == users.id);
             ViewBag.district = new UsersController().getDistricts();
 
@@ -131,16 +133,34 @@ namespace Prj_Dh_Food_Shop.Controllers
             {
                 result.name = users.name;
                 result.username = users.username;
-                result.passwords = users.passwords;
-                result.phone_number = users.phone_number;
-                result.addresss = users.addresss;
-                result.is_active = users.is_active;
-                result.permission = users.permission;
-                result.id_district = users.id_district;
+                if (users.passwords.Length < 8)
+                {
+                    msg = "Cập nhật không thành công! Password phải có nhiều hơn 8 kí tự!";
+                    status = -1;
+                }
+                else
+                {
+                    result.passwords = users.passwords;
+                    if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0-9]+$").Success || users.phone_number.Length != 10)
+                    {
+                        msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
+                        status = -1;
+                    }
+                    else
+                    {
+                        result.phone_number = users.phone_number;
+                        result.addresss = users.addresss;
+                        result.is_active = users.is_active;
+                        result.permission = users.permission;
+                        result.id_district = users.id_district;
 
-                db.SaveChanges();
+                        db.SaveChanges();
+                        msg = "Cập nhật thông tin người dùng thành công!";
+                        status = 1;
+                    }
+                }
             }
-            return RedirectToAction("Index");
+            return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(int? id)
@@ -185,66 +205,5 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
-
-        //[HttpPost]
-        //public ActionResult Search(Search_Users model)
-        //{
-        //    if (model.txbName != "" || model.txbUsername != "" || model.txbPhoneNumber != "")
-        //    {
-        //        model.txbName = model.txbName.Trim();
-        //        model.txbUsername = model.txbUsername.Trim();
-        //        model.txbPhoneNumber = model.txbPhoneNumber.Trim();
-        //    }
-        //    model.page = model.page == 0 ? 1 : model.page;
-        //    model.pageSize = model.pageSize == 0 ? 5 : model.pageSize;
-
-        //    var data = from c in db.CongNhan
-        //               join p2 in db.Phuong on c.id_phuong equals p2.id
-        //               where (string.IsNullOrEmpty(model.searchString) || c.ten.Contains(model.searchString))
-        //               && (!model.id_phong_ban.HasValue || c.id_phong_ban == model.id_phong_ban) && (!model.id_phuong.HasValue || c.id_phuong == model.id_phuong)
-        //               select new Search_Users()
-        //               {
-        //                   id = c.id,
-        //                   id_phuong = c.id_phuong,
-        //                   id_phong_ban = c.id_phong_ban,
-        //                   que_quan = c.que_quan,
-        //                   phuong_name = p2.ten,
-        //                   phong_name = p.ten,
-        //                   ten = c.ten,
-        //               };
-
-        //    var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Users>();
-
-        //    var lstDistrict = new UsersController().getDistricts();
-
-        //    ViewBag.phuong = lstDistrict;
-        //    //model.lstDistrict = lstDistrict.ConvertAll(a => new SelectListItem()
-        //    //{
-        //    //    Text = a.name,
-        //    //    Value = a.id.ToString(),
-        //    //}) ?? new List<SelectListItem>();
-
-        //    model.lstData = rs;
-        //    model.totalRecord = data.Count();
-        //    model.totalPage = (int)Math.Ceiling((decimal)model.totalRecord / model.pageSize);
-        //    return View(model);
-        //}
-
-
-        //{
-        //    List<Users> usser = new List<Users>();
-        //    if (txbName != "" || txbUsername != "" || txbPhoneNumber != "")
-        //    {
-        //        usser = db.Users.SqlQuery("select * from Users where Users.name like N'%" + txbName + "%' and Users.username like N'%" + txbUsername + "%' and Users.phone_number like N'%" + txbPhoneNumber + "%'").ToList();
-        //        ViewBag.district = new UsersController().getDistricts();
-        //    }
-        //    else
-        //    {
-        //        usser = db.Users.Where(x => x.id != 0).ToList();
-        //        ViewBag.district = new UsersController().getDistricts();
-        //    }
-        //    return View("Index", usser.OrderByDescending(x => x.id));
-        //}
-
     }
 }

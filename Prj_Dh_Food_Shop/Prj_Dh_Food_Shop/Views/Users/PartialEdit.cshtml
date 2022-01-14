@@ -12,8 +12,6 @@
     <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
         <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
         </div>
-        @using (Html.BeginForm("Edit", "Users"))
-        {
             <table class="n-tbl-head-1" style="margin-bottom: 0">
                 <tbody>
                     <tr style="height: 25px">
@@ -93,12 +91,11 @@
                     </tr>
                     <tr style="height: 25px;">
                         <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
-                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save">
+                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save" onclick="editUser(@Model.id)">
                             <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
                         </td>
                     </tr>
                 </tbody>
             </table>
-        }
     </div>
 </div>
