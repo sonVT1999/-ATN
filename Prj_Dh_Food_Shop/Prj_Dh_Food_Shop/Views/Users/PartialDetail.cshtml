@@ -9,8 +9,8 @@
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">Xem thông tin người dùng</span>
     </div>
-    <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
-        <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
+    <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div style="display:none;" role="status" aria-hidden="true">
         </div>
         @using (Html.BeginForm("Edit", "Users"))
         {
@@ -18,7 +18,7 @@
                 <tbody>
                     <tr style="height: 25px">
                         <td style="width: 150px">
-                            <span id="Name">Tên người dùng</span>:
+                            <span>Tên người dùng</span>:
                         </td>
                         <td style="width: 300px">
                             @Model.name
@@ -26,7 +26,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="UserName">Tài khoản</span>:
+                            <span>Tài khoản</span>:
                         </td>
                         <td>
                             @Model.username
@@ -34,7 +34,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Pass">Mật khẩu</span>:
+                            <span>Mật khẩu</span>:
                         </td>
                         <td>
                             @Model.passwords
@@ -42,7 +42,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Phone">Số điện thoại</span>:
+                            <span>Số điện thoại</span>:
                         </td>
                         <td>
                             @Model.phone_number
@@ -50,7 +50,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Address">Địa chỉ</span>:
+                            <span>Địa chỉ</span>:
                         </td>
                         <td>
                             @Model.addresss
@@ -58,7 +58,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Address">Ngày tạo</span>:
+                            <span>Ngày tạo</span>:
                         </td>
                         <td>
                             @Model.create_date
@@ -66,7 +66,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Act">Kích hoạt</span>:
+                            <span>Kích hoạt</span>:
                         </td>
                         <td>
                             @if (Model.is_active == 1)
@@ -77,7 +77,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="Permiss">Quyền</span>:
+                            <span>Quyền</span>:
                         </td>
                         <td>
                             @Model.permission
@@ -85,7 +85,7 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span id="District">Quận, huyện</span>:
+                            <span>Quận, huyện</span>:
                         </td>
                         <td>
                             @Model.Districts.name

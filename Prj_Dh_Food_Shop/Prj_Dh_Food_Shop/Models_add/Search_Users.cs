@@ -27,6 +27,8 @@ namespace Prj_Dh_Food_Shop
 
         public int id_district { get; set; }
 
+        public int id_category { get; set; }
+
         public string district_name { get; set; }
 
         public virtual Districts Districts { get; set; }

@@ -5,35 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="~/Content/css/style.css">
 
-@model Prj_Dh_Food_Shop.Search_Users
+@model Prj_Dh_Food_Shop.Search_Products
 @{
 
-    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+    var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
     var count = 0;
 }
 
 <script>
-    function addUser() {
+    function addProduct() {
         var model = {
             name: $('input[name="name"]').val(),
-            username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
-            phone_number: $('input[name="phone_number"]').val(),
-            addresss: $('input[name="addresss"]').val(),
-            permission: $('select[name="permission"]').val(),
-            id_district: $('select[name="id_district"]').val(),
+            price: $('input[name="price"]').val(),
+            descriptions: $('input[name="descriptions"]').val(),
+            promotion: $('input[name="promotion"]').val(),
+            id_category: $('#id_category_new option:selected').val(),
             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
         }
 
         $.ajax({
-            url: '/Users/Create',
+            url: '/Products/Create',
             type: "POST",
             data: model,
             success: function (rs) {
                 if (rs != null && rs != undefined && rs != '') {
                     if (window.confirm(rs.msg)) {
                         if (rs.status == 1)
-                            window.location.href = '/Users/Index';
+                            window.location.href = '/Products/Index';
                     }
                     else {
                         // They clicked no
@@ -48,14 +46,14 @@
 
     function DelUser(id) {
         $.ajax({
-            url: '/Users/Delete/' + id,
+            url: '/Products/Delete/' + id,
             type: "POST",
             //data: model,
             success: function (rs) {
                 if (rs != null && rs != undefined && rs != '') {
                     if (window.confirm(rs.msg)) {
                         if (rs.status == 1)
-                            window.location.href = '/Users/Index';
+                            window.location.href = '/Products/Index';
                     }
                     else {
                         // They clicked no
@@ -68,27 +66,27 @@
         });
     }
 
-    function editUser(id) {
+    function editProduct(id) {
         var model = {
             name: $('input[name="name"]').val(),
-            username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
-            phone_number: $('input[name="phone_number"]').val(),
-            addresss: $('input[name="addresss"]').val(),
-            permission: $('radio[name="is_active"]').val(),
-            permission: $('select[name="permission"]').val(),
-            id_district: $('select[name="id_district"]').val(),
+            price: $('input[name="price"]').val(),
+            descriptions: $('input[name="descriptions"]').val(),
+            promotion: $('input[name="promotion"]').val(),
+            is_hot: $('input[name="is_hot"]').val(),
+            is_new: $('select[name="is_new"]').val(),
+            is_active: $('select[name="is_active"]').val(),
+            id_category: $('select[name="id_category"]').val(),
         }
 
         $.ajax({
-            url: '/Users/Edit/' + id,
+            url: '/Products/Edit/' + id,
             type: "POST",
             data: model,
             success: function (rs) {
                 if (rs != null && rs != undefined && rs != '') {
                     if (window.confirm(rs.msg)) {
                         if (rs.status == 1)
-                            window.location.href = '/Users/Index';
+                            window.location.href = '/Products/Index';
                     }
                     else {
                         // They clicked no
@@ -106,32 +104,40 @@
     <ul>
         <li>
             <a>
-                <span>Quản lý người dùng</span>
+                <span>Quản lý sản phẩm</span>
             </a>
         </li>
     </ul>
 </div>
 <table style="width: 100%;" class="frmSearch n-tbl-head-1 m-0">
     <tbody>
-        <form action="/Users/Index" method="post">
+        <form action="/Products/Index" method="post">
             <tr>
                 <td style="padding-left: 0; width:110px">
-                    <span name="1" style="float: left; font-weight: bold">Tên người dùng</span>
+                    <span name="1" style="float: left; font-weight: bold">Tên sản phẩm</span>
                 </td>
                 <td>
-                    <input name="txbName" type="text" maxlength="255" class="trimspace">
+                    <input name="txbProductname" type="text" maxlength="255" class="trimspace">
                 </td>
-                <td style="width:120px">
-                    <span name="2" style="float: left; margin-left: 10px; font-weight: bold">Tên tài khoản</span>
+                <td style="width:120px;">
+                    <span name="2" style="float: left; margin-left: 10px; font-weight: bold">Đơn giá từ</span>
                 </td>
-                <td>
-                    <input name="txbUsername" type="text" maxlength="50" class="field trimspace">
+                <td style="width: 10%;">
+                    <input name="txbPriceFrom" type="text" maxlength="20" class="field trimspace">
                 </td>
-                <td style="width:130px">
-                    <span name="3" style="float: left; margin-left: 10px; font-weight: bold">Số điện thoại</span>
+                <td style="width:85px">
+                    <span name="3" style="float: left; margin-left: 10px; font-weight: bold">đến</span>
                 </td>
-                <td style="padding: 0">
-                    <input name="txbPhoneNumber" type="text" maxlength="20" class="field trimspace">
+                <td style="padding: 0;width: 10%;">
+                    <input name="txbPriceTo" type="text" maxlength="20" class="field trimspace">
+                </td>
+                <td style="width: 180px; padding-left: 35px;">
+                    <span name="4" style="float: left; margin-left: 10px; font-weight: bold">Loại sản phẩm</span>
+                </td>
+                <td style="padding: 0; width: 25%">
+                    <div class="searchDetail" style="width: 100%; padding-bottom: 3px">
+                        @Html.DropDownListFor(a => a.id_category, Model.lstloai, "Chọn loại sản phẩm")
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -166,16 +172,19 @@
                     STT
                 </th>
                 <th>
-                    Tên người dùng
-                </th>
-                <th>
-                    tài khoản
-                </th>
-                <th>
-                    mật khẩu
+                    Tên sản phẩm
                 </th>
                 <th style="text-align: center">
-                    Quyền
+                    Đơn giá
+                </th>
+                <th>
+                    loại sản phẩm
+                </th>
+                <th style="text-align: center">
+                    sản phẩm mới
+                </th>
+                <th style="text-align: center">
+                    sản phẩm bán chạy
                 </th>
                 <th style="text-align: center">
                     Kích hoạt
@@ -201,14 +210,23 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.username)
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.price)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.passwords)
+                        @Html.DisplayFor(modelItem => item.category_name)
                     </td>
                     <td style="text-align: center">
-                        @Html.DisplayFor(modelItem => item.permission)
+                        @if (item.is_hot == 1)
+                        {<span>Có</span>}
+                        else
+                        {<span>Không</span>}
+                    </td>
+                    <td style="text-align: center">
+                        @if (item.is_new == 1)
+                        {<span>Có</span>}
+                        else
+                        {<span>Không</span>}
                     </td>
                     <td style="text-align: center">
                         @if (item.is_active == 1)
@@ -217,13 +235,13 @@
                         {<span>Không</span>}
                     </td>
                     <td style="text-align: center">
-                        <a href="/Users/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                        <a href="/Products/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
                     </td>
                     <td style="text-align: center">
-                        <a href="/Users/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                        <a href="/Products/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
                     </td>
                     <td style="text-align: center">
-                        <a href="/Users/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                        <a href="/Products/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
             }
@@ -241,7 +259,7 @@
                         if (Model.page > 1)
                         {
                             <li class="page-item">
-                                <a class="page-link" href="@Url.Action("Index", "Users", new { page = Model.page-1, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber})" tabindex="-1"> << </a>
+                                <a class="page-link" href="@Url.Action("Index", "Products", new { page = Model.page-1, pageSize = Model.pageSize, txbProductname = Model.txbProductname,txbPriceFrom = Model.txbPriceFrom, txbPriceTo = Model.txbPriceTo})" tabindex="-1"> << </a>
                             </li>
                         }
 
@@ -250,19 +268,19 @@
 
                             if (position == Model.page)
                             {
-                                <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Users", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber })">@position</a></li>
+                                <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Products", new { page = position, pageSize = Model.pageSize, txbProductname = Model.txbProductname,txbPriceFrom = Model.txbPriceFrom, txbPriceTo = Model.txbPriceTo })">@position</a></li>
                             }
 
                             else
                             {
-                                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Users", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber })">@position</a></li>
+                                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Products", new { page = position, pageSize = Model.pageSize,txbProductname = Model.txbProductname,txbPriceFrom = Model.txbPriceFrom, txbPriceTo = Model.txbPriceTo })">@position</a></li>
                             }
 
                         }
                         if (Model.page > 0 && Model.page < Model.totalPage)
                         {
                             <li class="page-item">
-                                <a class="page-link" href="@Url.Action("Index", "Users", new { page = Model.page+1, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber })" tabindex="-1"> >> </a>
+                                <a class="page-link" href="@Url.Action("Index", "Products", new { page = Model.page+1, pageSize = Model.pageSize, txbProductname = Model.txbProductname,txbPriceFrom = Model.txbPriceFrom, txbPriceTo = Model.txbPriceTo })" tabindex="-1"> >> </a>
                             </li>
                         }
 
@@ -287,20 +305,20 @@
 
 <div id="myModalNew" class="modal fade" role="dialog">
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
-         style="position: absolute; height: 375px; width: auto; top: 100px; left: 38%;">
+         style="position: absolute; height: 300px; width: 590px; top: 100px; left: 38%;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-            <span class="ui-dialog-title">Thêm người dùng</span>
+            <span class="ui-dialog-title">Thêm sản phẩm</span>
         </div>
-        <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
-            <div style="display:none;" role="status" aria-hidden="true">
+        <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+            <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
             </div>
-            <form role="form" class="form-horizontal" method="post" action="/Users/Create" onsubmit="return false">
+            <form role="form" class="form-horizontal" method="post" action="/Products/Create" onsubmit="return false">
                 @Html.AntiForgeryToken()
                 <table class="n-tbl-head-1" style="margin-bottom: 0">
                     <tbody>
                         <tr style="height: 25px">
                             <td style="width: 150px">
-                                <span>Tên người dùng</span> (<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                                <span id="Name">Tên sản phẩm</span> (<span style="color:Red;">*</span>):
                             </td>
                             <td style="width: 300px">
                                 <input type="text" maxlength="255" placeholder="" name="name" class="m_text" required />
@@ -308,65 +326,72 @@
                         </tr>
                         <tr style="height: 25px">
                             <td>
-                                <span>Tài khoản</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                                <span>Đơn giá</span>(<span  style="color:Red;">*</span>):
                             </td>
                             <td>
-                                <input type="text" maxlength="255" placeholder="" name="username" class="m_text" required />
-                            </td>
-                        </tr>
-                        <tr style="height: 25px">
-                            <td>
-                                <span>Mật khẩu</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
-                            </td>
-                            <td>
-                                <input type="text" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                                <input type="text" maxlength="255" placeholder="" name="price" class="m_text" required />
                             </td>
                         </tr>
                         <tr style="height: 25px">
                             <td>
-                                <span>Số điện thoại(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>)</span>:
+                                <span>Miêu tả</span>:
                             </td>
                             <td>
-                                <input type="text" maxlength="10" placeholder="" name="phone_number" class="m_text" />
-                            </td>
-                        </tr>
-                        <tr style="height: 25px">
-                            <td>
-                                <span>Địa chỉ</span>:
-                            </td>
-                            <td>
-                                <input type="text" maxlength="255" placeholder="" name="addresss" class="m_text" />
+                                <input type="text" maxlength="255" placeholder="" name="descriptions" class="m_text" />
                             </td>
                         </tr>
                         <tr style="height: 25px">
                             <td>
-                                <span>Quyền</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                                <span>Khuyến mãi</span>:
                             </td>
                             <td>
-                                <select class="m_text" name="permission" required>
-                                    <option value="" disabled selected>Chọn quyền</option>
-                                    <option> Quản lý </option>
-                                    <option> Nhân viên </option>
-                                </select>
+                                <input type="text" maxlength="10" placeholder="" name="promotion" class="m_text" />
                             </td>
                         </tr>
                         <tr style="height: 25px">
                             <td>
-                                <span>Quận, huyện</span>:
+                                <span id="District">Loại sản phẩm</span>:
                             </td>
                             <td>
-                                <select class="m_text" name="id_district" required>
-                                    <option value="" disabled selected>Chọn tên quận, huyện</option>
-                                    @foreach (Districts item in districts)
+                                <select id="id_category_new" class="m_text" name="id_category" required>
+                                    <option value="" disabled selected>Chọn tên loại sản phẩm</option>
+                                    @foreach (Categories item in categories)
                                     {
                                         <option value=@item.id>@item.name</option>
                                     }
                                 </select>
                             </td>
                         </tr>
+                        @*<tr style="height: 25px">
+                            <td>
+                                <span>Sản phẩm mới</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="radio" name="is_new" value="1"><c>Có</c>
+                                <input type="radio" name="is_new" value="0"><c>Không</c>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Sản phẩm bán chạy</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="radio" name="is_hot" value="1"><c>Có</c>
+                                <input type="radio" name="is_hot" value="0"><c>Không</c>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Kích hoạt</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="radio" name="is_active" value="1"><c>Có</c>
+                                <input type="radio" name="is_active" value="0"><c>Không</c>
+                            </td>
+                        </tr>*@
                         <tr style="height: 25px;">
                             <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
-                                <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addUser()">
+                                <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addProduct()">
                                 <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
                             </td>
                         </tr>
