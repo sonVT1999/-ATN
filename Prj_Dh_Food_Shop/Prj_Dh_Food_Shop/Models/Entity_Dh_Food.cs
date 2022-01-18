@@ -26,7 +26,6 @@ namespace Prj_Dh_Food_Shop
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Provinces> Provinces { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -74,9 +73,8 @@ namespace Prj_Dh_Food_Shop
 
             modelBuilder.Entity<Districts>()
                 .HasMany(e => e.Users)
-                .WithRequired(e => e.Districts)
-                .HasForeignKey(e => e.id_district)
-                .WillCascadeOnDelete(false);
+                .WithOptional(e => e.Districts)
+                .HasForeignKey(e => e.id_district);
 
             modelBuilder.Entity<Orders>()
                 .HasMany(e => e.Orders_detail)
@@ -96,7 +94,8 @@ namespace Prj_Dh_Food_Shop
             modelBuilder.Entity<Products>()
                 .HasMany(e => e.Images_product)
                 .WithOptional(e => e.Products)
-                .HasForeignKey(e => e.id_product);
+                .HasForeignKey(e => e.id_product)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Products>()
                 .HasMany(e => e.Orders_detail)

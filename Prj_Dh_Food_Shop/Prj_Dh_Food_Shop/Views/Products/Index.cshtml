@@ -44,7 +44,7 @@
         });
     }
 
-    function DelUser(id) {
+    function DelProducts(id) {
         $.ajax({
             url: '/Products/Delete/' + id,
             type: "POST",
@@ -66,16 +66,16 @@
         });
     }
 
-    function editProduct(id) {
+    function editProducts(id) {
         var model = {
             name: $('input[name="name"]').val(),
             price: $('input[name="price"]').val(),
             descriptions: $('input[name="descriptions"]').val(),
             promotion: $('input[name="promotion"]').val(),
-            is_hot: $('input[name="is_hot"]').val(),
-            is_new: $('select[name="is_new"]').val(),
-            is_active: $('select[name="is_active"]').val(),
-            id_category: $('select[name="id_category"]').val(),
+            is_hot: $('input[name="is_hot"]:checked').val(),
+            is_new: $('input[name="is_new"]:checked').val(),
+            is_active: $('input[name="is_active"]:checked').val(),
+            id_category: $('select[name="id_category_edit"]').val(),
         }
 
         $.ajax({
@@ -122,7 +122,7 @@
                 <td style="width:120px;">
                     <span name="2" style="float: left; margin-left: 10px; font-weight: bold">Đơn giá từ</span>
                 </td>
-                <td style="width: 10%;">
+                <td style="padding: 0; width: 10%;">
                     <input name="txbPriceFrom" type="text" maxlength="20" class="field trimspace">
                 </td>
                 <td style="width:85px">

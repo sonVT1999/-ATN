@@ -182,6 +182,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         {
             Orders Od = db.Orders.Where(x => x.id_user == id).FirstOrDefault();
             Posts posts = db.Posts.Where(x => x.id_user == id).FirstOrDefault();
+            Users user = db.Users.Where(x => x.id == id).FirstOrDefault();
             var msgDel = "";
             var status = 0;
             if (Od != null)
@@ -192,6 +193,11 @@ namespace Prj_Dh_Food_Shop.Controllers
             else if (posts != null)
             {
                 msgDel = "Người dùng đã đăng bài viết. Không thể xóa!";
+                status = -1;
+            }
+            else if (user.is_active == 1)
+            {
+                msgDel = "Người dùng đang kích hoạt. Không thể xóa!";
                 status = -1;
             }
             else

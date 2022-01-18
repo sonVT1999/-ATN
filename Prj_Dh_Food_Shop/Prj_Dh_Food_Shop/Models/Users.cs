@@ -44,7 +44,7 @@ namespace Prj_Dh_Food_Shop
         [StringLength(100)]
         public string permission { get; set; }
 
-        public int id_district { get; set; }
+        public int? id_district { get; set; }
 
         public virtual Districts Districts { get; set; }
 
