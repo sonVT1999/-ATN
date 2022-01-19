@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models_add\Search_Categories.cs" />
     <Compile Include="Models_add\Search_Products.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Orders_detail.cs" />
@@ -586,6 +588,10 @@
     <Content Include="Views\Products\PartialEdit.cshtml" />
     <Content Include="Views\Products\PartialDetail.cshtml" />
     <Content Include="Views\Products\PartialDelete.cshtml" />
+    <Content Include="Views\Products\AddImageProduct.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\PartialDelete.cshtml" />
+    <Content Include="Views\Categories\PartialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

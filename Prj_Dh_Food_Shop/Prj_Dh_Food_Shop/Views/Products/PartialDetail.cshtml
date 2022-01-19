@@ -13,6 +13,7 @@
     <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
         <div style="display:none;" role="status" aria-hidden="true">
         </div>
+
         @using (Html.BeginForm("Detail", "Products"))
         {
             <table class="n-tbl-head-1" style="margin-bottom: 0">
@@ -102,12 +103,6 @@
                         <td>
                             <span>Ảnh sản phẩm</span>:
                         </td>
-                        <td>
-                            <span>thêm file</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden;">Ảnh</td>
                         <td>
                             @foreach (var item in Model.Images_product)
                             {

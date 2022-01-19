@@ -1,0 +1,282 @@
+﻿
+<link href="/Content/css/n-custom.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="~/Content/css/style.css">
+
+@model Prj_Dh_Food_Shop.Search_Categories
+@{
+    var count = 0;
+}
+
+<script>
+    function addCategory() {
+        var model = {
+            name: $('input[name="name"]').val(),
+            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        }
+
+        $.ajax({
+            url: '/Categories/Create',
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Categories/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+    function DelCategory(id) {
+        $.ajax({
+            url: '/Categories/Delete/' + id,
+            type: "POST",
+            //data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Categories/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+    function editCategory(id) {
+        var model = {
+            name: $('input[name="name"]').val(),
+        }
+
+        $.ajax({
+            url: '/Categories/Edit/' + id,
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Categories/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+</script>
+
+<div id="sitemap">
+    <ul>
+        <li>
+            <a>
+                <span>Quản lý loại sản phẩm</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<table style="width: 100%;" class="frmSearch n-tbl-head-1 m-0">
+    <tbody>
+        <form action="/Categories/Index" method="post">
+            <tr>
+                <td style="padding-left: 0; width:110px">
+                    <span name="1" style="float: left; font-weight: bold; width: 130px;">Tên loại sản phẩm</span>
+                </td>
+                <td> 
+                    <input name="txbName" type="text" maxlength="255" style="width: 300px" class="trimspace">
+                </td>
+                <td style="padding-top: 13px" ;="" colspan="8">
+                    <div class="topAction_right pr-0" style="float: right; margin-right: 111px; margin-bottom: 6px">
+                        <input type="submit" name="btnSearch" value="Tìm kiếm" class="myButton btnTrimSpace">
+                    </div>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+    <td style="padding-top: 10px" ; colspan="8">
+        <div class="topAction_right pr-0" style="float: right; margin-top: -55px" ">
+            <input type="submit" data-toggle="modal" data-target="#myModalNew" value="Thêm mới" class="myButton">
+        </div>
+    </td>
+</table>
+<div>
+    <div class="table-agile-info">
+        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+            <tr style="background-color: #EDEDED">
+                <th style="text-align: center">
+                    STT
+                </th>
+                <th>
+                    Tên loại sản phẩm
+                </th>
+                <th style="text-align: center">
+                    Ngày tạo
+                </th>
+                <th style="text-align: center">
+                    Sửa
+                </th>
+                <th style="text-align: center">
+                    Xóa
+                </th>
+            </tr>
+            @foreach (var item in Model.lstData)
+            {
+                count++;
+                <tr>
+                    <td style="text-align: center">
+                        @((Model.page - 1) * Model.pageSize + count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.create_date)
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Categories/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Categories/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <!--Paging-->
+        <div class="row paging">
+            <div class="col-md-3" style="text-align: left; margin-top: 6px; padding: 0px; width: 380px;">
+                <label style="color: #007243">Bạn đang xem @((Model.page - 1) * Model.pageSize + 1) đến @((Model.page - 1) * Model.pageSize + count) trong tổng số @Model.totalRecord bản ghi</label>
+            </div>
+            <div class="col-md-9" style="float: right; padding-right: 0;">
+                <ul class="pagination">
+                    @{
+                        int position;
+                        if (Model.page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Categories", new { page = Model.page-1, pageSize = Model.pageSize, txbName = Model.txbName})" tabindex="-1"> << </a>
+                            </li>
+                        }
+
+                        for (position = 1; position <= Model.totalPage; position++)
+                        {
+
+                            if (position == Model.page)
+                            {
+                                <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Categories", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName })">@position</a></li>
+                            }
+
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Categories", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName })">@position</a></li>
+                            }
+
+                        }
+                        if (Model.page > 0 && Model.page < Model.totalPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Categories", new { page = Model.page+1, pageSize = Model.pageSize, txbName = Model.txbName })" tabindex="-1"> >> </a>
+                            </li>
+                        }
+
+                        if (Model.totalPage == 0)
+                        {
+                            <li>
+                                <div style="font-weight: bold; color: #007243;" role="status" aria-live="polite">Không có dữ liệu hiển thị</div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
+        @*partialView*@
+    </div>
+</div>
+
+<div id="myModalNew" class="modal fade" role="dialog">
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+         style="position: absolute; height: 300px; width: 590px; top: 100px; left: 38%;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <span class="ui-dialog-title">Thêm loại sản phẩm</span>
+        </div>
+        <div id="divEditCustomer" style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+            <div id="ctl00_MainContent_udp1_PageUpdateProgress" style="display:none;" role="status" aria-hidden="true">
+            </div>
+            <form role="form" class="form-horizontal" method="post" action="/Products/Create" onsubmit="return false">
+                @Html.AntiForgeryToken()
+                <table class="n-tbl-head-1" style="margin-bottom: 0">
+                    <tbody>
+                        <tr style="height: 25px">
+                            <td style="width: 150px">
+                                <span id="Name">Tên loại sản phẩm</span> (<span style="color:Red;">*</span>):
+                            </td>
+                            <td style="width: 300px">
+                                <input type="text" maxlength="255" placeholder="" name="name" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                                <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addCategory()">
+                                <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.btn-load').on('click', function (e) {
+        e.preventDefault();
+
+        var $modal = $('#myModal');
+        var $modalDialog = $('.modal_dialog');
+        var href = $(this).prop('href');
+
+        // không cho phép tắt modal khi click bên ngoài modal
+        var option = { backdrop: 'static' };
+
+        // load modal
+        $modalDialog.load(href, function () {
+            $modal.modal(option, 'show');
+        });
+    });
+</script>
+

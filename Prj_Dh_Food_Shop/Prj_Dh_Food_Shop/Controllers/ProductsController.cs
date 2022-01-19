@@ -6,12 +6,15 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
 using System.Net;
+using System.IO;
+
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
     public class ProductsController : Controller
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
+
         public ActionResult Index(Search_Products model)
         {
             model.txbProductname = model.txbProductname == null ? string.Empty : model.txbProductname.Trim();
@@ -98,6 +101,18 @@ namespace Prj_Dh_Food_Shop.Controllers
             var model = db.Categories.ToList();
             return model;
         }
+
+        //public ActionResult UploadImage(IEnumerable<HttpPostedFileBase> files)
+        //{
+        //    foreach (var file in files)
+        //    {
+        //        if (file != null && file.ContentLength > 0)
+        //        {
+        //            file.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
+        //        }
+        //    }
+        //    return View();
+        //}
 
         public ActionResult Detail(int? id)
         {

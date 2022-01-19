@@ -56,7 +56,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Users model)
         {
-            var sqlEmail = db.Users.Where(x => x.phone_number == model.phone_number).FirstOrDefault();
+            var sqlSDT = db.Users.Where(x => x.phone_number == model.phone_number).FirstOrDefault();
             db.Users.Add(model);
             var msg = "";
             var status = 0;
@@ -70,7 +70,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
                 status = -1;
             }
-            else if (sqlEmail!=null)
+            else if (sqlSDT != null)
             {
                 msg = "Tạo mới không thành công! Số điện thoại của người dùng đã tồn tại!";
                 status = -1;
