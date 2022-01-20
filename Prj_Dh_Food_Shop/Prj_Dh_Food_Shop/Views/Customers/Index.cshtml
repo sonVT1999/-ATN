@@ -1,0 +1,438 @@
+﻿
+<link href="/Content/css/n-custom.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="~/Content/css/style.css">
+
+@model Prj_Dh_Food_Shop.Search_Customers
+@{
+
+    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+    var count = 0;
+}
+
+<script>
+    function addCustomer() {
+        var model = {
+            name: $('input[name="name"]').val(),
+            username: $('input[name="username"]').val(),
+            passwords: $('input[name="passwords"]').val(),
+            birrth_date: $('date[name="birrth_date"]').val(),
+            phone_number: $('input[name="phone_number"]').val(),
+            addresss: $('input[name="addresss"]').val(),
+            gender: $('input[name="is_new"]:checked').val(),
+            id_district: $('select[name="id_district"]').val(),
+            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        }
+
+        $.ajax({
+            url: '/Customers/Create',
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Customers/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+    function delCustomer(id) {
+        $.ajax({
+            url: '/Customers/Delete/' + id,
+            type: "POST",
+            //data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Customers/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+    function editCustomer(id) {
+        var model = {
+            name: $('input[name="name"]').val(),
+            username: $('input[name="username"]').val(),
+            passwords: $('input[name="passwords"]').val(),
+            birrth_date: $('date[name="birrth_date"]').val(),
+            phone_number: $('input[name="phone_number"]').val(),
+            addresss: $('input[name="addresss"]').val(),
+            gender: $('input[name="is_new"]:checked').val(),
+            permission: $('select[name="permission"]').val(),
+            id_district: $('select[name="id_district"]').val(),
+        }
+
+        $.ajax({
+            url: '/Customers/Edit/' + id,
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Customers/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+</script>
+
+<div id="sitemap">
+    <ul>
+        <li>
+            <a>
+                <span>Quản lý khách hàng</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<table style="width: 100%;" class="frmSearch n-tbl-head-1 m-0">
+    <tbody>
+        <form action="/Customers/Index" method="post">
+            <tr>
+                <td style="padding-left: 0; width:110px">
+                    <span name="1" style="float: left; font-weight: bold">Tên khách hàng</span>
+                </td>
+                <td>
+                    <input name="txbName" type="text" maxlength="255" class="trimspace">
+                </td>
+                <td style="width:120px">
+                    <span name="2" style="float: left; margin-left: 10px; font-weight: bold">Tên tài khoản</span>
+                </td>
+                <td>
+                    <input name="txbUsername" type="text" maxlength="50" class="field trimspace">
+                </td>
+                <td style="width:130px">
+                    <span name="3" style="float: left; margin-left: 10px; font-weight: bold">Số điện thoại</span>
+                </td>
+                <td style="padding: 0">
+                    <input name="txbPhoneNumber" type="text" maxlength="20" class="field trimspace">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 0; width:110px">
+                    <span name="4" style="float: left; font-weight: bold">Email</span>
+                </td>
+                <td>
+                    <input name="txbEmail" type="text" maxlength="255" class="trimspace">
+                </td>
+                <td style="width:120px">
+                    <span name="5" style="float: left; margin-left: 10px; font-weight: bold">Địa chỉ</span>
+                </td>
+                <td>
+                    <input name="txbAddress" type="text" maxlength="50" class="field trimspace">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 13px" ;="" colspan="8">
+                    <div class="topAction_right pr-0" style="float: right; margin-right: 111px; margin-bottom: 6px">
+                        <input type="submit" name="btnSearch" value="Tìm kiếm" class="myButton btnTrimSpace">
+                    </div>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+    <td style="padding-top: 10px" ; colspan="8">
+        <div class="topAction_right pr-0" style="float: right; margin-top: -55px" ">
+            <input type="submit" data-toggle="modal" data-target="#myModalNew" value="Thêm mới" class="myButton">
+        </div>
+    </td>
+</table>
+<div>
+    <div class="table-agile-info">
+        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+            <tr style="background-color: #EDEDED">
+                <th style="text-align: center">
+                    STT
+                </th>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Tài khoản
+                </th>
+                <th>
+                    Mật khẩu
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th style="text-align: center">
+                    Kích hoạt
+                </th>
+                <th style="text-align: center">
+                    Xem chi tiết
+                </th>
+                <th style="text-align: center">
+                    Sửa
+                </th>
+                <th style="text-align: center">
+                    Xóa
+                </th>
+            </tr>
+
+            @foreach (var item in Model.lstData)
+            {
+                count++;
+            <tr>
+                <td style="text-align: center">
+                    @((Model.page - 1) * Model.pageSize + count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.passwords)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.addresss)
+                </td>
+                <td style="text-align: center">
+                    @if (item.is_active == 1)
+                    {<span>Có</span>}
+                    else
+                    {<span>Không</span>}
+                </td>
+                <td style="text-align: center">
+                    <a href="/Customers/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Customers/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Customers/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            }
+        </table>
+
+        <!--Paging-->
+        <div class="row paging">
+            <div class="col-md-3" style="text-align: left; margin-top: 6px; padding: 0px; width: 380px;">
+                <label style="color: #007243">Bạn đang xem @((Model.page - 1) * Model.pageSize + 1) đến @((Model.page - 1) * Model.pageSize + count) trong tổng số @Model.totalRecord bản ghi</label>
+            </div>
+            <div class="col-md-9" style="float: right; padding-right: 0;">
+                <ul class="pagination">
+                    @{
+                        int position;
+                        if (Model.page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Customers", new { page = Model.page-1, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber, txbEmail = Model.txbEmail, txbAddress = Model.txbAddress })" tabindex="-1"> << </a>
+                            </li>
+                        }
+
+                        for (position = 1; position <= Model.totalPage; position++)
+                        {
+
+                            if (position == Model.page)
+                            {
+                                <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Customers", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber, txbEmail = Model.txbEmail, txbAddress = Model.txbAddress })">@position</a></li>
+                            }
+
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Customers", new { page = position, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber, txbEmail = Model.txbEmail, txbAddress = Model.txbAddress })">@position</a></li>
+                            }
+
+                        }
+                        if (Model.page > 0 && Model.page < Model.totalPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Customers", new { page = Model.page+1, pageSize = Model.pageSize, txbName = Model.txbName,txbUsername = Model.txbUsername, txbPhoneNumber = Model.txbPhoneNumber, txbEmail = Model.txbEmail, txbAddress = Model.txbAddress })" tabindex="-1"> >> </a>
+                            </li>
+                        }
+
+                        if (Model.totalPage == 0)
+                        {
+                            <li>
+                                <div style="font-weight: bold; color: #007243;" role="status" aria-live="polite">Không có dữ liệu hiển thị</div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
+        @*partialView*@
+    </div>
+</div>
+
+<div id="myModalNew" class="modal fade" role="dialog">
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+         style="position: absolute; height: 375px; width: auto; top: 100px; left: 38%;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+            <span class="ui-dialog-title">Thêm khách hàng</span>
+        </div>
+        <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+            <div style="display:none;" role="status" aria-hidden="true">
+            </div>
+            <form role="form" class="form-horizontal" method="post" action="/Customers/Create" onsubmit="return false">
+                @Html.AntiForgeryToken()
+                <table class="n-tbl-head-1" style="margin-bottom: 0">
+                    <tbody>
+                        <tr style="height: 25px">
+                            <td style="width: 150px">
+                                <span>Tên khách hàng</span> (<span style="color:Red;">*</span>):
+                            </td>
+                            <td style="width: 300px">
+                                <input type="text" maxlength="255" placeholder="" name="name" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Tài khoản</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="username" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Mật khẩu</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Giới tính</span>(<span style="color:Red;">*</span>):
+                            </td>
+                            <td>
+                                <input type="radio" name="gender" value="1"><c>Nam</c>
+                                <input type="radio" name="gender" value="0"><c>Nữ</c>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Email</span>:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Ngày sinh</span>:
+                            </td>
+                            <td>
+                                <input type="date" maxlength="255" placeholder="" name="birrth_date" style="width: calc(100% - 12px);color: #172B47;" class="m_text" required />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Số điện thoại(<span style="color:Red;">*</span>)</span>:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="10" placeholder="" name="phone_number" class="m_text" />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Địa chỉ</span>:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="255" placeholder="" name="addresss" class="m_text" />
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Quận, huyện</span>:
+                            </td>
+                            <td>
+                                <select class="m_text" name="id_district" required>
+                                    <option value="" disabled selected>Chọn tên quận, huyện</option>
+                                    @foreach (Districts item in districts)
+                                    {
+                                        <option value=@item.id>@item.name</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr style="height: 25px;">
+                            <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                                <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addCustomer()">
+                                <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.btn-load').on('click', function (e) {
+        e.preventDefault();
+
+        var $modal = $('#myModal');
+        var $modalDialog = $('.modal_dialog');
+        var href = $(this).prop('href');
+
+        // không cho phép tắt modal khi click bên ngoài modal
+        var option = { backdrop: 'static' };
+
+        // load modal
+        $modalDialog.load(href, function () {
+            $modal.modal(option, 'show');
+        });
+    });
+</script>
+
