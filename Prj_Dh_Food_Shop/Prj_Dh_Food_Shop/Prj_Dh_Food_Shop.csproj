@@ -601,6 +601,9 @@
     <Content Include="Views\Payments\PartialDelete.cshtml" />
     <Content Include="Views\Payments\PartialEdit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\PartialDelete.cshtml" />
+    <Content Include="Views\Customers\PartialDetail.cshtml" />
+    <Content Include="Views\Customers\PartialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

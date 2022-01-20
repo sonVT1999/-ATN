@@ -75,8 +75,8 @@
             passwords: $('input[name="passwords"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
-            permission: $('radio[name="is_active"]').val(),
-            permission: $('select[name="permission"]').val(),
+            is_active: $('radio[name="is_active"]:checked').val(),
+            permission: $('select[name="permission"]:checked').val(),
             id_district: $('select[name="id_district"]').val(),
         }
 

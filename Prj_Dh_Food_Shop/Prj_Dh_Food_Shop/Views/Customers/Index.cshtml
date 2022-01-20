@@ -18,10 +18,11 @@
             name: $('input[name="name"]').val(),
             username: $('input[name="username"]').val(),
             passwords: $('input[name="passwords"]').val(),
-            birrth_date: $('date[name="birrth_date"]').val(),
+            birth_date: $('input[name="birth_date"]').val(),
+            email: $('input[name="email"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
-            gender: $('input[name="is_new"]:checked').val(),
+            gender: $('input[name="gender"]').val(),
             id_district: $('select[name="id_district"]').val(),
             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
         }
@@ -74,11 +75,12 @@
             name: $('input[name="name"]').val(),
             username: $('input[name="username"]').val(),
             passwords: $('input[name="passwords"]').val(),
-            birrth_date: $('date[name="birrth_date"]').val(),
+            birth_date: $('input[name="birth_date"]').val(),
+            email: $('input[name="email"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
-            gender: $('input[name="is_new"]:checked').val(),
-            permission: $('select[name="permission"]').val(),
+            gender: $('input[name="gender"]:checked').val(),
+            is_active: $('input[name="is_active"]:checked').val(),
             id_district: $('select[name="id_district"]').val(),
         }
 
@@ -364,7 +366,7 @@
                                 <span>Email</span>:
                             </td>
                             <td>
-                                <input type="text" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                                <input type="text" maxlength="255" placeholder="" name="email" class="m_text" required />
                             </td>
                         </tr>
                         <tr style="height: 25px">
@@ -372,7 +374,7 @@
                                 <span>Ngày sinh</span>:
                             </td>
                             <td>
-                                <input type="date" maxlength="255" placeholder="" name="birrth_date" style="width: calc(100% - 12px);color: #172B47;" class="m_text" required />
+                                <input type="date" maxlength="255" placeholder="" name="birth_date" style="width: calc(100% - 12px);color: #172B47;" class="m_text" required />
                             </td>
                         </tr>
                         <tr style="height: 25px">

@@ -13,7 +13,7 @@ namespace Prj_Dh_Food_Shop
 
         public string birth_date { get; set; }
 
-        public int gender { get; set; }
+        public int? gender { get; set; }
 
         public string email { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +19,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();
             model.txbUsername = model.txbUsername == null ? string.Empty : model.txbUsername.Trim();
             model.txbPhoneNumber = model.txbPhoneNumber == null ? string.Empty : model.txbPhoneNumber.Trim();
-            model.txbEmail = model.txbEmail == null ? string.Empty : model.txbEmail.Trim();
             model.txbAddress = model.txbAddress == null ? string.Empty : model.txbAddress.Trim();
 
             model.page = model.page == 0 ? 1 : model.page;
@@ -36,6 +36,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                            username = c.username,
                            passwords = c.passwords,
                            email = c.email,
+                           gender = c.gender,
                            phone_number = c.phone_number,
                            addresss = c.addresss,
                            is_active = c.is_active,
@@ -79,7 +80,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             else if (sqlSDT != null)
             {
-                msg = "Tạo mới không thành công! Số điện thoại của quý khách đã tồn tại!";
+                msg = "Tạo mới không thành công! Số điện thoại của quý khách đã được đăng ký!";
                 status = -1;
             }
             else if (sqUser != null)
@@ -96,6 +97,129 @@ namespace Prj_Dh_Food_Shop.Controllers
                 status = 1;
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customers cus = db.Customers.Find(id);
+            ViewBag.district = new CustomersController().getDistricts();
+            if (cus == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDetail", cus);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customers cus = db.Customers.Find(id);
+            ViewBag.district = new CustomersController().getDistricts();
+            if (cus == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialEdit", cus);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Customers cus)
+        {
+            var msg = "";
+            var status = 0;
+            var sqlSDT = db.Customers.Where(x => x.phone_number == cus.phone_number).ToList();
+            var result = db.Customers.SingleOrDefault(b => b.id == cus.id);
+            ViewBag.district = new CustomersController().getDistricts();
+
+            if (result != null)
+            {
+                result.name = cus.name;
+                result.username = cus.username;
+                if (cus.passwords.Length < 8)
+                {
+                    msg = "Cập nhật không thành công! Password phải có nhiều hơn 8 kí tự!";
+                    status = -1;
+                }
+                else
+                {
+                    result.passwords = cus.passwords;
+                    if (cus.phone_number == null || !Regex.Match(cus.phone_number, @"^[0-9]+$").Success || cus.phone_number.Length != 10)
+                    {
+                        msg = "Cập nhật không thành công! Số điện thoại của quý khách không đúng định dạng!";
+                        status = -1;
+                    }
+                    else if (sqlSDT.Count() > 1)
+                    {
+                        msg = "Cập nhật không thành công! Số điện thoại của quý khách đã được đăng ký!";
+                        status = -1;
+                    }
+                    else
+                    {
+                        result.phone_number = cus.phone_number;
+                        result.birth_date = cus.birth_date;
+                        result.email = cus.email;
+                        result.addresss = cus.addresss;
+                        result.gender = cus.gender;
+                        result.is_active = cus.is_active;
+                        result.id_district = cus.id_district;
+
+                        db.SaveChanges();
+                        msg = "Cập nhật thông tin khách hàng thành công!";
+                        status = 1;
+                    }
+                }
+            }
+            return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customers cus = db.Customers.Find(id);
+            if (cus == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDelete", cus);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Orders Od = db.Orders.Where(x => x.id_customer == id).FirstOrDefault();
+            Customers cuss = db.Customers.Where(x => x.id == id).FirstOrDefault();
+            var msgDel = "";
+            var status = 0;
+            if (Od != null)
+            {
+                msgDel = "Khách hàng đã, đang có đơn hàng. Không thể xóa!";
+                status = -1;
+            }
+            else if (cuss.is_active == 1)
+            {
+                msgDel = "khách hàng đang được kích hoạt. Không thể xóa!";
+                status = -1;
+            }
+            else
+            {
+                Customers cus = db.Customers.Find(id);
+                db.Customers.Remove(cus);
+                db.SaveChanges();
+                msgDel = "Xóa khách hàng thành công!";
+                status = 1;
+            }
+
+            return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
     }
 }

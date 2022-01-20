@@ -127,6 +127,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             var msg = "";
             var status = 0;
             var result = db.Users.SingleOrDefault(b => b.id == users.id);
+            var sqlSDT = db.Users.Where(x => x.phone_number == users.phone_number).ToList();
             ViewBag.district = new UsersController().getDistricts();
 
             if (result != null)
@@ -143,7 +144,12 @@ namespace Prj_Dh_Food_Shop.Controllers
                     result.passwords = users.passwords;
                     if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0-9]+$").Success || users.phone_number.Length != 10)
                     {
-                        msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
+                        msg = "Cập nhật không thành công! Số điện thoại của người dùng không đúng định dạng!";
+                        status = -1;
+                    }
+                    else if (sqlSDT.Count() > 1)
+                    {
+                        msg = "Cập nhật không thành công! Số điện thoại này của người dùng đã được đăng ký!";
                         status = -1;
                     }
                     else
