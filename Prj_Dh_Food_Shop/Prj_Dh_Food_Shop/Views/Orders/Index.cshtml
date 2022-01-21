@@ -1,0 +1,227 @@
+﻿
+<link href="/Content/css/n-custom.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="~/Content/css/style.css">
+
+@model Prj_Dh_Food_Shop.Search_Orders
+@{
+
+    var customers = (List<Prj_Dh_Food_Shop.Customers>)ViewBag.customer;
+    var users = (List<Prj_Dh_Food_Shop.Users>)ViewBag.user;
+    var payments = (List<Prj_Dh_Food_Shop.Payment_methods>)ViewBag.payment;
+    var count = 0;
+}
+
+
+<div id="sitemap">
+    <ul>
+        <li>
+            <a>
+                <span>Quản lý đơn đặt hàng</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<table style="width: 100%;" class="frmSearch n-tbl-head-1 m-0">
+    <tbody>
+        <form action="/Orders/Index" method="post">
+            <tr>
+                <td style="padding-left: 0; width:110px">
+                    <span name="1" style="float: left; font-weight: bold">Tên khách hàng</span>
+                </td>
+                <td>
+                    <input name="txbCustomername" type="text" maxlength="255" class="trimspace">
+                </td>
+                <td style="width:120px;">
+                    <span name="2" style="float: left; margin-left: 10px; font-weight: bold">ngày đặt từ</span>
+                </td>
+                <td style="padding: 0; width: 15%;">
+                    <input name="txbDateFrom" type="date" maxlength="20" class="field trimspace">
+                </td>
+                <td style="width:85px">
+                    <span name="3" style="float: left; margin-left: 25px; font-weight: bold">đến</span>
+                </td>
+                <td style="padding: 0;width: 15%;">
+                    <input name="txbDateTo" type="date" maxlength="20" class="field trimspace">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 13px" ;="" colspan="8">
+                    <div style="text-align:center; margin-bottom: 6px">
+                        <input type="submit" name="btnSearch" value="Tìm kiếm" class="myButton btnTrimSpace">
+                    </div>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
+<div>
+    <div class="table-agile-info">
+        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+            <tr style="background-color: #EDEDED">
+                <th style="text-align: center">
+                    STT
+                </th>
+                <th>
+                    Mã đơn hàng
+                </th>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+                <th style="text-align: center">
+                    Ngày đặt hàng
+                </th>
+                <th>
+                    Tên người dùng
+                </th>
+                <th style="text-align: center">
+                    Trạng thái
+                </th>
+                <th>
+                    Phương thức thanh toán
+                </th>
+                <th style="text-align: center">
+                    Xem chi tiết
+                </th>
+                <th style="text-align: center">
+                    Sửa
+                </th>
+                <th style="text-align: center">
+                    Xóa
+                </th>
+            </tr>
+
+            @foreach (var item in Model.lstData)
+            {
+                count++;
+            <tr>
+                <td style="text-align: center">
+                    @((Model.page - 1) * Model.pageSize + count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user_name)
+                </td>
+                <td style="text-align: center">
+                    @if (item.statuss == 0)
+                    {<span>Chờ duyệt</span>}
+                    else if (item.statuss == 1)
+                    {<span>Đang vận chuyển</span>}
+                    else
+                    {<span>Đã giao</span>}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment_method_name)
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            }
+        </table>
+
+        <!--Paging-->
+        <div class="row paging">
+            <div class="col-md-3" style="text-align: left; margin-top: 6px; padding: 0px; width: 380px;">
+                <label style="color: #007243">Bạn đang xem @((Model.page - 1) * Model.pageSize + 1) đến @((Model.page - 1) * Model.pageSize + count) trong tổng số @Model.totalRecord bản ghi</label>
+            </div>
+            <div class="col-md-9" style="float: right; padding-right: 0;">
+                <ul class="pagination">
+                    @{
+                        int position;
+                        if (Model.page > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Orders", new { page = Model.page-1, pageSize = Model.pageSize, txbCustomername = Model.txbCustomername,txbDateFrom = Model.txbDateFrom, txbDateTo = Model.txbDateTo})" tabindex="-1"> << </a>
+                            </li>
+                        }
+
+                        for (position = 1; position <= Model.totalPage; position++)
+                        {
+
+                            if (position == Model.page)
+                            {
+                                <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Orders", new { page = position, pageSize = Model.pageSize, txbCustomername = Model.txbCustomername,txbDateFrom = Model.txbDateFrom, txbDateTo = Model.txbDateTo })">@position</a></li>
+                            }
+
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Orders", new { page = position, pageSize = Model.pageSize, txbCustomername = Model.txbCustomername,txbDateFrom = Model.txbDateFrom, txbDateTo = Model.txbDateTo })">@position</a></li>
+                            }
+
+                        }
+                        if (Model.page > 0 && Model.page < Model.totalPage)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", "Orders", new { page = Model.page+1, pageSize = Model.pageSize, txbCustomername = Model.txbCustomername,txbDateFrom = Model.txbDateFrom, txbDateTo = Model.txbDateTo })" tabindex="-1"> >> </a>
+                            </li>
+                        }
+
+                        if (Model.totalPage == 0)
+                        {
+                            <li>
+                                <div style="font-weight: bold; color: #007243;" role="status" aria-live="polite">Không có dữ liệu hiển thị</div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
+        @*partialView*@
+    </div>
+</div>
+
+<script>
+    $('.btn-load').on('click', function (e) {
+        e.preventDefault();
+
+        var $modal = $('#myModal');
+        var $modalDialog = $('.modal_dialog');
+        var href = $(this).prop('href');
+
+        // không cho phép tắt modal khi click bên ngoài modal
+        var option = { backdrop: 'static' };
+
+        // load modal
+        $modalDialog.load(href, function () {
+            $modal.modal(option, 'show');
+        });
+    });
+</script>
+

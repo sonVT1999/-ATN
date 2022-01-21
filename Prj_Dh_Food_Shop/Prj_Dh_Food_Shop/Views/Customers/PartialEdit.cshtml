@@ -43,7 +43,7 @@
                             <span>Ngày sinh</span>(<span style="color:Red;">*</span>):
                         </td>
                         <td>
-                            <input type="date" value="@Model.birth_date" maxlength="10" style="width: calc(100% - 12px);color: #172B47;" placeholder="" name="birth_date" class="m_text" />
+                            <input type="date" value="@(Model.birth_date.Value.ToString("yyyy-MM-dd"))" maxlength="10" style="width: calc(100% - 12px);color: #172B47;" placeholder="" name="birth_date" class="m_text" />
                         </td>
                     </tr>
                     <tr style="height: 25px">

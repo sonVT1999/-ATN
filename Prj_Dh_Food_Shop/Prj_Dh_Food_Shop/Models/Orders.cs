@@ -25,8 +25,7 @@ namespace Prj_Dh_Food_Shop
         [Column(TypeName = "date")]
         public DateTime order_date { get; set; }
 
-        [StringLength(50)]
-        public string statuss { get; set; }
+        public int? statuss { get; set; }
 
         public int? id_user { get; set; }
 

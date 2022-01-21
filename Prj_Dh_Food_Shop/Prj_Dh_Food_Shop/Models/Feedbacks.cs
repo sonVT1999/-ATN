@@ -14,6 +14,9 @@ namespace Prj_Dh_Food_Shop
         [StringLength(200)]
         public string title { get; set; }
 
+        [Required]
+        public string descriptions { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime feedback_date { get; set; }
 
