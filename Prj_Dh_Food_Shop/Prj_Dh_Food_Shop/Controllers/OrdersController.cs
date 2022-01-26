@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,13 +14,13 @@ namespace Prj_Dh_Food_Shop.Controllers
         public ActionResult Index(Search_Orders model)
         {
             model.txbCustomername = model.txbCustomername == null ? string.Empty : model.txbCustomername.Trim();
-            if (model.txbDateFrom == null)
+            if (model.txbDateFrom != null)
             {
                 model.txbDateFrom = model.txbDateFrom;
             }
             if (model.txbDateTo < model.txbDateTo && model.txbDateTo != null)
             {
-                DateTime temp = model.txbDateFrom;
+                DateTime? temp = model.txbDateFrom;
                 model.txbDateFrom = model.txbDateFrom;
                 model.txbDateFrom = temp;
             }
@@ -36,7 +37,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                        join u in db.Users on o.id_user equals u.id
                        join p in db.Payment_methods on o.id_payment_method equals p.id
                        where (string.IsNullOrEmpty(model.txbCustomername) || c.name.Contains(model.txbCustomername))
-                       //&& (model.txbDateFrom == null || o.order_date >= model.txbDateFrom) && (model.txbDateTo == null || o.order_date <= model.txbDateTo)
+                       && (!model.txbDateFrom.HasValue || o.order_date >= model.txbDateFrom) && (!model.txbDateFrom.HasValue || o.order_date <= model.txbDateTo)
                        select new Search_Orders()
                        {
                            id = o.id,
@@ -77,6 +78,42 @@ namespace Prj_Dh_Food_Shop.Controllers
         {
             var model = db.Payment_methods.ToList();
             return model;
+        }
+
+        public List<Products> getProducts()
+        {
+            var model = db.Products.ToList();
+            return model;
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var ord = from od in db.Orders_detail
+                       join o in db.Orders on od.id_order equals o.id
+                       join p in db.Products on od.id_product equals p.id
+                       where od.id_order == o.id
+                       where od.id_product == p.id
+                       where od.id_order == id
+                       select new Search_Orders_Detail()
+                       {
+                           id = od.id,
+                           product_name = p.name,
+                           counts = od.counts,
+                           amount = od.amount,
+                       };
+
+            var rs = ord.OrderBy(x => x.id).ToList() ?? new List<Search_Orders_Detail>();
+
+            ViewBag.product = new OrdersController().getProducts();
+            if (ord == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDetail", ord);
         }
     }
 }

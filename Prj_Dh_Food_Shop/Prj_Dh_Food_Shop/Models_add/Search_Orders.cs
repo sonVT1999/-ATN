@@ -15,7 +15,7 @@ namespace Prj_Dh_Food_Shop
 
         public int price { get; set; }
 
-        public DateTime order_date { get; set; }
+        public DateTime? order_date { get; set; }
 
         public int? statuss { get; set; }
 
@@ -41,9 +41,9 @@ namespace Prj_Dh_Food_Shop
 
         public string txbCustomername { get; set; }
 
-        public DateTime txbDateFrom { get; set; }
+        public DateTime? txbDateFrom { get; set; }
 
-        public DateTime txbDateTo { get; set; }
+        public DateTime? txbDateTo { get; set; }
 
         public int page { get; set; }
 
