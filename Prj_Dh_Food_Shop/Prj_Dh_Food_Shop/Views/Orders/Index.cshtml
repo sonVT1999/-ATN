@@ -14,6 +14,56 @@
     var count = 0;
 }
 
+<script>
+    function delOrder(id) {
+        $.ajax({
+            url: '/Orders/Delete/' + id,
+            type: "POST",
+            //data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Orders/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+
+    function editOrder(id) {
+        var model = {
+
+            statuss: $('select[name="statuss"]').val(),
+        }
+
+        $.ajax({
+            url: '/Orders/Edit/' + id,
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Orders/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+</script>
 
 <div id="sitemap">
     <ul>
@@ -108,46 +158,49 @@
             @foreach (var item in Model.lstData)
             {
                 count++;
-            <tr>
-                <td style="text-align: center">
-                    @((Model.page - 1) * Model.pageSize + count)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.customer_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.total)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.order_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.user_name)
-                </td>
-                <td style="text-align: center">
-                    @if (item.statuss == 0)
-                    {<span>Chờ duyệt</span>}
-                    else if (item.statuss == 1)
-                    {<span>Đang vận chuyển</span>}
-                    else
-                    {<span>Đã giao</span>}
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.payment_method_name)
-                </td>
-                <td style="text-align: center">
-                    <a href="/Orders/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
-                </td>
-                <td style="text-align: center">
-                    <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
-                </td>
-                <td style="text-align: center">
-                    <a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
-                </td>
-            </tr>
+                <tr>
+                    <td style="text-align: center">
+                        @((Model.page - 1) * Model.pageSize + count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.customer_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.total)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.order_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.user_name)
+                    </td>
+                    <td style="text-align: center">
+                        @if (item.statuss == 0)
+                        {<span>Chờ duyệt</span>}
+                        else if (item.statuss == 1)
+                        {<span>Đang vận chuyển</span>}
+                        else
+                        {<span>Đã giao</span>}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.payment_method_name)
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Orders/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                    </td>
+                    <td style="text-align: center">
+                        <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                    </td>
+                    <td style="text-align: center">
+                        @if (item.statuss == 0)
+                        {<a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>}
+                        else
+                        {<a href="/Orders/Delete/@item.id" class="btn-load" disabled="disabled"><i class="fas fa-trash-alt"></i></a>}
+                    </td>
+                </tr>
             }
         </table>
 
@@ -203,7 +256,7 @@
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
-        @*partialView*@
+
     </div>
 </div>
 

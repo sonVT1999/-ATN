@@ -48,6 +48,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                            user_name = u.name,
                            customer_name = c.name,
                            payment_method_name = p.name,
+
                        };
 
             var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
@@ -93,18 +94,18 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var ord = from od in db.Orders_detail
-                       join o in db.Orders on od.id_order equals o.id
-                       join p in db.Products on od.id_product equals p.id
-                       where od.id_order == o.id
-                       where od.id_product == p.id
-                       where od.id_order == id
-                       select new Search_Orders_Detail()
-                       {
-                           id = od.id,
-                           product_name = p.name,
-                           counts = od.counts,
-                           amount = od.amount,
-                       };
+                      join o in db.Orders on od.id_order equals o.id
+                      join p in db.Products on od.id_product equals p.id
+                      where od.id_order == o.id
+                      where od.id_product == p.id
+                      where od.id_order == id
+                      select new Search_Orders_Detail()
+                      {
+                          id = od.id,
+                          product_name = p.name,
+                          counts = od.counts,
+                          amount = od.amount,
+                      };
 
             var rs = ord.OrderBy(x => x.id).ToList() ?? new List<Search_Orders_Detail>();
 
@@ -114,6 +115,74 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return HttpNotFound();
             }
             return PartialView("PartialDetail", ord);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Orders ord = db.Orders.Find(id);
+
+            ViewBag.customer = new OrdersController().getCustomers();
+            ViewBag.user = new OrdersController().getUsers();
+            ViewBag.payment = new OrdersController().getPayments();
+            if (ord == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialEdit", ord);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Orders ord)
+        {
+            var msg = "";
+            var status = 0;
+            var result = db.Orders.SingleOrDefault(b => b.id == ord.id);
+
+            ViewBag.customer = new OrdersController().getCustomers();
+            ViewBag.user = new OrdersController().getUsers();
+            ViewBag.payment = new OrdersController().getPayments();
+
+            if (result != null)
+            {
+                result.statuss = ord.statuss;
+
+                db.SaveChanges();
+                msg = "Cập nhật thông tin đơn hàng thành công!";
+                status = 1;
+            }
+            return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Orders ord = db.Orders.Find(id);
+            if (ord == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("PartialDelete", ord);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var msgDel = "";
+            var status = 0;
+            Orders ord = db.Orders.Find(id);
+            db.Orders.Remove(ord);
+            db.SaveChanges();
+            msgDel = "Xóa đơn đặt hàng thành công!";
+            status = 1;
+
+            return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
     }
 }

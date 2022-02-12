@@ -130,7 +130,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
-    <Compile Include="Controllers\Orders_detailController.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -610,6 +609,8 @@
     <Content Include="Views\Customers\PartialEdit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\PartialDetail.cshtml" />
+    <Content Include="Views\Orders\PartialEdit.cshtml" />
+    <Content Include="Views\Orders\PartialDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

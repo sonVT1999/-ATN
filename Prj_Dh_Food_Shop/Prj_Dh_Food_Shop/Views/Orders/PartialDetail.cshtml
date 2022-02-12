@@ -1,18 +1,17 @@
-﻿
-@model Prj_Dh_Food_Shop.Search_Orders_Detail
+﻿@model IEnumerable<Prj_Dh_Food_Shop.Search_Orders_Detail>
 @{
+    var products = (List<Prj_Dh_Food_Shop.Products>)ViewBag.product;
     var count = 0;
 }
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
-     style="position: absolute; height: 343px; width: auto; top: 100px; left: 40%;">
+     style="position: absolute; height: auto; width: 60%; top: 140px; left: 23%;">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">Chi tiết đơn đặt hàng</span>
     </div>
     <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
         <div style="display:none;" role="status" aria-hidden="true">
         </div>
-        @using (Html.BeginForm("Detail", "Orders"))
-        {
+
         <table class="table" ui-jq="footable" ui-options='{
         "paging": {
           "enabled": true
@@ -44,7 +43,7 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.lstData)
+            @foreach (var item in Model)
             {
                 count++;
                 <tr>
@@ -61,19 +60,18 @@
                         @Html.DisplayFor(modelItem => item.amount)
                     </td>
                     <td style="text-align: center">
-                        <a href="/Orders_detail/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                        <a href="/Orders/Edit_detail/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
                     </td>
                     <td style="text-align: center">
-                        <a href="/Orders_detail/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                        <a href="/Orders/Delete_detail/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
             }
             <tr style="height: 25px;">
-                <td colspan="2" align="center" style="padding-top: 10px; padding-left: 37%">
+                <td colspan="2" align="center" style="padding-top: 10px; padding-left: 45%">
                     <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
                 </td>
             </tr>
         </table>
-        }
     </div>
 </div>
