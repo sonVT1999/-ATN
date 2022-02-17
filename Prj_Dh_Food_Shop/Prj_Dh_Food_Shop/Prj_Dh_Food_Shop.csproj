@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
+    <Compile Include="Controllers\CustomersPotentialController.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -152,6 +153,7 @@
     </Compile>
     <Compile Include="Models_add\Search_Customers.cs" />
     <Compile Include="Models_add\Search_Categories.cs" />
+    <Compile Include="Models_add\Search_CustomersPotential.cs" />
     <Compile Include="Models_add\Search_Feedbacks.cs" />
     <Compile Include="Models_add\Search_Orders.cs" />
     <Compile Include="Models_add\Search_Orders_Detail.cs" />
@@ -611,6 +613,9 @@
     <Content Include="Views\Orders\PartialDetail.cshtml" />
     <Content Include="Views\Orders\PartialEdit.cshtml" />
     <Content Include="Views\Orders\PartialDelete.cshtml" />
+    <Content Include="Views\CustomersPotential\Index.cshtml" />
+    <Content Include="Views\CustomersPotential\PartialEdit.cshtml" />
+    <Content Include="Views\CustomersPotential\PartialDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

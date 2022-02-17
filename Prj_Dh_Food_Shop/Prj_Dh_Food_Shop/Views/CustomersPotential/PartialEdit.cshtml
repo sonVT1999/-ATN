@@ -1,0 +1,54 @@
+﻿
+@model Prj_Dh_Food_Shop.Customers_potential
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 405px; width: auto; top: 100px; left: 38%;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span class="ui-dialog-title">Chỉnh sửa thông tin</span>
+    </div>
+    <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div style="display:none;" role="status" aria-hidden="true">
+        </div>
+            <table class="n-tbl-head-1" style="margin-bottom: 0">
+                <tbody>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Trạng thái</span>(<span style="color:Red;">*</span>):
+                        </td>
+                        <td style="width: 350px;">
+                            <select class="m_text" name="statuss" required>
+                                <option value="@Model.statuss" disabled selected>
+                                    @if (Model.statuss == "Đã gọi")
+                                    {<span>Đã gọi</span>}
+                                    else if (Model.statuss == "Chưa gọi")
+                                    {<span>Chưa gọi</span>}
+                                    else if (Model.statuss == "Gọi lại")
+                                    {<span>Gọi lại</span>}
+                                    else
+                                    {<span>Không gọi được</span>}
+                                </option>
+                                <option value="Đã gọi">Đã gọi</option>
+                                <option value="Chưa gọi">Chưa gọi</option>
+                                <option value="Gọi lại">Gọi lại</option>
+                                <option value="Không gọi được">Không gọi được </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Ghi chú</span>(<span style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.note" maxlength="255" style="height: 90px" placeholder="" name="note" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px;">
+                        <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save" onclick="editCustomersPotential(@Model.id)">
+                            <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

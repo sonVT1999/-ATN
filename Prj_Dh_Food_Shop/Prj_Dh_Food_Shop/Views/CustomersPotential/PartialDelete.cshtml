@@ -1,0 +1,17 @@
+﻿@model Prj_Dh_Food_Shop.Customers_potential
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 108px; width: 29%; top: 10px; left: 38%;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">  
+            <span class="ui-dialog-title">Bạn có chắc chắn muốn xóa khách hàng: @Model.name ?</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @*<form onsubmit="return false">*@
+        <input type="submit" value="Xóa" class="btn btn-danger" onclick="delCustomersPotential(@Model.id)">
+        <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+        @*</form>*@
+    </div>
+</div>
+
