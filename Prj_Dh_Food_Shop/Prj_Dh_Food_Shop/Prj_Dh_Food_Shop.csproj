@@ -131,6 +131,7 @@
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
     <Compile Include="Controllers\CustomersPotentialController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -616,6 +617,7 @@
     <Content Include="Views\CustomersPotential\Index.cshtml" />
     <Content Include="Views\CustomersPotential\PartialEdit.cshtml" />
     <Content Include="Views\CustomersPotential\PartialDelete.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

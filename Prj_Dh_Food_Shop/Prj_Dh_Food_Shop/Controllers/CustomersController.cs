@@ -12,8 +12,6 @@ namespace Prj_Dh_Food_Shop.Controllers
     {
         // GET: Customers
         private Entity_Dh_Food db = new Entity_Dh_Food();
-
-        // GET: Users
         public ActionResult Index(Search_Customers model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();

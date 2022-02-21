@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Prj_Dh_Food_Shop.Models_add
+namespace Prj_Dh_Food_Shop
 {
     public class Search_Feedbacks
     {
@@ -26,6 +26,8 @@ namespace Prj_Dh_Food_Shop.Models_add
         public List<Search_Feedbacks> lstData { get; set; }
 
         public string txbName { get; set; }
+
+        public int txb_is_active { get; set; }
 
         public int page { get; set; }
 
