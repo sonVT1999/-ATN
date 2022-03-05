@@ -11,36 +11,45 @@
 <body>
 
     <div id="main">
-        <div class="col-div-3">
-            <div class="box">
-                <p>67<br><span>Khách hàng</span></p>
-                <i class="fas fa-users box-icon"></i>
-            </div>
-        </div>
+        <a href="~/Customers/Index" class="active">
+            <div class="col-div-3">
+                <div class="box">
+                    <p>@ViewData["soluongKH"]<br><span>Khách hàng</span></p>
+                    <i class="fas fa-users box-icon"></i>
 
-        <div class="col-div-3">
-            <div class="box">
-                <p>99<br><span>Đơn đặt hàng</span></p>
-                <i class="fas fa-shopping-cart box-icon"></i>
+                </div>
             </div>
-        </div>
+        </a>
 
-        <div class="col-div-3">
-            <div class="box">
-                <p>78<br><span>Phản hồi</span></p>
-                <i class="fas fa-table box-icon"></i>
+        <a href="~/Orders/Index" class="active">
+            <div class="col-div-3">
+                <div class="box">
+                    <p>@ViewData["soluongOrder"]<br><span>Đơn đặt hàng cần duyệt</span></p>
+                    <i class="fas fa-shopping-cart box-icon"></i>
+                </div>
             </div>
-        </div>
+        </a>
 
-        <div class="col-div-3">
-            <div class="box">
-                <p>88<br><span>Khách hàng tiềm năng</span></p>
-                <i class="fas fa-user-plus box-icon"></i>
+        <a href="~/Feedbacks/Index" class="active">
+            <div class="col-div-3">
+                <div class="box">
+                    <p>@ViewData["soluongFeedback"]<br><span>Phản hồi cần trả lời</span></p>
+                    <i class="fas fa-table box-icon"></i>
+                </div>
             </div>
-        </div>
+        </a>
 
+        <a href="~/CustomersPotential/Index" class="active">
+            <div class="col-div-3">
+                <div class="box">
+                    <p>@ViewData["soluongKHTN"]<br><span>Khách hàng tiềm năng</span></p>
+                    <i class="fas fa-user-plus box-icon"></i>
+                </div>
+            </div>
+        </a>
         <div class="clearfix"></div>
         <br><br>
+
 
         <div class="col-div-8">
             <div class="box-8">

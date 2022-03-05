@@ -51,7 +51,7 @@ namespace Prj_Dh_Food_Shop.Controllers
 
                        };
 
-            var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
+            var rs = data.OrderBy(x => x.statuss).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
 
             ViewBag.customer = new OrdersController().getCustomers();
             ViewBag.user = new OrdersController().getUsers();
