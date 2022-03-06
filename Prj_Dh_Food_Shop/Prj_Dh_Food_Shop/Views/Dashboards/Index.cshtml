@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Prj_Dh_Food_Shop.SearchTop_Products>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="~/Content/css/style.css">
-
+@{
+    var rs = (List<Prj_Dh_Food_Shop.SearchTop_Products>)ViewBag.Inner;
+    var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
+    var count = 0;
+}
 <body>
 
     <div id="main">
@@ -54,34 +58,50 @@
         <div class="col-div-8">
             <div class="box-8">
                 <div class="content-box">
-                    <p>Top Selling Projects <span>View All </span></p>
+                    <p>Top 5 sản phẩm bán chạy <span> Xem tất cả </span></p>
                     <br>
-                    <table>
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
+                    <table class="table" ui-jq="footable" ui-options='{
+                    "paging": {
+                    "enabled": true
+                    },
+                    "filtering": {
+                     "enabled": true
+                    },
+                    "sorting": {
+                    "enabled": true
+                    }}'>
+                        <tr style="background-color: #EDEDED">
+                            <th style="text-align: center">
+                                STT
+                            </th>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Loại sản phẩm
+                            </th>
+                            <th style="text-align: center">
+                                Doanh thu
+                            </th>
                         </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Alfreds</td>
-                            <td>Futterkister</td>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Alfreds</td>
-                            <td>Futterkister</td>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Alfreds</td>
-                            <td>Futterkister</td>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Alfreds</td>
-                            <td>Futterkister</td>
-                        </tr>
+                        @foreach (var item in rs)
+                        {
+                            count++;
+                            <tr>
+                                <td style="text-align: center">
+                                    @(count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tenSP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.category_name)
+                                </td>
+                                <td style="text-align: center">
+                                    @Html.DisplayFor(modelItem => item.doanhthu)
+                                </td>
+                            </tr>
+                        }
                     </table>
                 </div>
             </div>
