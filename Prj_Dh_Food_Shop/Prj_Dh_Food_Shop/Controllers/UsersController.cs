@@ -65,7 +65,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 msg = "Tạo mới không thành công! Password phải có nhiều hơn 8 kí tự!";
                 status = -1;
             }
-            else if (model.phone_number == null || !Regex.Match(model.phone_number, @"^[0-9]+$").Success || model.phone_number.Length != 10)
+            else if (model.phone_number == null || !Regex.Match(model.phone_number, @"^[0,+84][0-9]{9}$").Success || model.phone_number.Length != 10)
             {
                 msg = "Tạo mới không thành công! Số điện thoại của người dùng không đúng định dạng!";
                 status = -1;

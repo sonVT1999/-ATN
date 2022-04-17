@@ -1,0 +1,220 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- include head.html -->
+    <title>Dh_Foods</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" /> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+    <!-- meta social -->
+    <meta name="twitter:card" content="" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:creator" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <!-- Google Font -->
+    <!-- include styles.html -->
+    <link rel="stylesheet" href="~/Areas/Content/Css/vendor.css" />
+    <link rel="stylesheet" href="~/Areas/Content/Css/style.css" />
+    <link rel="Stylesheet" type="text/css" href="~/Areas/Content/Css/n-custom.css" />
+    <script type="text/javascript" src="~/Areas/Scripts/jquery.min.1.11.3.js"></script>
+    <script type="text/javascript" src="~/Areas/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function loadJsAsync(src, callback) {
+            var s = document.createElement('script');
+            s.type = "text/javascript";
+            s.src = src;
+            s.addEventListener('load', function (e) { callback(null, e); }, false);
+            var head = document.getElementsByTagName('head')[0];
+            head.appendChild(s);
+        }
+
+        window.addEventListener("load", function () {
+            try {
+                var enable = <%=ConfigurationManager.AppSettings["TurnOnIPCCChatFrame"] %>;
+                var mobileScreenWidth = screen.width;
+                if (enable.toString().toLowerCase() == "true" && mobileScreenWidth > 480) {
+                    loadJsAsync('https://econtact.viettel.vn:8909/js/IpccChat.js', function () {
+                        var IpccChat = {
+                            domain: 'V_TRACKING',
+                            username: '<%= CurrentSession.CurrentUser.username %>',
+                            color: ''
+                        };
+                        embedIpccChat(IpccChat);
+                    })
+                }
+            }
+            catch (err) {
+                //do nothing - duongpx2
+            }
+        }, false);
+    </script>
+    <style type="text/css">
+        .cd-top {
+            right: 25px;
+            bottom: 60px;
+        }
+
+        .list-message .listMessage.warning {
+            background-color: #EE0000;
+        }
+
+        .select2-container--open .select2-dropdown {
+            width: 210px !important;
+        }
+
+        .tend {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .n-section {
+            background-color: #ffffff;
+        }
+
+        .n-heading#gioi-thieu {
+            margin-bottom: 20px
+        }
+    </style>
+</head>
+
+<body class="n-landing">
+    <ul id="listMessage" class="list-message"></ul>
+    <div class="body-wrap">
+        <header class="header-site header sticky" id="myHeader">
+            <!--Header Bottom-->
+            <div class="container">
+                <div class="header-bottom">
+                    <div class="header__menu__btn">
+                        <span class="content-btn"></span>
+                    </div>
+                    <div class="wrap-flex-right" style="width: 85%">
+                        <nav class="header__menu" style="width: 100%">
+                            <div class="logo">
+                                <a href="">
+                                    <img src="~/Areas/Content/Images/Logo_Dh_Foods.png" alt="" style="float: left; width: 55px" />
+                                </a>
+                            </div>
+                            <ul class="main-menu list-unstyled" id="myNavbar">
+                                <li style="border: hidden;">
+                                    <a></a>
+                                </li>
+                                <li>
+                                    <a href="">Trang chủ</a>
+                                </li>
+                                <li>
+                                    <a href="#gioi-thieu">Về dh foods</a>
+                                </li>
+                                <li>
+                                    <a href="">Sản phẩm</a>
+                                    <ul>
+                                        <li><a href="https://dhfoods.com.vn/vn/muoi-cham.html" target="_self">Muối Chấm Tây Ninh</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/sot-cham.html" target="_self">Sốt Chấm</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-nuoc-mam-phu-quoc.html" target="_self">NATURAL Nước Mắm Phú Quốc</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-mam-dac-san-phu-quoc.html" target="_self">NATURAL Mắm Đặc Sản Phú Quốc</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-gia-vi-nau.html" target="_self">NATURAL Gia Vị Nấu Và Ướp</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-gia-vi-tu-nhien.html" target="_self">NATURAL Gia Vị Tự Nhiên</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-tom-chua.html" target="_self">NATURAL Tôm Chua</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-rau-cu-chua-ngot-amp-rau-cu-ngam-giam.html" target="_self">NATURAL Rau Củ Chua Ngọt &amp; Rau Củ Ngâm Giấm</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/natural-muoi-cham.html" target="_self">NATURAL Muối Chấm</a></li>
+                                        <li><a href="https://dhfoods.com.vn/vn/san-pham-big-size.html" target="_self">Sản phẩm Big Size</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#mon-ngon">Món ngon</a>
+                                </li>
+                                <li>
+                                    <a href="#gia-vi">Khám phá gia vị</a>
+                                </li>
+                                <li>
+                                    <a href="">Liên hệ</a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-cart-plus"></i> Giỏ Hàng</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="header__btn">
+                        <a class="item-login n-login-btn" href="#login">
+                            Đăng nhập
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <main class="main-site">
+
+        @RenderBody()
+
+        <!--Footer-->
+        <div id="vnt-footer">
+            <div class="mainFoot">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="title">Thông tin liên hệ</div>
+                            <div class="grid">
+
+                                <div class="col">
+                                    <div class="name">BP. Sản Xuất &amp; Thu Mua:</div>
+                                    <div class="be">Ms. Kim Xoạn - COO</div>
+                                    <div class="be">Email: <a href="mailto:xoanbk@dhfoods.com.vn">xoanbk@dhfoods.com.vn</a></div>
+                                    <div class="be">SĐT/Telegram: <a href="tel:+(84) 947 442 788">+(84) 947 442 788</a></div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="name">BP. Kinh Doanh &amp; MKT:</div>
+                                    <div class="be">Ms. Thanh Huyền - CCO</div>
+                                    <div class="be">Email: <a href="mailto:huyenvtt@dhfoods.com.vn">huyenvtt@dhfoods.com.vn</a></div>
+                                    <div class="be">SĐT/Telegram: <a href="tel:+(84) 94 476 0277">+(84) 94 476 0277</a></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="title">Liên kết với Dh Foods</div>
+                            <div class="socialFoot">
+                                <ul>
+
+                                    <li><a href="https://www.facebook.com/DHFoods.com.vn/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+
+                                    <li><a href="https://www.youtube.com/user/userGiaviDhfoods" target="_blank"><i class="fab fa-youtube"></i></a></li>
+
+                                    <li><a href="http://google.com" target="_blank"><i class="fab fa-google"></i></a></li>
+
+                                    <li><a href="https://www.instagram.com/dhfoods_vn/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botFoot">
+                <div class="wrapper">
+                    <div class="copyright">
+                        <div class="copy">Copyright © 2018 <strong>Dh Foods</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End-->
+    </main>
+    <!-- include footer.html -->
+    <footer></footer>
+    <script src="~/Areas/Scripts/Css/vendor.js" type="text/javascript"></script>
+    <script src="~/Areas/Scripts/Css/script.js" type="text/javascript"></script>
+</body>
+</html>
+
+

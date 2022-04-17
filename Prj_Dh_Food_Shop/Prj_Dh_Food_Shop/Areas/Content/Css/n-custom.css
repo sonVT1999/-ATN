@@ -45,6 +45,61 @@ table td {
     height: calc(100% - 130px);
 }
 
+.main-site {
+    background-color: #fff;
+}
+
+.info-contact {
+    position: relative;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #ffffff;
+    padding-right: 210px;
+}
+
+    .info-contact .img {
+        float: left;
+        border: solid 1px #f1f1f1;
+        box-shadow: 3px 3px 0px #f1f1f1;
+        margin-right: 20px;
+        max-width: 160px;
+    }
+
+    .info-contact .over {
+        overflow: hidden;
+    }
+
+    .info-contact ul {
+        margin-bottom: 5px;
+    }
+
+    .info-contact .view-map-contact {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .info-contact ul li {
+        padding-left: 25px;
+        position: relative;
+        margin-bottom: 5px;
+        font-size: 15px;
+        line-height: 23px;
+    }
+
+    .info-contact .view-map-contact a {
+        display: inline-block;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        border-radius: 5px;
+        border: solid 1px #1b5633;
+        padding: 9px 23px;
+        transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        position: relative;
+        overflow: hidden;
+    }
+
 .pagesmater .contain {
     height: calc(100% - 160px);
     overflow: auto;
@@ -64,6 +119,51 @@ table td {
     text-decoration: none;
     height: 40px
 }
+
+
+.box_mid .mid-title {
+    width: auto;
+    position: relative;
+    margin: 20px 0 20px 0;
+}
+
+    .box_mid .mid-title .titleL {
+        font-size: 35px;
+        line-height: 35px;
+        font-weight: bold;
+        color: #1b5633 !important;
+        font-family: inherit;
+        text-align: center;
+    }
+
+    .box_mid .mid-title .titleR {
+        float: right;
+        position: relative;
+    }
+
+.roomContact .grid {
+    display: -webkit-box;
+    display: flex;
+    align-items: flex-start;
+    margin: 0 -15px;
+    flex-wrap: wrap;
+}
+
+    .roomContact .grid .col {
+        width: 25%;
+        padding: 0 15px;
+        margin-bottom: 45px;
+    }
+
+.contactTitle {
+    font-size: 40px;
+    line-height: 50px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 45px;
+    color: #1b5633;
+}
+
 
 .menu {
     background: linear-gradient(270deg, #D81A20 14.06%, #EE0033 60.42%, #EE0000 100%);
@@ -354,6 +454,59 @@ table td {
 
 .progress {
     height: 8px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-contact.v2 label {
+    width: 100%;
+}
+
+.form-contact.v2 .colRight {
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-contact .faForm {
+    position: relative;
+}
+
+.form-contact input, .form-contact textarea, .form-contact select {
+    width: 100%;
+    border: solid 1px #1b5633;
+    background: #ffffff;
+    height: 45px;
+    padding-left: 30px;
+}
+
+.form-contact.v2 .gridButton .col {
+    width: initial;
+    padding: 0;
+    float: none;
+}
+
+.form-contact.v2 button {
+    width: initial;
+    margin-left: 10px;
+}
+
+.form-contact button {
+    font-size: 16px;
+    line-height: 24px;
+    background: #1b5633;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    transition: all 0.5s ease;
+    border-radius: 5px;
 }
 
 .n-topbanner {
@@ -1137,19 +1290,21 @@ table td {
     justify-content: center;
 }
 
-.socialFoot ul li {
+    .socialFoot ul li {
         margin: 0 20px;
-}
-
-.socialFoot ul li a {
-     display: block;
-     font-size: 20px;
-     line-height: 33px;
-     color: #ffffff;
-}
-    .socialFoot ul li a:hover {
-        color: #FFEB3B;
     }
+
+        .socialFoot ul li a {
+            display: block;
+            font-size: 20px;
+            line-height: 33px;
+            color: #ffffff;
+        }
+
+            .socialFoot ul li a:hover {
+                color: #FFEB3B;
+            }
+
 .bannerProduct .img img {
     position: absolute;
     top: 0;
@@ -1341,36 +1496,78 @@ table td {
     letter-spacing: 0;
 }
 
-    .header-site .header-bottom .header__menu ul li a {
-        text-transform: none;
-        font-size: 16px;
-        font-family: 'Sarabun', sans-serif !important;
+.header-site .header-bottom .header__menu ul li a {
+    text-transform: none;
+    font-size: 16px;
+    font-family: 'Sarabun', sans-serif !important;
+}
+
+.header-site .header-bottom .header__menu ul li {
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    padding: 15px 10px;
+}
+
+    .header-site .header-bottom .header__menu ul li:hover {
+        background: transparent;
+        border-bottom: 3px solid #fff;
+        color: #fff;
     }
 
-    .header-site .header-bottom .header__menu ul li {
-        border-radius: 0;
-        border-bottom: 3px solid transparent;
-        padding: 15px 10px;
-    }
-
-        .header-site .header-bottom .header__menu ul li:hover {
-            background: transparent;
-            border-bottom: 3px solid #fff;
-            color: #fff;
+        .header-site .header-bottom .header__menu ul li:hover ul {
+            opacity: 1;
+            visibility: initial;
+            transform: initial;
+            pointer-events: auto
         }
 
-    .header-site .header-bottom .header__menu ul .active-menu {
+    .header-site .header-bottom .header__menu ul li:active {
         background: transparent;
         border-bottom: 3px solid #fff;
     }
 
-    .header-site .header-bottom .header__menu ul li:hover a {
-        color: #fff !important;
+    .header-site .header-bottom .header__menu ul li ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(255,255,255,0.85);
+        min-width: 250px;
+        pointer-events: none;
+        -webkit-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: translateY(40px);
+        -ms-transform: translateY(40px);
+        -o-transform: translateY(40px);
+        transform: translateY(40px);
+        pointer-events: none;
+        z-index: 1;
     }
 
-    .header-site .header-bottom .header__menu ul .active-menu .item-nav {
-        color: #fff;
-    }
+        .header-site .header-bottom .header__menu ul li ul li {
+            border-bottom: solid 1px rgba(0,0,0,0.1);
+            position: relative;
+            width: -webkit-fill-available;
+            margin-right: 0
+        }
+
+            .header-site .header-bottom .header__menu ul li ul li a {
+                font-size: 12px;
+                display: block;
+                color: #333333 !important;
+                transition: all 0.3s linear
+            }
+
+            .header-site .header-bottom .header__menu ul li ul li:hover {
+                background: transparent;
+                border-bottom: 3px solid #1b5633;
+            }
+
+.header-site .header-bottom .header__menu ul .active-menu .item-nav {
+    color: #fff;
+}
 
 .n-topbanner-link {
     display: block;
