@@ -165,7 +165,6 @@ namespace Prj_Dh_Food_Shop.Controllers
                     result.price = pros.price;
                     result.descriptions = pros.descriptions;
                     result.promotion = pros.promotion;
-                    result.is_hot = pros.is_hot;
                     result.is_new = pros.is_new;
                     result.is_active = pros.is_active;
                     result.id_category = pros.id_category;

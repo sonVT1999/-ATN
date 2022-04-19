@@ -3094,20 +3094,20 @@ fieldset[disabled] .btn-default.active {
   background-color: #333;
 }
 .btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+    color: #fff;
+    background-color: #007243;
+    border-color: #007243;
 }
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
-}
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary.focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #007243;
+        border-color: #007243;
+    }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
@@ -3729,9 +3729,10 @@ tbody.collapse.in {
   pointer-events: none;
 }
 .input-group {
-  position: relative;
-  display: table;
-  border-collapse: separate;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 100%;
 }
 .input-group[class*="col-"] {
   float: none;

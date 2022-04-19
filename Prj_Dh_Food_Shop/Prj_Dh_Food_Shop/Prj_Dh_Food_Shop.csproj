@@ -154,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models_add\ReportTurnover.cs" />
     <Compile Include="Models_add\SearchTop_Products.cs" />
     <Compile Include="Models_add\Search_Customers.cs" />
     <Compile Include="Models_add\Search_Categories.cs" />

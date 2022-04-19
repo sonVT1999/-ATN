@@ -302,6 +302,45 @@ table td {
             display: none;
         }
 
+
+.card {
+    position: relative;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    background-clip: border-box;
+    border-radius: 0.42rem;
+}
+
+.accordion .card .card-header {
+    cursor: pointer;
+    margin: 0;
+    border-bottom: 0;
+    padding: 0;
+    background-color: #F3F6F9;
+}
+
+.accordion.accordion-toggle-arrow .card .card-header .card-title.collapsed {
+    color: #16492c;
+    -webkit-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+}
+
+.accordion .card .card-header .card-title {
+    padding: 1rem 1.25rem;
+    margin: 0;
+    font-size: 1.15rem;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
 .n-paging {
     margin-bottom: 0px;
 }
@@ -642,6 +681,47 @@ table td {
         padding-top: 33px;
     }
 
+
+
+.accordion.accordion-toggle-arrow .card .card-header .card-title.collapsed:after {
+    color: #7E8299;
+    -webkit-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.accordion.accordion-toggle-arrow .card .card-header .card-title:after {
+    position: absolute;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    content: "<";
+    color: #3699FF;
+    font-size: 0.7rem;
+    -webkit-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+}
+
+.btn.btn-secondary {
+    color: #3F4254;
+    background-color: #E4E6EF;
+    border-color: #E4E6EF;
+}
+
+.form-group {
+    margin-bottom: 0.9rem;
+}
+
+.accordion .card .card-header .card-title:after {
+    right: 1rem;
+}
 
 /*=========Giám Sát*/
 .colLeft {
