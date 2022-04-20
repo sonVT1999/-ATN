@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Prj_Dh_Food_Shop.Search_Categories>
+﻿
 @{
     var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
 }
+@model Prj_Dh_Food_Shop.Users
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -26,11 +27,15 @@
     <meta property="og:url" content="" />
     <!-- Google Font -->
     <!-- include styles.html -->
+    <!-- js-->
+    <script src="/Content/js/jquery-1.11.1.min.js"></script>
+    <script src="/Content/js/modernizr.custom.js"></script>
+
+    <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.min.1.11.3.js"></script>
     <link rel="stylesheet" href="~/Areas/Content/Css/vendor.css" />
     <link rel="stylesheet" href="~/Areas/Content/Css/style.css" />
     <link rel="Stylesheet" type="text/css" href="~/Areas/Content/Css/n-custom.css" />
-    <script type="text/javascript" src="~/Areas/Scripts/jquery.min.1.11.3.js"></script>
-    <script type="text/javascript" src="~/Areas/Scripts/bootstrap.min.js"></script>
     <style type="text/css">
         .cd-top {
             right: 25px;
@@ -57,30 +62,14 @@
         .n-heading#gioi-thieu {
             margin-bottom: 20px
         }
+        .w3l-login {
+            position: relative;
+            height: 100vh;
+            background: none !important;
+            background-size: cover;
+        }
     </style>
 
-    <script>
-    $(document).ready(function () {
-
-        $('.item-login n-login-btn').click(function (e) {
-
-            e.preventDefault();
-
-            var $modal = $('#login');
-            var $modalDialog = $('.modal-dialog');
-            var href = $(this).prop('href');
-
-            // không cho phép tắt modal khi click bên ngoài modal
-            var option = { backdrop: 'static' };
-
-            // load modal
-            $modalDialog.load(href, function () {
-                $modal.modal(option, 'show');
-            });
-        });
-
-    });
-</script>
 </head>
 
 <body class="n-landing">
@@ -138,9 +127,7 @@
                         </nav>
                     </div>
                     <div class="header__btn">
-                        <a class="item-login n-login-btn" data-target="#login">
-                            Đăng nhập
-                        </a>
+                        <button type="button" class="item-login n-login-btn" data-toggle="modal" data-target="#exampleModal">Đăng nhập</button>
                     </div>
                 </div>
             </div>
@@ -206,32 +193,54 @@
     </main>
     <!-- include footer.html -->
     <footer></footer>
-    <script src="~/Areas/Scripts/Css/vendor.js" type="text/javascript"></script>
-    <script src="~/Areas/Scripts/Css/script.js" type="text/javascript"></script>
+    <script src="~/Areas/Content/Scripts/Css/vendor.js" type="text/javascript"></script>
+    <script src="~/Areas/Content/Scripts/Css/script.js" type="text/javascript"></script>
+    <!--scrolling js-->
+    <script src="/Content/js/jquery.nicescroll.js"></script>
+    <!--//scrolling js-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Content/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="~/Content/login.css" type="text/css" media="all" />
 
-    <div id="login" role="dialog" class="zoom-anim-dialog mfp-hide wrap-sigin">
-        <div class="signin-bg">
-            <div class="signin-bg-wrapper">
-                <form class="custom-form form-horizontal" runat="server" data-message="Đăng nhập thành công">
-                    <h2 class="form-title">Đăng nhập</h2>
-                    <div class="form-group input-form">
-                        <span id="reauth-email" class="reauth-email"></span>
-                        <asp:TextBox ID="txtUser" placeholder="Nhập tên đăng nhập..." runat="server" CssClass="form-control"></asp:TextBox>
+
+    <div id="exampleModal" class="modal fade" role="dialog">
+        <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+             style=" height: 375px; width: auto; top: 100px; left: 38%;">
+            <section class="w3l-login">
+                <div class="overlay">
+                    <div class="wrapper">
+                        <div class="form-section">
+                            <h3>Đăng nhập</h3>
+
+                            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" });
+                                <div class="form-input">
+                                    @Html.Hidden("ReturnUrl", ViewBag.ReturnUrl as string)
+                                    @Html.TextBoxFor(model => model.username, new { @class = "form-control", @placeholder = "Username", @name = "username", @autofocus = "autofocus" })
+                                </div>
+                                <div class="form-input">
+                                    @Html.PasswordFor(model => model.passwords, new { @class = "form-control", @placeholder = "Password", @name = "passwords", @type = "password" })
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit" class="btn btn-primary theme-button mt-4">Đăng nhập</button>
+                            }
+
+                        </div>
                     </div>
-                    <div class="form-group input-form">
-                        <asp:TextBox ID="txtPass" TextMode="Password" runat="server" CssClass="form-control" placeholder="Mật khẩu" />
-                        <img src="../Turing.aspx" id="imgTuring" runat="server" style="width: auto; height: 35px; cursor: pointer; margin-top: 10px"
-                             alt="*" onclick="RefreshCaptcha()" title='Click vào hình để làm mới' />
-                        <asp:TextBox ID="txtTuring" Visible="false" runat="server" placeholder="Mã xác thực..." CssClass="form-control"></asp:TextBox>
-                    </div>
-                    <div class="btn-button">
-                        <asp:Button runat="server" ID="bntLogin" OnClientClick="return ValidateLogin();" OnClick="bntLogin_Click" Text="Đăng nhập" CssClass="btn-basic n-reg-btn" />
-                    </div>
-                </form>
-                <p class="item-signup"><a href="LostPassword.aspx">Quên mật khẩu</a></p>
+                </div>
+                <div id='stars'></div>
+                <div id='stars2'></div>
+                <div id='stars3'></div>
+            </section>
+            <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+                <div style="display:none;" role="status" aria-hidden="true">
+                </div>
             </div>
         </div>
     </div>
+
 
 </body>
 </html>

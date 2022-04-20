@@ -23,6 +23,8 @@ namespace Prj_Dh_Food_Shop
         [Column(TypeName = "date")]
         public DateTime create_date { get; set; }
 
+        public string image { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
     }

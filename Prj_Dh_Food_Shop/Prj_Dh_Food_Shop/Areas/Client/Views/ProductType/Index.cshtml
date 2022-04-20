@@ -1,7 +1,9 @@
-﻿
+﻿@model IEnumerable<Prj_Dh_Food_Shop.Search_Categories>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
+    var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
 }
 
 <link rel="stylesheet" href="~/Areas/Content/Css/vendor.css" />
@@ -180,160 +182,30 @@
 
                                 <div class="mid-content">
                                     <div class="gridCat">
+                                        @if (categories != null)
+                                        {
+                                            foreach (var item in categories)
+                                            {
+                                                <div class="col ">
+                                                    <div class="productCat">
+                                                        <div class="wrap">
 
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/muoi-cham.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__Muoi_Cham_Tay_Ninh.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__Muoi_Cham_Tay_Ninh.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
+                                                            <div class="img">
+                                                                <a href="~/Client/Product/Index?Category=@item.id">
+                                                                    <img src="@item.image" class="hidden-sm hidden-xs" />
+                                                                    <img src="@item.image" class="hidden-lg hidden-md" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="tend hidden">
+                                                                <h3><a href="~/Client/Product/Index?Category=@item.id">@item.name</a></h3>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/muoi-cham.html">Muối Chấm Tây Ninh</h3></a></div>
-
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/sot-cham.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__Sot_Cham.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__Sot_Cham.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/sot-cham.html">Sốt Chấm</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="~/Client/Product/Nuoc_mam_phu_quoc">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Nuoc_Mam_Phu_Quoc.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Nuoc_Mam_Phu_Quoc.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="~/Client/Product/Nuoc_mam_phu_quoc">NATURAL Nước Mắm Phú Quốc</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-mam-dac-san-phu-quoc.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Mam_Dac_San_Phu_Quoc.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Mam_Dac_San_Phu_Quoc.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-mam-dac-san-phu-quoc.html">NATURAL Mắm Đặc Sản Phú Quốc</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col full">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-gia-vi-nau.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Gia_vi_Uop_va_Nau.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Gia_vi_Uop_va_Nau.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-gia-vi-nau.html">NATURAL Gia Vị Nấu Và Ướp</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-gia-vi-tu-nhien.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Gia_vi_Tu_Nhien.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Gia_vi_Tu_Nhien.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-gia-vi-tu-nhien.html">NATURAL Gia Vị Tự Nhiên</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-tom-chua.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Tom_Chua.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Tom_Chua.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-tom-chua.html">NATURAL Tôm Chua</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-rau-cu-chua-ngot-amp-rau-cu-ngam-giam.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Rau_Cu.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Rau_Cu.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-rau-cu-chua-ngot-amp-rau-cu-ngam-giam.html">NATURAL Rau Củ Chua Ngọt &amp; Rau Củ Ngâm Giấm</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col ">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/natural-muoi-cham.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Muoi_Cham.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__NATURAL_Muoi_Cham.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/natural-muoi-cham.html">NATURAL Muối Chấm</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col full">
-                                            <div class="productCat">
-                                                <div class="wrap">
-                                                    <div class="img">
-                                                        <a href="https://dhfoods.com.vn/vn/san-pham-big-size.html">
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/12_2021/SP_Big_Size_Dh_Foods-01_1.jpg" class="hidden-sm hidden-xs" />
-                                                            <img src="https://dhfoods.com.vn/vnt_upload/product/12_2021/SP_Big_Size_Dh_Foods-01_1.jpg" class="hidden-lg hidden-md" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="tend hidden"><h3><a href="https://dhfoods.com.vn/vn/san-pham-big-size.html">Sản phẩm Big Size</h3></a></div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                            }
+                                        }
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

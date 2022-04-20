@@ -25,5 +25,7 @@ namespace Prj_Dh_Food_Shop
 
         public int totalPage { get; set; }
 
+        public string image { get; set; }
+
     }
 }

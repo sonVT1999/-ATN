@@ -8,9 +8,11 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 {
     public class ProductTypeController : Controller
     {
-        // GET: Client/ProdutType
+        private Entity_Dh_Food db = new Entity_Dh_Food();
+        // GET: Client/LienHe
         public ActionResult Index()
         {
+            ViewBag.category = db.Categories.ToList();
             return View();
         }
     }
