@@ -38,5 +38,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             var model = db.Categories.ToList();
             return model;
         }
+
     }
 }

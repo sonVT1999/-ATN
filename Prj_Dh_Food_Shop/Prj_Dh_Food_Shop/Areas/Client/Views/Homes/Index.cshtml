@@ -96,7 +96,7 @@
                     <div class="wrap-flex-right" style="width: 85%">
                         <nav class="header__menu" style="width: 100%">
                             <div class="logo">
-                                <a href="">
+                                <a href="~/Client/Homes/Index">
                                     <img src="~/Areas/Content/Images/Logo_Dh_Foods.png" alt="" style="float: left; width: 55px" />
                                 </a>
                             </div>
@@ -105,13 +105,13 @@
                                     <a></a>
                                 </li>
                                 <li>
-                                    <a href="">Trang chủ</a>
+                                    <a href="~/Client/Homes/Index">Trang chủ</a>
                                 </li>
                                 <li>
                                     <a href="#gioi-thieu">Về dh foods</a>
                                 </li>
                                 <li>
-                                    <a href="">Sản phẩm</a>
+                                    <a href="~/Client/Products/Index">Sản phẩm</a>
                                     <ul>
                                         <li><a href="https://dhfoods.com.vn/vn/muoi-cham.html" target="_self">Muối Chấm Tây Ninh</a></li>
                                         <li><a href="https://dhfoods.com.vn/vn/sot-cham.html" target="_self">Sốt Chấm</a></li>
@@ -132,7 +132,7 @@
                                     <a href="#gia-vi">Khám phá gia vị</a>
                                 </li>
                                 <li>
-                                    <a href="">Liên hệ</a>
+                                    <a href="~/Client/LienHe/Index">Liên hệ</a>
                                 </li>
                                 <li>
                                     <a href=""><i class="fa fa-cart-plus"></i> Giỏ Hàng</a>
@@ -286,7 +286,7 @@
             <div class="container">
                 <div class="row n-heading">
                     <div class="col-md-12">
-                        <h2 style="margin-bottom:20px; color:#16492c; margin-top: 75px" >Món ngon</h2>
+                        <h2 style="margin-bottom:20px; color:#16492c; margin-top: 75px">Món ngon</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -302,7 +302,7 @@
             <div class="container">
                 <div class="row n-heading">
                     <div class="col-md-12">
-                        <h2 style="margin-bottom:20px;margin-top: 75px; color:#16492c" >Khám phá gia vị</h2>
+                        <h2 style="margin-bottom:20px;margin-top: 75px; color:#16492c">Khám phá gia vị</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -372,8 +372,10 @@
         <!--End-->
     </main>
     <!-- include footer.html -->
-    <footer>
-    </footer>
+    <footer></footer>
+
+
+
     <div id="login" class="zoom-anim-dialog mfp-hide wrap-sigin">
         <div class="signin-bg">
             <div class="signin-bg-wrapper">
@@ -391,12 +393,15 @@
                     </div>
                     <div class="btn-button">
                         <asp:Button runat="server" ID="bntLogin" OnClientClick="return ValidateLogin();" OnClick="bntLogin_Click" Text="Đăng nhập" CssClass="btn-basic n-reg-btn" />
+                        <asp:Button runat="server" ID="bntRegister" OnClientClick="return ValidateRegister();" OnClick="bntRegister_Click" Text="Đăng kí" CssClass="btn-basic n-reg-btn" />
                     </div>
                 </form>
                 <p class="item-signup"><a href="LostPassword.aspx">Quên mật khẩu</a></p>
             </div>
         </div>
     </div>
+
+
     <div id="forgot-pass" class="zoom-anim-dialog mfp-hide wrap-sigin">
         <div class="signin-bg">
             <div class="signin-bg-wrapper">
@@ -436,6 +441,8 @@
             </div>
         </div>
     </div>
+
+
     <div id="modal_register" class="zoom-anim-dialog mfp-hide wrap-sigin">
         <div class="signin-bg">
             <div class="signin-bg-wrapper">
@@ -488,6 +495,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="modal fade" id="myAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
