@@ -11,7 +11,7 @@ using System.IO;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
 

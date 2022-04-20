@@ -25,9 +25,5 @@ namespace Prj_Dh_Food_Shop
 
         public string Captcha { get; set; }
 
-        internal object login(object tendangnhap, object matkhau)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

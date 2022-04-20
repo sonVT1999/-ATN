@@ -134,6 +134,8 @@
     <Compile Include="Areas\Client\Controllers\LienHeController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductTypeController.cs" />
+    <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CustomersPotentialController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -640,6 +642,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Client\Models\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Orders_detail\" />
     <Folder Include="Views\SessionHelper\" />
   </ItemGroup>

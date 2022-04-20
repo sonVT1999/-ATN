@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
 

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
-    public class ReportsController : Controller
+    public class ReportsController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
         // GET: Reports

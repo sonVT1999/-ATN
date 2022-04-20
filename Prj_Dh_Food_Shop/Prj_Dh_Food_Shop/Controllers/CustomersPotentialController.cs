@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
-    public class CustomersPotentialController : Controller
+    public class CustomersPotentialController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
         public ActionResult Index(Search_CustomersPotential model)
