@@ -142,7 +142,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 else
                 {
                     result.passwords = users.passwords;
-                    if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0-9]+$").Success || users.phone_number.Length != 10)
+                    if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0,+84][0-9]{9}$").Success || users.phone_number.Length != 10)
                     {
                         msg = "Cập nhật không thành công! Số điện thoại của người dùng không đúng định dạng!";
                         status = -1;

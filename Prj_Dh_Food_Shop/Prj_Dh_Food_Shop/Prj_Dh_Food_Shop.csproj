@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
+    <Compile Include="Areas\Client\Controllers\CartsController.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
     <Compile Include="Areas\Client\Controllers\LienHeController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductsController.cs" />
@@ -210,6 +211,7 @@
     <Content Include="Areas\Client\Views\Shared\_LayoutClient.cshtml" />
     <Content Include="Areas\Client\Views\LienHe\Index.cshtml" />
     <Content Include="Areas\Client\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Carts\Index.cshtml" />
     <None Include="Areas\Content\Scripts\General\jquery-1.4.1-vsdoc.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.min.js" />
@@ -554,6 +556,7 @@
     <Content Include="Content\js\underscore-min.js" />
     <Content Include="Content\js\validator.min.js" />
     <Content Include="Content\js\wow.min.js" />
+    <Content Include="Content\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
