@@ -25,7 +25,7 @@ namespace Prj_Dh_Food_Shop
 
         public string addresss { get; set; }
 
-        public DateTime create_date { get; set; }
+        public DateTime? create_date { get; set; }
 
         public int is_active { get; set; }
 

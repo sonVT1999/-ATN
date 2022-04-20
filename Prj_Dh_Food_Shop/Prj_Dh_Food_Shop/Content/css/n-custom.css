@@ -3110,12 +3110,12 @@ div.ui-widget-overlay {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f5f5f5;
+    background: #007243;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #cfcfcf;
+    background: #007243;
 }
 
     /* Handle on hover */

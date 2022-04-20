@@ -18,7 +18,7 @@ namespace Prj_Dh_Food_Shop
 
         public string promotion { get; set; }
 
-        public DateTime create_date { get; set; }
+        public DateTime? create_date { get; set; }
 
         public int? is_hot { get; set; }
 

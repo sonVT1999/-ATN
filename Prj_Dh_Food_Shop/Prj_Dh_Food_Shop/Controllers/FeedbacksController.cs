@@ -18,13 +18,15 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
 
             var data = from f in db.Feedbacks
-                       join c in db.Customers on f.id_customer equals c.id
-                       where (string.IsNullOrEmpty(model.txbName) || c.name.Contains(model.txbName))
+                       where (string.IsNullOrEmpty(model.txbName) || f.customer_name.Contains(model.txbName))
                        && ((model.txb_is_active) == 0 || f.is_active == model.txb_is_active )
                        select new Search_Feedbacks()
                        {
                            id = f.id,
-                           customer_name = c.name,
+                           customer_name = f.customer_name,
+                           phone_number = f.phone_number,
+                           addresss = f.addresss,
+                           email = f.email,
                            title = f.title,
                            descriptions = f.descriptions,
                            feedback_date = f.feedback_date,

@@ -11,7 +11,7 @@ namespace Prj_Dh_Food_Shop
 
         public string name { get; set; }
 
-        public DateTime create_date { get; set; }
+        public DateTime? create_date { get; set; }
 
         public List<Search_Categories> lstData { get; set; }
 

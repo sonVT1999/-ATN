@@ -132,7 +132,8 @@
     <Compile Include="Areas\Client\Controllers\CartsController.cs" />
     <Compile Include="Areas\Client\Controllers\HomesController.cs" />
     <Compile Include="Areas\Client\Controllers\LienHeController.cs" />
-    <Compile Include="Areas\Client\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Client\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Client\Controllers\ProductTypeController.cs" />
     <Compile Include="Controllers\CustomersPotentialController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -210,8 +211,10 @@
     <Content Include="Areas\Content\Scripts\General\jquery-1.11.1.min.js" />
     <Content Include="Areas\Client\Views\Shared\_LayoutClient.cshtml" />
     <Content Include="Areas\Client\Views\LienHe\Index.cshtml" />
-    <Content Include="Areas\Client\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Product\Nuoc_mam_phu_quoc.cshtml" />
     <Content Include="Areas\Client\Views\Carts\Index.cshtml" />
+    <Content Include="Areas\Client\Views\ProductType\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Carts\CheckoutComplete.cshtml" />
     <None Include="Areas\Content\Scripts\General\jquery-1.4.1-vsdoc.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.min.js" />

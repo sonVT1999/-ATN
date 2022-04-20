@@ -13,15 +13,18 @@ namespace Prj_Dh_Food_Shop
 
         public string descriptions { get; set; }
 
-        public DateTime feedback_date { get; set; }
+        public DateTime? feedback_date { get; set; }
 
         public int? is_active { get; set; }
 
-        public int? id_customer { get; set; }
 
         public string customer_name { get; set; }
 
-        public virtual Customers Customers { get; set; }
+        public string addresss { get; set; }
+
+        public string phone_number { get; set; }
+
+        public string email { get; set; }
 
         public List<Search_Feedbacks> lstData { get; set; }
 

@@ -33,6 +33,25 @@ namespace Prj_Dh_Food_Shop.Controllers
             return View(model);
         }
 
+        public List<Search_Categories> getAllCate()
+        {
+            try
+            {
+                List<Search_Categories> listCate = db.Categories.OrderByDescending(u => u.create_date).
+                                                        Select(u => new Search_Categories
+                                                        {
+                                                            id = u.id,
+                                                            name = u.name
+                                                        }).ToList();
+                return listCate;
+            }
+            catch
+            {
+                return new List<Search_Categories>();
+            }
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Categories model)

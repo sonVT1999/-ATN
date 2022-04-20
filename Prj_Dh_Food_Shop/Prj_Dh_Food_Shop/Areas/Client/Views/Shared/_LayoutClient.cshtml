@@ -1,4 +1,5 @@
 ﻿
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,37 +27,6 @@
     <link rel="Stylesheet" type="text/css" href="~/Areas/Content/Css/n-custom.css" />
     <script type="text/javascript" src="~/Areas/Scripts/jquery.min.1.11.3.js"></script>
     <script type="text/javascript" src="~/Areas/Scripts/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-        function loadJsAsync(src, callback) {
-            var s = document.createElement('script');
-            s.type = "text/javascript";
-            s.src = src;
-            s.addEventListener('load', function (e) { callback(null, e); }, false);
-            var head = document.getElementsByTagName('head')[0];
-            head.appendChild(s);
-        }
-
-        window.addEventListener("load", function () {
-            try {
-                var enable = <%=ConfigurationManager.AppSettings["TurnOnIPCCChatFrame"] %>;
-                var mobileScreenWidth = screen.width;
-                if (enable.toString().toLowerCase() == "true" && mobileScreenWidth > 480) {
-                    loadJsAsync('https://econtact.viettel.vn:8909/js/IpccChat.js', function () {
-                        var IpccChat = {
-                            domain: 'V_TRACKING',
-                            username: '<%= CurrentSession.CurrentUser.username %>',
-                            color: ''
-                        };
-                        embedIpccChat(IpccChat);
-                    })
-                }
-            }
-            catch (err) {
-                //do nothing - duongpx2
-            }
-        }, false);
-    </script>
     <style type="text/css">
         .cd-top {
             right: 25px;
@@ -114,8 +84,17 @@
                                     <a href="~/Client/Homes/Index#gioi-thieu">Về dh foods</a>
                                 </li>
                                 <li>
-                                    <a href="~/Client/Products/Index">Sản phẩm</a>
-                                    <ul>
+                                    <a href="~/Client/ProductType/Index">Sản phẩm</a>
+                                    <ul class="dropdown-menu">
+
+                                        @if (ViewBag.getAllCate != null)
+                                        {
+                                            foreach (var item in ViewBag.getAllCate)
+                                            {
+                                                <li><a href="~/Client/Product/Index" target="_self">@item.name</a></li>
+                                            }
+                                        }
+
                                         <li><a href="https://dhfoods.com.vn/vn/muoi-cham.html" target="_self">Muối Chấm Tây Ninh</a></li>
                                         <li><a href="https://dhfoods.com.vn/vn/sot-cham.html" target="_self">Sốt Chấm</a></li>
                                         <li><a href="https://dhfoods.com.vn/vn/natural-nuoc-mam-phu-quoc.html" target="_self">NATURAL Nước Mắm Phú Quốc</a></li>

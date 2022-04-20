@@ -9,7 +9,6 @@
 @model Prj_Dh_Food_Shop.Search_Feedbacks
 @{
 
-    var Customers = (List<Prj_Dh_Food_Shop.Customers>)ViewBag.customer;
     var count = 0;
 }
 
@@ -45,7 +44,7 @@
             </tr>
             <tr>
                 <td style="padding-top: 13px" ;="" colspan="8">
-                    <div class="topAction_right pr-0" style="float: right; margin-bottom: 6px">
+                    <div style="text-align:center; margin-bottom: 6px">
                         <input type="submit" name="btnSearch" value="Tìm kiếm" class="myButton btnTrimSpace">
                     </div>
                 </td>
@@ -73,6 +72,12 @@
                     Tên khách hàng
                 </th>
                 <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
                     Tiêu đề
                 </th>
                 <th>
@@ -98,6 +103,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.customer_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.title)

@@ -53,11 +53,6 @@ namespace Prj_Dh_Food_Shop
                 .IsUnicode(false);
 
             modelBuilder.Entity<Customers>()
-                .HasMany(e => e.Feedbacks)
-                .WithOptional(e => e.Customers)
-                .HasForeignKey(e => e.id_customer);
-
-            modelBuilder.Entity<Customers>()
                 .HasMany(e => e.Orders)
                 .WithOptional(e => e.Customers)
                 .HasForeignKey(e => e.id_customer);

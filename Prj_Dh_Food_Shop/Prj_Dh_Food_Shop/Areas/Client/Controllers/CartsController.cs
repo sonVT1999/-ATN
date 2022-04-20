@@ -13,5 +13,10 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         {
             return View();
         }
+
+        public ActionResult CheckoutComplete()
+        {
+            return View();
+        }
     }
 }

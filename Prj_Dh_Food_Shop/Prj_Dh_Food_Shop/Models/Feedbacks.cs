@@ -22,8 +22,17 @@ namespace Prj_Dh_Food_Shop
 
         public int? is_active { get; set; }
 
-        public int? id_customer { get; set; }
+        public string customer_name { get; set; }
 
-        public virtual Customers Customers { get; set; }
+        [StringLength(100)]
+        public string addresss { get; set; }
+
+        [StringLength(15)]
+        public string phone_number { get; set; }
+
+        [StringLength(100)]
+        public string email { get; set; }
+
+
     }
 }
