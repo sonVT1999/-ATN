@@ -24,11 +24,11 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = db.Customers.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords)).FirstOrDefault();
+                var data = db.Customers.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords) && s.is_active == 1).FirstOrDefault();
                 if (data != null)
                 {
                     //add session
-                    Session.Add(CommonConstants.USER_SESSION, data);
+                    Session.Add(CommonConstants.KH_SESSION, data);
                     if (IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 

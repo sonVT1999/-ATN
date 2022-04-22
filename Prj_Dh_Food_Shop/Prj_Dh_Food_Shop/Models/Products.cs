@@ -31,6 +31,10 @@ namespace Prj_Dh_Food_Shop
         [StringLength(200)]
         public string promotion { get; set; }
 
+        public string ingredient { get; set; }
+
+        public string HDSD { get; set; }
+
         public int? is_hot { get; set; }
 
         public int? is_new { get; set; }

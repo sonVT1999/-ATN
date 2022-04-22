@@ -16,6 +16,10 @@ namespace Prj_Dh_Food_Shop
 
         public string descriptions { get; set; }
 
+        public string ingredient { get; set; }
+
+        public string HDSD { get; set; }
+
         public string promotion { get; set; }
 
         public DateTime? create_date { get; set; }
@@ -30,7 +34,11 @@ namespace Prj_Dh_Food_Shop
 
         public string category_name { get; set; }
 
+        public string link { get; set; }
+
         public virtual Categories categories { get; set; }
+
+        public virtual Images_product images_product { get; set; }
 
         public List<Search_Products> lstData { get; set; }
 

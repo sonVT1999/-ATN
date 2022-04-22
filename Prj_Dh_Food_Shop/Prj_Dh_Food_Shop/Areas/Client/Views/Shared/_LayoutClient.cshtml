@@ -1,8 +1,9 @@
-﻿
+﻿@using Prj_Dh_Food_Shop.Common;
 @{
     var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
+    var KH = (Customers)Session[CommonConstants.KH_SESSION];
 }
-@model Prj_Dh_Food_Shop.Users
+@model Prj_Dh_Food_Shop.Customers
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -106,7 +107,7 @@
                                         {
                                             foreach (var item in categories)
                                             {
-                                                <li><a href="~/Client/Product/Index?Category=@item.id" target="_self">@item.name</a></li>
+                                                <li><a href="~/Client/Product/product?CategoryId=@item.id" target="_self">@item.name</a></li>
                                             }
                                         }
                                     </ul>
@@ -126,9 +127,21 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="header__btn">
-                        <button type="button" class="item-login n-login-btn" data-toggle="modal" data-target="#exampleModal">Đăng nhập</button>
-                    </div>
+                    @if (KH == null)
+                    {
+                        <div class="header__btn">
+                            <button type="button" class="item-login n-login-btn" data-toggle="modal" data-target="#exampleModal">Đăng nhập</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="header__btn">
+                            <li> Xin chào: @KH.name</li>
+                            <button type="button" class="item-login n-login-btn" data-toggle="modal">Đăng xuất</button>
+                        </div>
+                    }
+
+
                 </div>
             </div>
         </header>
@@ -139,21 +152,21 @@
 
         <!--Footer-->
         <div id="vnt-footer">
-            <div class="mainFoot">
+            <div class="mainFoot" style="padding-top: 100px;">
                 <div class="wrapper">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="title">Thông tin liên hệ</div>
                             <div class="grid">
 
-                                <div class="col">
+                                <div class="col" style="padding: 0">
                                     <div class="name">BP. Sản Xuất &amp; Thu Mua:</div>
                                     <div class="be">Ms. Kim Xoạn - COO</div>
                                     <div class="be">Email: <a href="mailto:xoanbk@dhfoods.com.vn">xoanbk@dhfoods.com.vn</a></div>
                                     <div class="be">SĐT/Telegram: <a href="tel:+(84) 947 442 788">+(84) 947 442 788</a></div>
                                 </div>
 
-                                <div class="col">
+                                <div class="col" style="padding: 0">
                                     <div class="name">BP. Kinh Doanh &amp; MKT:</div>
                                     <div class="be">Ms. Thanh Huyền - CCO</div>
                                     <div class="be">Email: <a href="mailto:huyenvtt@dhfoods.com.vn">huyenvtt@dhfoods.com.vn</a></div>
@@ -212,7 +225,7 @@
                         <div class="form-section">
                             <h3>Đăng nhập</h3>
 
-                            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                            @using (Html.BeginForm("Login", "Homes", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" });

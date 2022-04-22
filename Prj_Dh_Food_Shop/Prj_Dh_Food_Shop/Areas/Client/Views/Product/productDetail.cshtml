@@ -1,0 +1,387 @@
+﻿@model Prj_Dh_Food_Shop.Search_Products
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+    <title>NATURAL Nước Mắm Phú Quốc</title>
+    <meta name="keywords" CONTENT="CÔNG TY CỔ PHẦN DH FOODS" />
+    <meta name="description" CONTENT="Dh Foods với niềm tự hào về gia vị Việt, luôn mang đến những sản phẩm chất lượng nhất được lựa chọn kỹ càng từ khắp mọi miền Tổ Quốc." />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="aEmUg-7Z0H8FynZTBTzycgen1XIhJ8ExKGPLjmo2XfM" />
+    <meta name="author" content="Dh Foods" />
+    <style type="text/css">
+
+        .wrap > a:focus {
+            outline: none;
+        }
+
+        .header-tools > .languageMobile a {
+            padding-top: 14px;
+        }
+
+        .header-tools > .menuTop > ul > li {
+            margin-right: 35px;
+        }
+
+        .mainHeadWrap > .mainHead.fixed .logo img {
+            max-height: 60px;
+        }
+
+        .menuTab ul li a, .productCart a, .info-contact .view-map-contact a, .info-contact .view-map-contact a:before, .form-contact button {
+            border-radius: 5px;
+        }
+
+        div#vnt-footer > .mainFoot .grid .col:nth-child(3), div#vnt-footer > .mainFoot .grid .col:nth-child(4) {
+            margin-bottom: 25px;
+        }
+
+        .item > .productCat .tend {
+            min-height: 75px;
+        }
+
+            .item > .productCat .tend h3 {
+                font-size: 27px;
+                line-height: 35px;
+                white-space: normal;
+            }
+
+        .breadcrumb ul li:first-child {
+            display: none;
+        }
+
+        .breadcrumb ul li:nth-child(2) {
+            margin-left: 0;
+        }
+
+        .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productDes {
+            font-size: 18px;
+            line-height: 26px;
+        }
+
+        .item > .productCat .tend h3, .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a, .item > .product .tend a, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h1, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h2, .col > .productCat .tend h3 {
+            text-transform: none;
+        }
+
+        .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a {
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        .productDes > ol, .productDes > ul {
+            list-style: disc !important;
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-inline-start: 40px;
+        }
+
+        .info-contact .view-map-contact a span {
+            padding-top: 1px;
+        }
+
+        .col-lg-4.col-md-4.col-sm-6.col-xs-12 > .recruit .tend h3 {
+            height: auto;
+        }
+
+        .recruit .des {
+            padding-top: 25px;
+        }
+
+        .recruit:hover .des {
+            padding-top: 0px;
+        }
+
+        /*khảng cách tiêu đề bài viết*/
+        .wrapConts .box_mid .mid-title .titleL {
+            margin-top: 30px
+        }
+
+        .productWrap_c {
+            margin-top: 30px;
+        }
+
+        .product .link a span {
+            padding-right: 0 !important;
+            position: relative;
+        }
+
+            .product .link a span:before {
+                content: "" !important;
+                font-family: fontAwesome;
+                position:;
+                right: 0;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+    </style>
+
+    <style type="text/css">
+        .bx-bct {
+            display: flex;
+        }
+    </style>
+
+    <link href="https://dhfoods.com.vn/js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://dhfoods.com.vn/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://dhfoods.com.vn/js/slick/slick.css" rel="stylesheet" type="text/css" />
+    <link href="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.css" type="text/css" rel="stylesheet" />
+    <link href="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.css" type="text/css" rel="stylesheet" />
+    <link href="https://dhfoods.com.vn/js/menumobile/menumobile.css" type="text/css" rel="stylesheet" />
+    <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
+    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/slick/slick.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/menumobile/menumobile.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/my_effect_scroll/my_effect_scroll.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/core.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/style.js"></script>
+    <link rel="stylesheet" href="https://dhfoods.com.vn/modules/product//css/product.css" type="text/css" />
+    <script type="text/javascript" src="https://dhfoods.com.vn/js/mntab/mntab.js"></script>
+    <script type="text/javascript" src="https://dhfoods.com.vn/modules/product//js/product.js"></script>
+    <style type="text/css">
+        #vnt-navation {
+            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
+        }
+
+        .mainFoot {
+            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
+        }
+
+        .mainHead {
+            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="vnt-content">
+        <div class="vnt-main-top">
+            <div id="vnt-slide" class="slick-init">
+                <div class="item">
+                    <div class="img">
+                        <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/Muoi_Tom_Tay_Ninh.png" />
+                    </div>
+                </div>
+            </div>
+            <div id="vnt-navation" class="breadcrumb">
+                <div class="wrapper">
+                    <div class="navation">
+                        <ul>
+                            <li><a href="https://dhfoods.com.vn/"><span>Trang chủ</span></a></li>
+
+                            <li><a href="https://dhfoods.com.vn/vn/san-pham.html"><span>Sản phẩm</span></a></li>
+
+                            <li><span>Muối Tôm Tây Ninh</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="vnt-background" class="bg" style="padding-top: 60px;">
+            <div class="wrapCont">
+                <div class="wrapper">
+                    <div class="productWrap">
+                        <div class="productWrap_c">
+
+                            <div class="productWrap_l">
+                                <div class="productThumbnail">
+                                    <div id="vnt-thumbnail-for">
+
+                                        <div class="item">
+                                            <div class="img"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/MUOI_TOM_TAY_NINH_120G.png" /></div>
+                                        </div>
+
+                                        <div class="item">
+                                            <div class="img"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/MUOI_TOM_TAY_NINH_60G.png" /></div>
+                                        </div>
+
+                                    </div>
+                                    <div id="vnt-thumbnail-nav">
+
+                                        <div class="item">
+                                            <div class="img"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/100_MUOI_TOM_TAY_NINH_120G.png" /></div>
+                                        </div>
+
+                                        <div class="item">
+                                            <div class="img"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/100_MUOI_TOM_TAY_NINH_60G.png" /></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="productWrap_r">
+                                <div class="productTitle"><h1>Muối Tôm Tây Ninh</h1></div>
+                                <div class="productDes">
+                                    Muối tôm Tây Ninh là một trong các đặc sản Tây Ninh nổi tiếng tại Việt Nam và trên thế giới, được Dh Foods sản xuất trên dây chuyền hiện đại, khép kín. Gia vị này chính là sự kết hợp hài hoà giữa tôm khô, tỏi, muối và ớt đỏ tươi; dùng để chấm cùng trái cây.
+                                </div>
+                                <div class="productCart"><a href="https://www.dhfoods.com.vn/vn/toi-muon-mua-hang.html"><span>Tôi muốn mua hàng</span></a></div>
+                            </div>
+
+                        </div>
+                        <div class="description">
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">Muối Tôm Tây Ninh là một trong những sản phẩm đầu tiên và chủ lực của chúng tôi. Sự kết hợp của muối mặn nồng, tôm&nbsp;cùng với những quả ớt chín mọng, tạo nên hương vị thơm ngon, hấp dẫn cho món gia vị độc đáo mà không vùng miền nào khác có được.</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">Đặc biệt, tiêu chí hoàn toàn <span style="color:#1b5633;"><strong>“Không&nbsp;Màu Tổng Hợp, Không Chất Bảo Quản Nhân Tạo”</strong></span> giúp cho sản phẩm luôn là sự lựa chọn an toàn, chất lượng của người tiêu dùng. </span></span></p>
+
+                            <div class="vnt_gallery_zoom">
+                                <div class="ck_zoom_list_img">
+                                    <div class="ck_row">
+                                        <div class="ck_xs_1">
+                                            <div class="ck_zoom_item" data-img="http://dhfoods.demo189.trust.vn/vnt_upload/File/Image/muoi_tom_tay_ninh_dh_foods_1.png"><span style="font-size:20px;"><img alt="" src="http://dhfoods.demo189.trust.vn/vnt_upload/File/Image/muoi_tom_tay_ninh_dh_foods_1.png" /></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;"><strong>Thành phần:&nbsp;</strong>Muối Iod (40%), Bột Tôm (15%), Ớt (15%), Tỏi, Chất điều vị: Mononatri Glutamat (E621), Đường, Phẩm màu tự nhiên: Parika oleoresin (E160c).</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;"><strong>Hướng dẫn sử dụng:</strong></span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">- Chấm hoa quả, rau củ tươi, rau củ luộc, hấp.</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">- Nêm các món xào, kho, canh.</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;"><strong>Trọng lượng:</strong> 110g và 60g</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;"><strong><font face="Roboto, sans-serif">Quy cách đóng gói:</font></strong></span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">- Hũ được sản xuất từ nhựa Pet nguyên sinh – đảm bảo an toàn sức khỏe cho người sử dụng.</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">- Hũ sản phẩm được đóng kín bằng màng seal 5 lớp phía dưới nắp, màng co bên ngoài nắp – đảm bảo tuyệt đối chất lượng sản phẩm – không hút ẩm – chống vón cục.</span></span></p>
+
+                            <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">Ngoài công dụng dùng để chấm trái cây, Muối Tôm Tây Ninh còn là gia vị chìa khoá cho món Tôm Rang Muối Tôm Sốt Dẻo nữa đấy, cùng bỏ túi công thức món ăn này với Dh Foods nhé!</span></span></p>
+
+                            <p><span style="font-size:20px;"><iframe align="middle" allowfullscreen="" frameborder="1" height="550" scrolling="no" src="//www.youtube.com/embed/4tjWOh7yi_s" width="640"></iframe></span></p>
+                        </div>
+                    </div>
+
+                    <div class="box_mid v2">
+                        <div class="mid-title">
+                            <div class="titleL white"><h1>Sản phẩm cùng loại</h1></div>
+                            <div class="titleR"></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="mid-content">
+                            <div id="slideOther" class="slick-init">
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tieu-la-chanh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tieu_la_chanh_120g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tieu-la-chanh.html">Muối Tiêu Lá Chanh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tieu-la-chanh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tieu-chanh-ot-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tieu_chanh_ot_120g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tieu-chanh-ot-tay-ninh.html">Muối Tiêu Chanh Ớt Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tieu-chanh-ot-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-ot-say.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_ot_say_110g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-ot-say.html">Muối Ớt Sấy</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-ot-say.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-xanh-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tom_ot_xanh_Tay_ninh_120g_1.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-xanh-tay-ninh.html">Muối Tôm Ớt Xanh Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-xanh-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tom-say.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tom_say_110g_1.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tom-say.html">Muối Tôm Sấy</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tom-say.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-ot-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_ot_Tay_ninh_110g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-ot-tay-ninh.html">Muối Ớt Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-ot-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tom_ot_Tay_ninh_120g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-tay-ninh.html">Muối Tôm Ớt Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tom-ot-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-ot-xanh-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_ot_xanh_Tay_Ninh_120g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-ot-xanh-tay-ninh.html">Muối Ớt Xanh Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-ot-xanh-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-tieu-tay-ninh.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_tieu_Tay_ninh_120g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-tieu-tay-ninh.html">Muối Tiêu Tây Ninh</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-tieu-tay-ninh.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="product">
+                                        <div class="img"><a href="https://dhfoods.com.vn/vn/muoi-cham-hoa-qua.html"><img src="https://dhfoods.com.vn/vnt_upload/product/07_2021/thumbs/350_fw_Muoi_cham_hoa_qua_110g.png" /></a></div>
+                                        <div class="tend">
+                                            <h3><a href="https://dhfoods.com.vn/vn/muoi-cham-hoa-qua.html">Muối Chấm Hoa Quả</a></h3>
+                                        </div>
+                                        <div class="link"><a href="https://dhfoods.com.vn/vn/muoi-cham-hoa-qua.html"><span>Xem chi tiết</span></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

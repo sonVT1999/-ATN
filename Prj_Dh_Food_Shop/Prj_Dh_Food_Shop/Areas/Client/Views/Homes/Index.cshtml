@@ -216,6 +216,42 @@
         <!--End-->
     </main>
 
+    <p class="cd-top">
+        <span class="icon-down"></span>
+    </p>
+    <div class="messages wow fadeInDown" data-wow-duration="1s">
+        <span class="item-message">Đăng nhập thành công</span>
+    </div>
+
+
+
+    <div class="modal fade" id="myAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-top: 10px;padding-bottom: 10px;">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="H1" style="color: #009688; font-size: 21px;"><%= GetLocalResourceObject("Notice").ToString()%></h4>
+                </div>
+                <div class="modal-body" style="padding-top: 5px;padding-bottom: 10px;">
+                    <div>
+                        <div class="card card-container">
+                            <p id="p1" class="profile-name-card"></p>
+                            <label id="lblAlert" style="font-weight:normal"><%= GetLocalResourceObject("Notice").ToString()%></label>
+                            <br />
+                            <div id="divRead" class="checkbox">
+                                <label id="lblRead">
+                                    <input type="checkbox" value="remember-me" id="chkRead" onclick="IsRead(this)" /> <%= GetLocalResourceObject("NoShowAgain").ToString()%>
+                                </label>
+                            </div>
+                        </div><!-- /card-container -->
+                    </div><!-- /container -->
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="~/Areas/Scripts/Css/vendor.js" type="text/javascript"></script>
     <script src="~/Areas/Scripts/Css/script.js" type="text/javascript"></script>
 </body>

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML>
+﻿@using Prj_Dh_Food_Shop.Common;
+@{
+    var US = (Users)Session[CommonConstants.USER_SESSION];
+}
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -71,6 +76,7 @@
                             <a href="~/Orders/Index" style="padding-left: 16px">
                                 <i class="fas fa-shopping-bag nav_icon" style="margin-right: 1.3em"></i>
                                 <span>Đơn đặt hàng</span>
+                                <span class="nav-badge-btm">@ViewData["soluongOrder"]</span>
                             </a>
                         </li>
                         <li>
@@ -89,7 +95,7 @@
                             <a href="~/Feedbacks/Index" style="padding-left: 16px">
                                 <i class="fa fa-envelope nav_icon" style="margin-right: 1.2em"></i>
                                 <span>Phản hồi, góp ý</span>
-                                <span class="nav-badge-btm">05</span>
+                                <span class="nav-badge-btm">@ViewData["soluongFeedback"]</span>
                             </a>
                         </li>
                         <li>
@@ -108,7 +114,7 @@
                             <a href="~/CustomersPotential/Index" style="padding-left: 16px">
                                 <i class="fas fa-user-plus nav_icon" style="margin-right: 0.9em"></i>
                                 <span>Khách hàng tiềm năng</span>
-                                <span class="nav-badge-btm">20</span>
+                                <span class="nav-badge-btm">@ViewData["soluongKHTN"]</span>
                             </a>
                         </li>
                         <li>
@@ -159,17 +165,16 @@
                                 <div class="profile_img">
                                     <span class="prfil-img"><img src="images/a.png" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Wikolia</p>
-                                        <span>Administrator</span>
+                                        <p>@US.name</p>
+                                        <span>@US.permission</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>
                                 </div>
                             </a>
                             <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                                <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-                                <li> <a href="~/Login/Logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                <li> <a href="~/Users/Detail/@US.id"><i class="fa fa-user"></i> Thông tin</a> </li>
+                                <li> <a href="~/Login/Logout"><i class="fa fa-sign-out"></i> Đăng xuất</a> </li>
                             </ul>
                         </li>
                     </ul>
