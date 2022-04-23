@@ -101,7 +101,7 @@
         }
 
         div#vnt-slide .img {
-            padding-top: 40% !important;
+            padding-top: 5% !important;
         }
     </style>
 
@@ -110,8 +110,6 @@
             display: flex;
         }
     </style>
-
-    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
     <script src="~/Areas/Content/Scripts/animate.css.js"></script>
     <script src="~/Areas/Content/Scripts/jquery.min.js"></script>
     <script src="~/Areas/Content/Scripts/jquery-migrate.min.js"></script>
@@ -152,14 +150,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="vnt-navation" class="breadcrumb">
-                        <div class="wrapper">
-                            <div class="navation">
-                                <ul>
-                                    <li><span>Loại sản phẩm</span></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%;">
                     </div>
                 </div>
                 <div id="vnt-background" class="bg bgp">
@@ -173,12 +164,12 @@
                                 </div>
 
                                 <div class="mid-content">
-                                    <div class="gridCat">
+                                    <div class="gridCat" style="width: 100%;">
                                         @if (categories != null)
                                         {
                                             foreach (var item in categories)
                                             {
-                                                <div class="col ">
+                                                <div class="col-md-4">
                                                     <div class="productCat">
                                                         <div class="wrap">
 

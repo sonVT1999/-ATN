@@ -2407,6 +2407,10 @@ h2 {
     display: inline-block;
     width: 160px;
     margin-left: 10px;
+
+}.header-site .header-bottom .header__btn_logout {
+    display: inline-block;
+    margin-left: 10px;
 }
 
     .header-site .header-bottom .header__btn .item-login {

@@ -62,7 +62,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                             is_active = c.is_active,
                             category_name = p.name,
                             link = ima.link,
-                            ingredient = c.descriptions,
+                            ingredient = c.ingredient,
                             HDSD = c.HDSD,
                         }).FirstOrDefault();
 
