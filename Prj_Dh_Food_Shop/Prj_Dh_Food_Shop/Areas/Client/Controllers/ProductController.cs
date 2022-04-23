@@ -17,8 +17,14 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             return View();
         }
 
+        
+        public Products VỉewDetail (int ProductId)
+        {
+            return db.Products.Find(ProductId);
+        }
 
-        public ActionResult product(int CategoryId)
+
+    public ActionResult product(int CategoryId)
         {
             ViewBag.category = db.Categories.FirstOrDefault(x => x.id == CategoryId);
 
@@ -43,7 +49,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             return View("product", data);
         }
 
-        public ActionResult productDetail(int ProductId)
+    public ActionResult productDetail(int ProductId)
         {
 
             var data = (from c in db.Products
@@ -51,7 +57,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                         join ima in db.Images_product on c.id equals ima.id_product
                         where c.id == ProductId && c.is_active == 1
                         select new Search_Products()
-                        {
+                        {   
                             id = c.id,
                             name = c.name,
                             price = c.price,

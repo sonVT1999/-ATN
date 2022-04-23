@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Prj_Dh_Food_Shop.Areas.Client.CartItem>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
@@ -163,119 +163,92 @@
                                 <div class="titleR"></div>
                                 <div class="clear"></div>
                             </div>
-                            <!-- / catg header banner section -->
-                            <!-- Cart view section -->
                             <section id="cart-view">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="cart-view-area">
-                                                @*@if (Model != null)
-                                                {*@
-                                                    @*if (!Model.cartDetails.Any())
-                                                    {
-                                                        <p class="alert alert-info">
-                                                            Bạn chưa có sản phẩm nào trong giỏ hàng!
-                                                        </p>
-                                                    }
-                                                    else
-                                                    {*@
-                                                        <div class="cart-view-table">
-                                                            <div class="table-responsive">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th></th>
-                                                                            <th></th>
-                                                                            <th>Sản phẩm</th>
-                                                                            <th>Giá</th>
-                                                                            <th>Số lượng</th>
-                                                                            <th>Tổng</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @*@foreach (var item in Model.cartDetails)
-                                                                            {
-                                                                                var img = item.product.image_url.Split(',');
-                                                                                <tr>
-                                                                                    <td id="row_" + @item.productId>
-                                                                                        <button class="remove" onclick="RemoveItem(@item.productId)">
-                                                                                            <fa class="fa fa-close"></fa>
-                                                                                        </button>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <a href="#">
-                                                                                            <img src="@img[0]" alt="img">
-                                                                                        </a>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <a class="aa-cart-title" href="#">
-                                                                                            @item.product.product_name
-                                                                                        </a>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        @if (item.product.price_sale != null)
-                                                                                        {
-                                                                                            <span>
-                                                                                                @item.product.price_sale.Value.ToString("#,##") VNĐ
-                                                                                            </span>
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            <span>
-                                                                                                @item.product.price_start.Value.ToString("#,##") VNĐ
-                                                                                            </span>
-                                                                                        }
-
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input class="aa-cart-quantity" id="@item.productId" type="number" value="@item.totalItems"
-                                                                                               onchange="ChangeQuantity(@item.product.id)">
-                                                                                    </td>
-                                                                                    <td class="@item.productId">
-                                                                                        @item.totalPrices.ToString("#,##") VNĐ
-                                                                                    </td>
-                                                                                </tr>
-                                                                            }*@
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <!-- Cart Total view -->
-                                                            <div class="cart-view-total">
-                                                                <h4>Tổng thanh toán</h4>
-                                                                <table class="aa-totals-table">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>Tổng số lượng</th>
-                                                                            <td id="TotalItems">
-                                                                                @*@Model.totalItems*@
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>Thành tiền</th>
-                                                                            <td id="TotalPrice">
-                                                                                @*@if (Model != null)
-                                                                                    {
-                                                                                        <span>
-                                                                                            @Model.totalPrices.ToString("#,##")
-                                                                                        </span>
-                                                                                    }*@
-                                                                            </td>
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                                <a href="@Url.Action("CheckOut")" class="aa-cart-view-btn">Thanh toán</a>
-                                                            </div>
-                                                        </div>
-                                                @*}
-
+                                                @if (Model.Count() == 0)
+                                                {
+                                                <p class="alert alert-info">
+                                                    Bạn chưa có sản phẩm nào trong giỏ hàng!
+                                                </p>
+                                                }
                                                 else
                                                 {
-                                                    <p class="alert alert-info">
-                                                        Bạn chưa có sản phẩm nào trong giỏ hàng!
-                                                    </p>
-                                                }*@
+                                                <div class="cart-view-table">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Sản phẩm</th>
+                                                                    <th>Giá</th>
+                                                                    <th>Số lượng</th>
+                                                                    <th>Tổng</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var item in Model)
+                                                                {
+                                                                    <tr>
+                                                                        <td id="row_" + @item.Product.id>
+                                                                            <button class="remove" onclick="RemoveItem(@item.Product.id)">
+                                                                                <fa class="fa fa-close"></fa>
+                                                                            </button>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="aa-cart-title" href="#">
+                                                                                @item.Product.name
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span>
+                                                                                @item.Product.price.ToString("#,##") VNĐ
+                                                                            </span>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <input class="aa-cart-quantity" id="@item.Product.id" type="number" value="@item.Quantity"
+                                                                                   onchange="ChangeQuantity(@item.Product.id)">
+                                                                        </td>
+                                                                        <td class="@item.Product.id">
+                                                                            @(item.Product.price * item.Quantity).ToString("#,##") VNĐ
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- Cart Total view -->
+                                                    <div class="cart-view-total">
+                                                        <h4>Tổng thanh toán</h4>
+                                                        <table class="aa-totals-table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th>Tổng số lượng</th>
+                                                                    <td id="TotalItems">
+                                                                        @*@Model.totalItems*@
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Thành tiền</th>
+                                                                    <td id="TotalPrice">
+                                                                        @*@if (Model != null)
+                                                                            {
+                                                                                <span>
+                                                                                    @Model.totalPrices.ToString("#,##")
+                                                                                </span>
+                                                                            }*@
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                        <a href="@Url.Action("CheckOut")" class="aa-cart-view-btn">Thanh toán</a>
+                                                    </div>
+                                                </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
