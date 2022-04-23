@@ -17,14 +17,15 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             return View();
         }
 
-        // GET: Client/Product/Nuoc_mam_phu_quoc
+
         public ActionResult product(int CategoryId)
         {
             ViewBag.category = db.Categories.FirstOrDefault(x => x.id == CategoryId);
+
             var data =  (from c in db.Products
                         join p in db.Categories on c.id_category equals p.id
                         join ima in db.Images_product on c.id equals ima.id_product
-                        where p.id == CategoryId
+                        where p.id == CategoryId && c.is_active == 1
                          select new Search_Products()
                                   {
                                       id = c.id,
@@ -40,6 +41,32 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                                   }).ToList();
 
             return View("product", data);
+        }
+
+        public ActionResult productDetail(int ProductId)
+        {
+
+            var data = (from c in db.Products
+                        join p in db.Categories on c.id_category equals p.id
+                        join ima in db.Images_product on c.id equals ima.id_product
+                        where c.id == ProductId && c.is_active == 1
+                        select new Search_Products()
+                        {
+                            id = c.id,
+                            name = c.name,
+                            price = c.price,
+                            descriptions = c.descriptions,
+                            promotion = c.promotion,
+                            is_hot = c.is_hot,
+                            is_new = c.is_new,
+                            is_active = c.is_active,
+                            category_name = p.name,
+                            link = ima.link,
+                            ingredient = c.descriptions,
+                            HDSD = c.HDSD,
+                        }).FirstOrDefault();
+
+            return View("productDetail", data);
         }
     }
 }

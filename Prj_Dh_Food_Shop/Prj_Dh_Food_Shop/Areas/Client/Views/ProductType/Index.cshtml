@@ -110,24 +110,18 @@
             display: flex;
         }
     </style>
-    <link href="https://dhfoods.com.vn/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/menumobile/menumobile.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/slick/slick.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/menumobile/menumobile.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/my_effect_scroll/my_effect_scroll.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.js"></script>
+    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/Content/Scripts/animate.css.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.min.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery-migrate.min.js"></script>
+    <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Areas/Content/Scripts/slick..js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.fancybox.js"></script>
+    <script src="~/Areas/Content/Scripts/my_effect_scroll.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.alerts.js"></script>
+    <script src="~/Areas/Content/Scripts/style.js"></script>
     <script type="text/javascript" src="https://dhfoods.com.vn/js/core.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/style.js"></script>
     <link rel="stylesheet" href="https://dhfoods.com.vn/modules/product//css/product.css" type="text/css" />
     <script type="text/javascript" src="https://dhfoods.com.vn/modules/product//js/product.js"></script>
 
@@ -162,9 +156,7 @@
                         <div class="wrapper">
                             <div class="navation">
                                 <ul>
-                                    <li><a href="https://dhfoods.com.vn/"><span>Trang chủ</span></a></li>
-
-                                    <li><span>Sản phẩm</span></li>
+                                    <li><span>Loại sản phẩm</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -175,7 +167,7 @@
                         <div class="">
                             <div class="box_mid v2">
                                 <div class="mid-title">
-                                    <div class="titleL"><h1>Sản phẩm</h1></div>
+                                    <div class="titleL"><h1>Loại sản phẩm</h1></div>
                                     <div class="titleR"></div>
                                     <div class="clear"></div>
                                 </div>
@@ -191,7 +183,7 @@
                                                         <div class="wrap">
 
                                                             <div class="img">
-                                                                <a href="~/Client/Product/Index?Category=@item.id">
+                                                                <a href="~/Client/Product/product?CategoryId=@item.id">
                                                                     <img src="@item.image" class="hidden-sm hidden-xs" />
                                                                     <img src="@item.image" class="hidden-lg hidden-md" />
                                                                 </a>

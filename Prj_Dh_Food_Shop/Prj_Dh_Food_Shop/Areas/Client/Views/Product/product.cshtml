@@ -1,8 +1,8 @@
 ﻿
-@{
+@*@{
     ViewBag.Title = "product";
     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
-}
+}*@
 
 @model List<Prj_Dh_Food_Shop.Search_Products>
 @{
@@ -144,16 +144,16 @@
     <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
     <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/slick/slick.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/menumobile/menumobile.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/my_effect_scroll/my_effect_scroll.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.min.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery-migrate.min.js"></script>
+    <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Areas/Content/Scripts/slick..js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.fancybox.js"></script>
+    <script src="~/Areas/Content/Scripts/my_effect_scroll.js"></script>
+    <script src="~/Areas/Content/Scripts/jquery.alerts.js"></script>
+    <script src="~/Areas/Content/Scripts/style.js"></script>
+
     <script type="text/javascript" src="https://dhfoods.com.vn/js/core.js"></script>
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/style.js"></script>
     <link rel="stylesheet" href="https://dhfoods.com.vn/modules/product//css/product.css" type="text/css" />
     <script type="text/javascript" src="https://dhfoods.com.vn/js/mntab/mntab.js"></script>
     <script type="text/javascript" src="https://dhfoods.com.vn/modules/product//js/product.js"></script>
@@ -187,10 +187,6 @@
                             <div class="wrapper">
                                 <div class="navation">
                                     <ul>
-                                        <li><a href="https://dhfoods.com.vn/"><span>Trang chủ</span></a></li>
-
-                                        <li><a href="https://dhfoods.com.vn/vn/san-pham.html"><span>Sản phẩm</span></a></li>
-
                                         <li><span>@categories.name</span></li>
                                     </ul>
                                 </div>
@@ -213,11 +209,11 @@
                                             {
                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                     <div class="product">
-                                                        <div class="img"><a href="~/Client/Product/productDetail?Product=@item.id"><img src="@item.link" /></a></div>
+                                                        <div class="img"><a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.link" /></a></div>
                                                         <div class="tend">
-                                                            <h3><a href="~/Client/Product/productDetail?Product=@item.id">@item.name</a></h3>
+                                                            <h3><a href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
                                                         </div>
-                                                        <div class="link"><a href="~/Client/Product/productDetail?Product=@item.id"><span>Xem chi tiết</span></a></div>
+                                                        <div class="link"><a href="~/Client/Product/productDetail?ProductId=@item.id"><span>Xem chi tiết</span></a></div>
                                                     </div>
                                                 </div>
                                             }
