@@ -78,6 +78,7 @@
             is_active: $('input[name="is_active"]:checked').val(),
             image: $('#imgThumbnailDisplay').attr('src'),
             id_category: $('select[name="id_category_edit"]').val(),
+            imageMore: getImageUrlMore(),
         }
 
         $.ajax({
@@ -99,6 +100,18 @@
                 }
             },
         });
+    }
+
+    function getImageUrlMore() {
+        var array = [];
+        $("#imageMoreDisplay").find('td').each(function (index, e) {
+            var url = $(e).find('img').attr('src');
+            array.push(url);
+        });
+        if (array.length > 0) {
+            return array.join(',');
+        }
+        return "";
     }
 </script>
 
@@ -420,5 +433,10 @@
             $modal.modal(option, 'show');
         });
     });
+
+
+    function delImage(e) {
+        $(e).parent('td').remove();
+    }
 </script>
 

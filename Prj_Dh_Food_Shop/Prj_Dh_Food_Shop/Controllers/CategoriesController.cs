@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +12,8 @@ namespace Prj_Dh_Food_Shop.Controllers
     public class CategoriesController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
+        private static string[] whiteList = { "jpg", "jpeg", "png", "svg", "bmp", "tif", "tiff", "gif" };
+
         public ActionResult Index(Search_Categories model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();
@@ -90,6 +94,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             var result = db.Categories.SingleOrDefault(b => b.id == cates.id);
 
             result.name = cates.name;
+            result.image = cates.image;
 
             db.SaveChanges();
             msg = "Cập nhật thông tin loại sản phẩm thành công!";
@@ -138,6 +143,38 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
 
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        public string UploadImageThumbnail(HttpPostedFileBase fileUpload)
+        {
+            string base64Image = "";
+            if (fileUpload == null) { return ""; }
+            if (!CheckFileExtension(fileUpload.FileName, out var extension))
+                throw new InvalidDataException($"File extension is denied.");
+            var fileId = Guid.NewGuid().ToString();
+            System.Drawing.Image image = System.Drawing.Image.FromStream(fileUpload.InputStream);
+
+            using (MemoryStream m = new MemoryStream())
+            {
+                image.Save(m, image.RawFormat);
+                byte[] imageBytes = m.ToArray();
+                base64Image = Convert.ToBase64String(imageBytes);
+            }
+            return base64Image;
+        }
+
+        public static byte[] convertImagetoByte(Image x)
+        {
+            ImageConverter _imageConverter = new ImageConverter();
+            byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
+            return xByte;
+        }
+
+        public static bool CheckFileExtension(string filename, out string extension)
+        {
+            var arrPath = filename.Split('.');
+            extension = arrPath[arrPath.Length - 1].ToLower();
+            return whiteList.Contains(extension);
         }
     }
 }

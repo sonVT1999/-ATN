@@ -158,6 +158,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                     result.is_active = pros.is_active;
                     result.id_category = pros.id_category;
                     result.image = pros.image;
+                    result.imageMore = pros.imageMore;
 
                     db.SaveChanges();
                     msg = "Cập nhật thông tin sản phẩm thành công!";
@@ -210,7 +211,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpPost]
         public string UploadImageThumbnail(HttpPostedFileBase fileUpload)
         {
             string base64Image = "";
@@ -241,6 +242,30 @@ namespace Prj_Dh_Food_Shop.Controllers
             var arrPath = filename.Split('.');
             extension = arrPath[arrPath.Length - 1].ToLower();
             return whiteList.Contains(extension);
+        }
+
+        [HttpPost]
+        public JsonResult UploadImageMore(List<HttpPostedFileBase> fileUpload)
+        {
+            List<string> urlImgMore = new List<string>();
+            if (fileUpload == null) { return Json(urlImgMore, JsonRequestBehavior.AllowGet); }
+
+            foreach (HttpPostedFileBase file in fileUpload)
+            {
+                if (!CheckFileExtension(file.FileName, out var extension))
+                    continue;
+
+                var fileId = Guid.NewGuid().ToString();
+
+                string path = Path.Combine(Server.MapPath("~/Images/product"));
+                if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
+
+                string filePath = Path.Combine(path, $"{fileId}.{extension}");
+                file.SaveAs(filePath);
+                urlImgMore.Add($"/Images/product/{fileId}.{extension}");
+            }
+
+            return Json(urlImgMore, JsonRequestBehavior.AllowGet);
         }
     }
 }

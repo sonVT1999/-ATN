@@ -23,7 +23,6 @@ namespace Prj_Dh_Food_Shop
         [Column(TypeName = "date")]
         public DateTime create_date { get; set; }
 
-        [StringLength(100)]
         public string image { get; set; }
 
         [Column(TypeName = "date")]
