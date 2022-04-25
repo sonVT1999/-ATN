@@ -1,7 +1,7 @@
-﻿@*@{
+﻿@{
         ViewBag.Title = "product";
         Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
-    }*@
+    }
 
 @model List<Prj_Dh_Food_Shop.Search_Products>
 @{
@@ -22,48 +22,6 @@
     <meta name="author" content="Dh Foods" />
     <style type="text/css">
 
-        .wrap > a:focus {
-            outline: none;
-        }
-
-        .header-tools > .languageMobile a {
-            padding-top: 14px;
-        }
-
-        .header-tools > .menuTop > ul > li {
-            margin-right: 35px;
-        }
-
-        .mainHeadWrap > .mainHead.fixed .logo img {
-            max-height: 60px;
-        }
-
-        .menuTab ul li a, .productCart a, .info-contact .view-map-contact a, .info-contact .view-map-contact a:before, .form-contact button {
-            border-radius: 5px;
-        }
-
-        div#vnt-footer > .mainFoot .grid .col:nth-child(3), div#vnt-footer > .mainFoot .grid .col:nth-child(4) {
-            margin-bottom: 25px;
-        }
-
-        .item > .productCat .tend {
-            min-height: 75px;
-        }
-
-            .item > .productCat .tend h3 {
-                font-size: 27px;
-                line-height: 35px;
-                white-space: normal;
-            }
-
-        .breadcrumb ul li:first-child {
-            display: none;
-        }
-
-        .breadcrumb ul li:nth-child(2) {
-            margin-left: 0;
-        }
-
         .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productDes {
             font-size: 18px;
             line-height: 26px;
@@ -72,6 +30,7 @@
         .item > .productCat .tend h3, .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a, .item > .product .tend a, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h1, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h2, .col > .productCat .tend h3 {
             text-transform: none;
         }
+
 
         .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a {
             font-size: 24px;
@@ -83,6 +42,19 @@
             margin-top: 0;
             margin-bottom: 10px;
             padding-inline-start: 40px;
+        }
+        .product .link a:hover {
+            background-color: #fff !important;
+        }
+
+            .product .link a:hover span {
+                color: #1b5633 !important;
+            }
+
+        .product .link a {
+            color: #fff !important;
+            border: solid 1px #1b5633 !important;
+            background-color: #1b5633 !important;
         }
 
         .info-contact .view-map-contact a span {
@@ -133,16 +105,7 @@
             display: flex;
         }
     </style>
-
-    <link href="https://dhfoods.com.vn/js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/menumobile/menumobile.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
-
+    <script src="~/Areas/Content/Scripts/animate.css.js"></script>
     <script src="~/Areas/Content/Scripts/jquery.min.js"></script>
     <script src="~/Areas/Content/Scripts/jquery-migrate.min.js"></script>
     <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
@@ -156,19 +119,6 @@
     <link rel="stylesheet" href="https://dhfoods.com.vn/modules/product//css/product.css" type="text/css" />
     <script type="text/javascript" src="https://dhfoods.com.vn/js/mntab/mntab.js"></script>
     <script type="text/javascript" src="https://dhfoods.com.vn/modules/product//js/product.js"></script>
-    <style type="text/css">
-        #vnt-navation {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-
-        .mainFoot {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-
-        .mainHead {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-    </style>
 </head>
 <body>
     <div id="vnt-wrapper">
@@ -177,20 +127,20 @@
                 <div class="vnt-main-top"
                         <div id="vnt-slide" class="slick-init">
                             <div class="item">
-                                <div class="img">
+                                <div class="img" style="padding-top: 60px;">
                                     <img src="https://dhfoods.com.vn/vnt_upload/product/08_2021/__Nuoc_Mam_Phu_Quoc.jpg" />
                                 </div>
                             </div>
                         </div>
-                        <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%;">
+                        <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%; background-color: #1b5633">
                         </div>
                     </div>
                 <div id="vnt-background" class="bg">
                     <div class="wrapCont">
                         <div class="wrapper">
                             <div class="box_mid v2">
-                                <div class="mid-title">
-                                    <div class="titleL white"><h1>@categories.name</h1></div>
+                                <div class="mid-title" style="margin-top: 8%;">
+                                    <div class="titleL white"><h1 style="color: #1b5633;">@categories.name</h1></div>
                                     <div class="titleR"></div>
                                     <div class="clear"></div>
                                 </div>

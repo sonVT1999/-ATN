@@ -1,6 +1,6 @@
 ﻿@using Prj_Dh_Food_Shop.Common;
 @{
-    var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
+    var categoryLists = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.categoryList;
     var KH = (Customers)Session[CommonConstants.KH_SESSION];
 }
 
@@ -91,9 +91,9 @@
                                 <li>
                                     <a href="~/Client/ProductType/Index">Sản phẩm</a>
                                     <ul>
-                                        @if (categories != null)
+                                        @if (categoryLists != null)
                                         {
-                                            foreach (var item in categories)
+                                            foreach (var item in categoryLists)
                                             {
                                                 <li><a href="~/Client/Product/product?CategoryId=@item.id" target="_self">@item.name</a></li>
                                             }

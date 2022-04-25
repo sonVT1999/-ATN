@@ -8,10 +8,12 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 {
     public class CartsController : Controller
     {
+        private Entity_Dh_Food db = new Entity_Dh_Food();
         private const string CartSession = "CartSession";
         // GET: Client/Carts
         public ActionResult Index()
         {
+            ViewBag.categoryList = db.Categories.ToList();
             var cart = Session[CartSession];
             var list = new List<CartItem>();
             if (cart != null)

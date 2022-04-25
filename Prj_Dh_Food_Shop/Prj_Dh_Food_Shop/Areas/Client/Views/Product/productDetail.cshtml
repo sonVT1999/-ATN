@@ -1,7 +1,7 @@
-﻿@*@{
+﻿@{
       ViewBag.Title = "productDetail";
      Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
-}*@
+}
 
 @model Prj_Dh_Food_Shop.Search_Products
 
@@ -9,7 +9,6 @@
 <html lang="">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
     <title>NATURAL Nước Mắm Phú Quốc</title>
     <meta name="keywords" CONTENT="CÔNG TY CỔ PHẦN DH FOODS" />
@@ -19,17 +18,6 @@
     <meta name="author" content="Dh Foods" />
     <style type="text/css">
 
-        .wrap > a:focus {
-            outline: none;
-        }
-
-        .header-tools > .languageMobile a {
-            padding-top: 14px;
-        }
-
-        .header-tools > .menuTop > ul > li {
-            margin-right: 35px;
-        }
 
         .mainHeadWrap > .mainHead.fixed .logo img {
             max-height: 60px;
@@ -94,7 +82,28 @@
             padding-top: 25px;
         }
 
-        .recruit:hover .des {
+        .productCart a:hover {
+            border: solid 1px #1b5633;
+            background-color: #fff;
+        }
+
+        .productCart a {
+            display: inline-block;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            border-radius: 5px;
+            border: solid 1px #1b5633;
+            padding: 12px 30px;
+            -webkit-transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+            transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+            position: relative;
+            overflow: hidden;
+            font-size: 22px;
+            background-color: #1b5633;
+            max-width: 380px;
+        }
+            .recruit:hover .des {
             padding-top: 0px;
         }
 
@@ -131,14 +140,7 @@
         }
     </style>
 
-    <link href="https://dhfoods.com.vn/js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
-
+    <script src="~/Areas/Content/Scripts/animate.css.js"></script>
     <script src="~/Areas/Content/Scripts/jquery.min.js"></script>
     <script src="~/Areas/Content/Scripts/jquery-migrate.min.js"></script>
     <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
@@ -149,21 +151,7 @@
     <script src="~/Areas/Content/Scripts/style.js"></script>
     <script type="text/javascript" src="https://dhfoods.com.vn/js/core.js"></script>
     <link rel="stylesheet" href="https://dhfoods.com.vn/modules/product//css/product.css" type="text/css" />
-    <script type="text/javascript" src="https://dhfoods.com.vn/js/mntab/mntab.js"></script>
     <script type="text/javascript" src="https://dhfoods.com.vn/modules/product//js/product.js"></script>
-    <style type="text/css">
-        #vnt-navation {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-
-        .mainFoot {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-
-        .mainHead {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-    </style>
 </head>
 <body>
 
@@ -177,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%;">
+            <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%; background-color: #1b5633">
             </div>
         </div>
         <div id="vnt-background" class="bg" style="padding-top: 60px;">
@@ -230,7 +218,7 @@
                             </div>
                             <div class="mid-content">
                                 <div id="slideOther" class="slick-init">
-                                    @foreach (var item in Model.lstData)
+                                    @foreach (var item in Model)
                                     {
                                         <div class="item">
                                             <div class="product">
