@@ -46,14 +46,14 @@ namespace Prj_Dh_Food_Shop.Controllers
         public ActionResult Logout()
         {
             var user = (Users)Session[CommonConstants.USER_SESSION];
-            var kh = (Users)Session[CommonConstants.KH_SESSION];
+            var kh = (Customers)Session[CommonConstants.KH_SESSION];
             if (user != null)
             {
                 Session.Remove(CommonConstants.USER_SESSION);
                 return RedirectToAction("Index");
             }
             Session.Remove(CommonConstants.KH_SESSION);
-            return RedirectToAction("~/Client/Homes/Index");
+            return RedirectToAction("Index", "Client/Homes/Index");
         }
 
 

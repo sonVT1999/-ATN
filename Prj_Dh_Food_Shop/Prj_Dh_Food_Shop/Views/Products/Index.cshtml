@@ -19,6 +19,7 @@
             price: $('input[name="price"]').val(),
             descriptions: $('input[name="descriptions"]').val(),
             promotion: $('input[name="promotion"]').val(),
+            image: $('#imgThumbnailDisplay').attr('src'),
             id_category: $('#id_category_new option:selected').val(),
             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
         }
@@ -75,6 +76,7 @@
             is_hot: $('input[name="is_hot"]:checked').val(),
             is_new: $('input[name="is_new"]:checked').val(),
             is_active: $('input[name="is_active"]:checked').val(),
+            image: $('#imgThumbnailDisplay').attr('src'),
             id_category: $('select[name="id_category_edit"]').val(),
         }
 

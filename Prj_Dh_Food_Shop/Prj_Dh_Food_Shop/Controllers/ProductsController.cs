@@ -7,12 +7,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Net;
 using System.IO;
-
+using System.Drawing;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
     public class ProductsController : BaseController
     {
+        private static string[] whiteList = { "jpg", "jpeg", "png", "svg", "bmp", "tif", "tiff", "gif" };
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
         public ActionResult Index(Search_Products model)
@@ -85,7 +86,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             else
             {
-                model.create_date = DateTime.Now;
+                model.createAt = DateTime.Now;
                 model.is_new = 1;
                 model.is_hot = 0;
                 model.is_active = 1;
@@ -101,18 +102,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             var model = db.Categories.ToList();
             return model;
         }
-
-        //public ActionResult UploadImage(IEnumerable<HttpPostedFileBase> files)
-        //{
-        //    foreach (var file in files)
-        //    {
-        //        if (file != null && file.ContentLength > 0)
-        //        {
-        //            file.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
-        //        }
-        //    }
-        //    return View();
-        //}
 
         public ActionResult Detail(int? id)
         {
@@ -168,6 +157,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                     result.is_new = pros.is_new;
                     result.is_active = pros.is_active;
                     result.id_category = pros.id_category;
+                    result.image = pros.image;
 
                     db.SaveChanges();
                     msg = "Cập nhật thông tin sản phẩm thành công!";
@@ -221,5 +211,36 @@ namespace Prj_Dh_Food_Shop.Controllers
         }
 
 
+        public string UploadImageThumbnail(HttpPostedFileBase fileUpload)
+        {
+            string base64Image = "";
+            if (fileUpload == null) { return ""; }
+            if (!CheckFileExtension(fileUpload.FileName, out var extension))
+                throw new InvalidDataException($"File extension is denied.");
+            var fileId = Guid.NewGuid().ToString();
+            System.Drawing.Image image = System.Drawing.Image.FromStream(fileUpload.InputStream);
+
+            using (MemoryStream m = new MemoryStream())
+            {
+                image.Save(m, image.RawFormat);
+                byte[] imageBytes = m.ToArray();
+                base64Image = Convert.ToBase64String(imageBytes);
+            }
+            return base64Image;
+        }
+
+        public static byte[] convertImagetoByte(Image x)
+        {
+            ImageConverter _imageConverter = new ImageConverter();
+            byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
+            return xByte;
+        }
+
+        public static bool CheckFileExtension(string filename, out string extension)
+        {
+            var arrPath = filename.Split('.');
+            extension = arrPath[arrPath.Length - 1].ToLower();
+            return whiteList.Contains(extension);
+        }
     }
 }
