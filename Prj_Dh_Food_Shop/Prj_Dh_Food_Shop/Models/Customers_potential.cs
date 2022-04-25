@@ -24,5 +24,17 @@ namespace Prj_Dh_Food_Shop
 
         [StringLength(200)]
         public string note { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
+
+        [StringLength(200)]
+        public string createBy { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
     }
 }

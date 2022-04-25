@@ -23,7 +23,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
 
             var data = from c in db.Customers
-                       join p in db.Districts on c.id_district equals p.id
+                       join p in db.Provinces on c.id_province equals p.id
                        where (string.IsNullOrEmpty(model.txbName) || c.name.Contains(model.txbName))
                        && (!string.IsNullOrEmpty(model.username) || c.username.Contains(model.txbUsername)) && (!string.IsNullOrEmpty(model.phone_number) || c.phone_number.Contains(model.txbPhoneNumber))
                        && (!string.IsNullOrEmpty(model.addresss) || c.addresss.Contains(model.txbAddress))
@@ -38,12 +38,12 @@ namespace Prj_Dh_Food_Shop.Controllers
                            phone_number = c.phone_number,
                            addresss = c.addresss,
                            is_active = c.is_active,
-                           district_name = p.name,
+                           province_name = p.name,
                        };
 
             var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Customers>();
 
-            ViewBag.district = new CustomersController().getDistricts();
+            ViewBag.province = new CustomersController().getProvinces();
 
             model.lstData = rs;
             model.totalRecord = data.Count();
@@ -51,9 +51,9 @@ namespace Prj_Dh_Food_Shop.Controllers
             return View(model);
         }
 
-        public List<Districts> getDistricts()
+        public List<Provinces> getProvinces()
         {
-            var model = db.Districts.ToList();
+            var model = db.Provinces.ToList();
             return model;
         }
 
@@ -89,7 +89,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             else
             {
                 model.is_active = 1;
-                model.create_date = DateTime.Now;
+                model.createAt = DateTime.Now;
                 db.SaveChanges();
                 msg = "Thêm mới khách hàng thành công!";
                 status = 1;
@@ -104,7 +104,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customers cus = db.Customers.Find(id);
-            ViewBag.district = new CustomersController().getDistricts();
+            ViewBag.province = new CustomersController().getProvinces();
             if (cus == null)
             {
                 return HttpNotFound();
@@ -119,7 +119,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customers cus = db.Customers.Find(id);
-            ViewBag.district = new CustomersController().getDistricts();
+            ViewBag.province = new CustomersController().getProvinces();
             if (cus == null)
             {
                 return HttpNotFound();
@@ -134,7 +134,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             var status = 0;
             var sqlSDT = db.Customers.Where(x => x.phone_number == cus.phone_number).ToList();
             var result = db.Customers.SingleOrDefault(b => b.id == cus.id);
-            ViewBag.district = new CustomersController().getDistricts();
+            ViewBag.province = new CustomersController().getProvinces();
 
             if (result != null)
             {
@@ -166,7 +166,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                         result.addresss = cus.addresss;
                         result.gender = cus.gender;
                         result.is_active = cus.is_active;
-                        result.id_district = cus.id_district;
+                        result.id_province = cus.id_province;
 
                         db.SaveChanges();
                         msg = "Cập nhật thông tin khách hàng thành công!";

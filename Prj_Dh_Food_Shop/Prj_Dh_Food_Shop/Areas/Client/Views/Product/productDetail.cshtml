@@ -190,12 +190,12 @@
                                 <div class="productThumbnail">
                                     <div id="vnt-thumbnail-for">
                                         <div class="item">
-                                            <div class="img"><img src="@Model.link" /></div>
+                                            <div class="img"><img src="@Model.image" /></div>
                                         </div>
                                     </div>
                                     <div id="vnt-thumbnail-nav">
                                         <div class="item">
-                                            <div class="img"><img src="@Model.link" /></div>
+                                            <div class="img"><img src="@Model.imageMore" /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,11 +206,14 @@
                                 <div class="productDes">
                                     @Model.descriptions
                                 </div>
+                                <p><span style="font-size:24px;"><span style="font-family:Roboto,sans-serif;"><strong>Đơn giá:&nbsp;</strong>@Model.price (VNĐ)/1 thùng</span></span></p>
+                                <div class="productDes"></div>
                                 <div class="productCart"><a href="~/Client/Carts/AddItem?productId=@Model.id&quantity=1"><span>Thêm vào vào giỏ hàng</span></a></div>
                             </div>
 
                         </div>
                         <div class="description">
+
                             <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;">@Model.descriptions</span></span></p>
 
                             <p><span style="font-size:20px;"><span style="font-family:Roboto,sans-serif;"><strong>Thành phần:&nbsp;</strong>@Model.ingredient</span></span></p>
@@ -227,11 +230,11 @@
                             </div>
                             <div class="mid-content">
                                 <div id="slideOther" class="slick-init">
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.lstData)
                                     {
                                         <div class="item">
                                             <div class="product">
-                                                <div class="img"><a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.link" /></a></div>
+                                                <div class="img"><a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.image" /></a></div>
                                                 <div class="tend">
                                                     <h3><a href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
                                                 </div>

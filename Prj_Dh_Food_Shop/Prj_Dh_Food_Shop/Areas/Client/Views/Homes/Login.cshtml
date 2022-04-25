@@ -1,0 +1,37 @@
+﻿@model Prj_Dh_Food_Shop.Customers
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style=" height: 375px; width: auto; top: 100px; left: 38%;">
+    <section class="w3l-login">
+        <div class="overlay">
+            <div class="wrapper">
+                <div class="form-section">
+                    <h3>Đăng nhập</h3>
+
+                    @using (Html.BeginForm("Login", "Homes", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" });
+                        <div class="form-input">
+                            @Html.Hidden("ReturnUrl", ViewBag.ReturnUrl as string)
+                            @Html.TextBoxFor(model => model.username, new { @class = "form-control", @placeholder = "Username", @name = "username", @autofocus = "autofocus" })
+                        </div>
+                        <div class="form-input">
+                            @Html.PasswordFor(model => model.passwords, new { @class = "form-control", @placeholder = "Password", @name = "passwords", @type = "password" })
+                        </div>
+                        <!-- Change this to a button or input when using this as a form -->
+                        <button type="submit" class="btn btn-primary theme-button mt-4">Đăng nhập</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+    </section>
+    <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div style="display:none;" role="status" aria-hidden="true">
+        </div>
+    </div>
+</div>

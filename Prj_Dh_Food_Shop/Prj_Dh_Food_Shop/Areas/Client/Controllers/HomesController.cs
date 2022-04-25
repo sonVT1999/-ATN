@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,6 +17,11 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         {
             ViewBag.category = db.Categories.ToList();
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            return PartialView();
         }
 
         [HttpPost]

@@ -30,7 +30,6 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
             var data =  (from c in db.Products
                         join p in db.Categories on c.id_category equals p.id
-                        join ima in db.Images_product on c.id equals ima.id_product
                         where p.id == CategoryId && c.is_active == 1
                          select new Search_Products()
                                   {
@@ -43,7 +42,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                                       is_new = c.is_new,
                                       is_active = c.is_active,
                                       category_name = p.name,
-                                      link = ima.link,
+                                      image = c.image,
                                   }).ToList();
 
             return View("product", data);
@@ -54,7 +53,6 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
             var data = (from c in db.Products
                         join p in db.Categories on c.id_category equals p.id
-                        join ima in db.Images_product on c.id equals ima.id_product
                         where c.id == ProductId && c.is_active == 1
                         select new Search_Products()
                         {   
@@ -67,7 +65,8 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                             is_new = c.is_new,
                             is_active = c.is_active,
                             category_name = p.name,
-                            link = ima.link,
+                            image = c.image,
+                            imageMore = c.imageMore,
                             ingredient = c.ingredient,
                             HDSD = c.HDSD,
                         }).FirstOrDefault();

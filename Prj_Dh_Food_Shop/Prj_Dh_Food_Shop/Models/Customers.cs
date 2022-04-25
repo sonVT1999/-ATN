@@ -11,7 +11,6 @@ namespace Prj_Dh_Food_Shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customers()
         {
-            Feedbacks = new HashSet<Feedbacks>();
             Orders = new HashSet<Orders>();
         }
 
@@ -43,17 +42,23 @@ namespace Prj_Dh_Food_Shop
         [StringLength(15)]
         public string phone_number { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime create_date { get; set; }
-
         public int is_active { get; set; }
 
-        public int? id_district { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
 
-        public virtual Districts Districts { get; set; }
+        [StringLength(200)]
+        public string createBy { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Feedbacks> Feedbacks { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
+
+        public int? id_province { get; set; }
+
+        public virtual Provinces Provinces { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

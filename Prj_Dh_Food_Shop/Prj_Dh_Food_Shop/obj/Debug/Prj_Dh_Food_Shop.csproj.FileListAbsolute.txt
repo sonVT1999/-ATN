@@ -1,3 +1,4 @@
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Prj_Dh_Food_Shop.dll.config
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Prj_Dh_Food_Shop.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Prj_Dh_Food_Shop.pdb
@@ -48,6 +49,8 @@ D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\roslyn\vbc.rsp
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\roslyn\VBCSCompiler.exe
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\roslyn\VBCSCompiler.exe.config
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Antlr3.Runtime.dll
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.dll
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Microsoft.Web.Infrastructure.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\Newtonsoft.Json.dll
@@ -59,6 +62,7 @@ D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.WebPages.Deployment.dl
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.WebPages.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.WebPages.Razor.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\WebGrease.dll
+D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.Helpers.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.Mvc.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\System.Web.Optimization.xml
@@ -73,8 +77,4 @@ D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csproj.Cor
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csproj.CopyComplete
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.pdb
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.dll
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.dll
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.xml
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EntityFramework.SqlServer.xml
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csprojAssemblyReference.cache

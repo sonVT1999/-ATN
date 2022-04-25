@@ -80,7 +80,7 @@
                             <span>Ngày tạo</span>:
                         </td>
                         <td>
-                            @Model.create_date
+                            @Model.createAt
                         </td>
                     </tr>
                     <tr style="height: 25px">
@@ -96,18 +96,18 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span>Quận, huyện</span>:
+                            <span>Tỉnh thành</span>:
                         </td>
                         <td>
-                            @Model.Districts.name
+                            @Model.Provinces.name
                         </td>
                     </tr>
-                    <tr style="height: 25px">
+                    @*<tr style="height: 25px">
                         <td>
                             <span>Thành phố</span>:
                         </td>
                         <td>
-                            @Model.Districts.Cities.name
+                            @Model.Provinces.i
                         </td>
                     </tr>
                     <tr style="height: 25px">
@@ -117,7 +117,7 @@
                         <td>
                             @Model.Districts.Cities.Provinces.name
                         </td>
-                    </tr>
+                    </tr>*@
                     <tr style="height: 25px;">
                         <td colspan="2" align="center" style="padding-top: 10px; padding-left: 37%">
                             <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">

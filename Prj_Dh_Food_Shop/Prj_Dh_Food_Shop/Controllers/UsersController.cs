@@ -26,7 +26,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
 
             var data = from c in db.Users
-                       join p in db.Districts on c.id_district equals p.id
+                       join p in db.Provinces on c.id_province equals p.id
                        where (string.IsNullOrEmpty(model.txbName) || c.name.Contains(model.txbName))
                        && (!string.IsNullOrEmpty(model.username) || c.username.Contains(model.txbUsername)) && (!string.IsNullOrEmpty(model.phone_number) || c.phone_number.Contains(model.txbPhoneNumber))
                        select new Search_Users()
@@ -39,12 +39,12 @@ namespace Prj_Dh_Food_Shop.Controllers
                            addresss = c.addresss,
                            is_active = c.is_active,
                            permission = c.permission,
-                           district_name = p.name,
+                           province_name = p.name,
                        };
 
             var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Users>();
 
-            ViewBag.district = new UsersController().getDistricts();
+            ViewBag.province = new UsersController().getProvinces();
 
             model.lstData = rs;
             model.totalRecord = data.Count();
@@ -85,9 +85,9 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
-        public List<Districts> getDistricts()
+        public List<Provinces> getProvinces()
         {
-            var model = db.Districts.ToList();
+            var model = db.Provinces.ToList();
             return model;
         }
 
@@ -98,7 +98,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Users users = db.Users.Find(id);
-            ViewBag.district = new UsersController().getDistricts();
+            ViewBag.province = new UsersController().getProvinces();
             if (users == null)
             {
                 return HttpNotFound();
@@ -113,7 +113,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Users users = db.Users.Find(id);
-            ViewBag.district = new UsersController().getDistricts();
+            ViewBag.province = new UsersController().getProvinces();
             if (users == null)
             {
                 return HttpNotFound();
@@ -128,7 +128,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             var status = 0;
             var result = db.Users.SingleOrDefault(b => b.id == users.id);
             var sqlSDT = db.Users.Where(x => x.phone_number == users.phone_number).ToList();
-            ViewBag.district = new UsersController().getDistricts();
+            ViewBag.province = new UsersController().getProvinces();
 
             if (result != null)
             {
@@ -158,7 +158,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                         result.addresss = users.addresss;
                         result.is_active = users.is_active;
                         result.permission = users.permission;
-                        result.id_district = users.id_district;
+                        result.id_province = users.id_province;
 
                         db.SaveChanges();
                         msg = "Cập nhật thông tin người dùng thành công!";
@@ -187,18 +187,12 @@ namespace Prj_Dh_Food_Shop.Controllers
         public ActionResult Delete(int id)
         {
             Orders Od = db.Orders.Where(x => x.id_user == id).FirstOrDefault();
-            Posts posts = db.Posts.Where(x => x.id_user == id).FirstOrDefault();
             Users user = db.Users.Where(x => x.id == id).FirstOrDefault();
             var msgDel = "";
             var status = 0;
             if (Od != null)
             {
                 msgDel = "Người dùng đã, đang xử lý đơn hàng. Không thể xóa!";
-                status = -1;
-            }
-            else if (posts != null)
-            {
-                msgDel = "Người dùng đã đăng bài viết. Không thể xóa!";
                 status = -1;
             }
             else if (user.is_active == 1)

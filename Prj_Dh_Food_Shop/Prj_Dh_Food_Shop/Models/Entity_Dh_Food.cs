@@ -18,14 +18,12 @@ namespace Prj_Dh_Food_Shop
         public virtual DbSet<Customers_potential> Customers_potential { get; set; }
         public virtual DbSet<Districts> Districts { get; set; }
         public virtual DbSet<Feedbacks> Feedbacks { get; set; }
-        public virtual DbSet<Images_post> Images_post { get; set; }
-        public virtual DbSet<Images_product> Images_product { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Orders_detail> Orders_detail { get; set; }
         public virtual DbSet<Payment_methods> Payment_methods { get; set; }
-        public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Provinces> Provinces { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -61,15 +59,9 @@ namespace Prj_Dh_Food_Shop
                 .Property(e => e.phone_number)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Districts>()
-                .HasMany(e => e.Customers)
-                .WithOptional(e => e.Districts)
-                .HasForeignKey(e => e.id_district);
-
-            modelBuilder.Entity<Districts>()
-                .HasMany(e => e.Users)
-                .WithOptional(e => e.Districts)
-                .HasForeignKey(e => e.id_district);
+            modelBuilder.Entity<Feedbacks>()
+                .Property(e => e.phone_number)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Orders>()
                 .HasMany(e => e.Orders_detail)
@@ -81,17 +73,6 @@ namespace Prj_Dh_Food_Shop
                 .WithOptional(e => e.Payment_methods)
                 .HasForeignKey(e => e.id_payment_method);
 
-            modelBuilder.Entity<Posts>()
-                .HasMany(e => e.Images_post)
-                .WithOptional(e => e.Posts)
-                .HasForeignKey(e => e.id_post);
-
-            modelBuilder.Entity<Products>()
-                .HasMany(e => e.Images_product)
-                .WithOptional(e => e.Products)
-                .HasForeignKey(e => e.id_product)
-                .WillCascadeOnDelete();
-
             modelBuilder.Entity<Products>()
                 .HasMany(e => e.Orders_detail)
                 .WithOptional(e => e.Products)
@@ -99,6 +80,16 @@ namespace Prj_Dh_Food_Shop
 
             modelBuilder.Entity<Provinces>()
                 .HasMany(e => e.Cities)
+                .WithOptional(e => e.Provinces)
+                .HasForeignKey(e => e.id_province);
+
+            modelBuilder.Entity<Provinces>()
+                .HasMany(e => e.Customers)
+                .WithOptional(e => e.Provinces)
+                .HasForeignKey(e => e.id_province);
+
+            modelBuilder.Entity<Provinces>()
+                .HasMany(e => e.Users)
                 .WithOptional(e => e.Provinces)
                 .HasForeignKey(e => e.id_province);
 
@@ -116,11 +107,6 @@ namespace Prj_Dh_Food_Shop
 
             modelBuilder.Entity<Users>()
                 .HasMany(e => e.Orders)
-                .WithOptional(e => e.Users)
-                .HasForeignKey(e => e.id_user);
-
-            modelBuilder.Entity<Users>()
-                .HasMany(e => e.Posts)
                 .WithOptional(e => e.Users)
                 .HasForeignKey(e => e.id_user);
         }

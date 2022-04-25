@@ -11,7 +11,6 @@ namespace Prj_Dh_Food_Shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
-            Images_product = new HashSet<Images_product>();
             Orders_detail = new HashSet<Orders_detail>();
         }
 
@@ -28,12 +27,11 @@ namespace Prj_Dh_Food_Shop
 
         public string descriptions { get; set; }
 
-        [StringLength(200)]
         public string promotion { get; set; }
 
-        public string ingredient { get; set; }
+        public string image { get; set; }
 
-        public string HDSD { get; set; }
+        public string imageMore { get; set; }
 
         public int? is_hot { get; set; }
 
@@ -41,12 +39,25 @@ namespace Prj_Dh_Food_Shop
 
         public int? is_active { get; set; }
 
+        public string ingredient { get; set; }
+
+        public string HDSD { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
+
+        [StringLength(200)]
+        public string createBy { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
+
         public int? id_category { get; set; }
 
         public virtual Categories Categories { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Images_product> Images_product { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders_detail> Orders_detail { get; set; }

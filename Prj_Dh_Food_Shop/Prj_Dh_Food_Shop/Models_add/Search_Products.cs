@@ -34,11 +34,11 @@ namespace Prj_Dh_Food_Shop
 
         public string category_name { get; set; }
 
-        public string link { get; set; }
+        public string image { get; set; }
+
+        public string imageMore { get; set; }
 
         public virtual Categories categories { get; set; }
-
-        public virtual Images_product images_product { get; set; }
 
         public List<Search_Products> lstData { get; set; }
 

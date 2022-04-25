@@ -22,6 +22,7 @@ namespace Prj_Dh_Food_Shop
 
         public int? is_active { get; set; }
 
+        [StringLength(200)]
         public string customer_name { get; set; }
 
         [StringLength(100)]
@@ -33,6 +34,16 @@ namespace Prj_Dh_Food_Shop
         [StringLength(100)]
         public string email { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
 
+        [StringLength(200)]
+        public string createBy { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
     }
 }

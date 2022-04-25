@@ -1,7 +1,7 @@
 ﻿
 @model Prj_Dh_Food_Shop.Users
 @{
-    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+    var provinces = (List<Prj_Dh_Food_Shop.Provinces>)ViewBag.province;
 }
 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
@@ -81,8 +81,8 @@
                         </td>
                         <td>
                             <select class="m_text" name="id_district" required>
-                                <option value="@Model.id_district">@Model.Districts.name</option>
-                                @foreach (Districts item in districts)
+                                <option value="@Model.id_province">@Model.Provinces.name</option>
+                                @foreach (Provinces item in provinces)
                                 {
                                     <option value=@item.id>@item.name</option>
                                 }

@@ -139,6 +139,9 @@
                 <th>
                     Tên loại sản phẩm
                 </th>
+                <th>
+                    Hình ảnh
+                </th>
                 <th style="text-align: center">
                     Ngày tạo
                 </th>
@@ -152,23 +155,26 @@
             @foreach (var item in Model.lstData)
             {
                 count++;
-                <tr>
-                    <td style="text-align: center">
-                        @((Model.page - 1) * Model.pageSize + count)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td style="text-align: center">
-                        @Html.DisplayFor(modelItem => item.create_date)
-                    </td>
-                    <td style="text-align: center">
-                        <a href="/Categories/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
-                    </td>
-                    <td style="text-align: center">
-                        <a href="/Categories/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <td style="text-align: center">
+                    @((Model.page - 1) * Model.pageSize + count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.image)" width="100" height="100" alt=""/>
+                </td>
+                <td style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.create_date)
+                </td>
+                <td style="text-align: center">
+                    <a href="/Categories/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Categories/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
             }
         </table>
 

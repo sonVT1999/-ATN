@@ -20,6 +20,18 @@ namespace Prj_Dh_Food_Shop
         [StringLength(100)]
         public string name { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
+
+        [StringLength(200)]
+        public string createBy { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
+
         public int? id_province { get; set; }
 
         public virtual Provinces Provinces { get; set; }

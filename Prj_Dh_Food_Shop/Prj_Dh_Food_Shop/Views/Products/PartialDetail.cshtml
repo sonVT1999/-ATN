@@ -2,7 +2,6 @@
 @model Prj_Dh_Food_Shop.Products
 @{
     var categories = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.category;
-    var image_pro = (List<Prj_Dh_Food_Shop.Images_product>)ViewBag.image_pro;
 }
 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
@@ -88,7 +87,7 @@
                             <span>Ngày tạo</span>:
                         </td>
                         <td>
-                            @Model.create_date
+                            @Model.createAt
                         </td>
                     </tr>
                     <tr style="height: 25px">
@@ -104,10 +103,7 @@
                             <span>Ảnh sản phẩm</span>:
                         </td>
                         <td>
-                            @foreach (var item in Model.Images_product)
-                            {
-                                <img src="@item.link" width="100" height="100" />
-                            }
+                            <img src="@Model.image" width="100" height="100" />
                         </td>
                     </tr>
                     <tr style="height: 25px;">

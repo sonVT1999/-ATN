@@ -8,7 +8,7 @@
 @model Prj_Dh_Food_Shop.Search_Customers
 @{
 
-    var districts = (List<Prj_Dh_Food_Shop.Districts>)ViewBag.district;
+    var provinces = (List<Prj_Dh_Food_Shop.Provinces>)ViewBag.province;
     var count = 0;
 }
 
@@ -23,7 +23,7 @@
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
             gender: $('input[name="gender"]').val(),
-            id_district: $('select[name="id_district"]').val(),
+            id_province: $('select[name="id_province"]').val(),
             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
         }
 
@@ -81,7 +81,7 @@
             addresss: $('input[name="addresss"]').val(),
             gender: $('input[name="gender"]:checked').val(),
             is_active: $('input[name="is_active"]:checked').val(),
-            id_district: $('select[name="id_district"]').val(),
+            id_province: $('select[name="id_province"]').val(),
         }
 
         $.ajax({
@@ -395,12 +395,12 @@
                         </tr>
                         <tr style="height: 25px">
                             <td>
-                                <span>Quận, huyện</span>:
+                                <span>Tỉnh thành</span>:
                             </td>
                             <td>
                                 <select class="m_text" name="id_district" required>
                                     <option value="" disabled selected>Chọn tên quận, huyện</option>
-                                    @foreach (Districts item in districts)
+                                    @foreach (Provinces item in provinces)
                                     {
                                         <option value=@item.id>@item.name</option>
                                     }

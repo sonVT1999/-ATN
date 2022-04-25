@@ -29,11 +29,11 @@ namespace Prj_Dh_Food_Shop
 
         public int is_active { get; set; }
 
-        public int id_district { get; set; }
+        public int id_province { get; set; }
 
-        public string district_name { get; set; }
+        public string province_name { get; set; }
 
-        public virtual Districts Districts { get; set; }
+        public virtual Provinces Provinces { get; set; }
 
         public List<Search_Customers> lstData { get; set; }
 

@@ -14,6 +14,18 @@ namespace Prj_Dh_Food_Shop
 
         public double amount { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? createAt { get; set; }
+
+        [StringLength(200)]
+        public string createBy { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? updateAt { get; set; }
+
+        [StringLength(200)]
+        public string updateBy { get; set; }
+
         public int? id_order { get; set; }
 
         public int? id_product { get; set; }

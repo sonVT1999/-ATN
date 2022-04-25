@@ -24,6 +24,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                            id = c.id,
                            name = c.name,
                            create_date = c.create_date,
+                           image = c.image,
                        };
 
             var rs = data.OrderBy(x => x.id).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Categories>();
