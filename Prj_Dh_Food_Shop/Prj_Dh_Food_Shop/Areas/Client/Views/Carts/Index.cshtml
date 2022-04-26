@@ -141,22 +141,18 @@
                                                             <table class="table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th></th>
                                                                         <th>Sản phẩm</th>
-                                                                        <th>Giá</th>
+                                                                        <th>Đơn giá</th>
                                                                         <th>Số lượng</th>
-                                                                        <th>Tổng</th>
+                                                                        <th>Thành tiền</th>
+                                                                        <th></th>
+                                                                        <th></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach (var item in Model)
                                                                     {
                                                                         <tr>
-                                                                            <td id="row_" + @item.Product.id>
-                                                                                <button class="remove" onclick="RemoveItem(@item.Product.id)">
-                                                                                    <fa class="fa fa-close"></fa>
-                                                                                </button>
-                                                                            </td>
                                                                             <td>
                                                                                 <a class="aa-cart-title" href="#">
                                                                                     @item.Product.name
@@ -164,16 +160,25 @@
                                                                             </td>
                                                                             <td>
                                                                                 <span>
-                                                                                    @(string.Format("{0:#,0.#############################}", item.Product.price))<span> vnd</span>
+                                                                                    @(string.Format("{0:#,0.#############################}", item.Product.price))<span> VNĐ</span>
                                                                                 </span>
 
                                                                             </td>
                                                                             <td>
-                                                                                <input class="aa-cart-quantity" id="@item.Product.id" type="number" value="@item.Quantity"
-                                                                                       onchange="ChangeQuantity(@item.Product.id)">
+                                                                                <input class="aa-cart-quantity" data-id="@item.Product.id" type="number" value="@item.Quantity">
                                                                             </td>
                                                                             <td class="@item.Product.id">
                                                                                 @((item.Product.price * item.Quantity).ToString("#,##")) VNĐ
+                                                                            </td>
+                                                                            <td id="row_" + @item.Product.id>
+                                                                                <button class="edit">
+                                                                                    <fa class="fa fa-pencil"></fa>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td id="row_" + @item.Product.id>
+                                                                                <button class="remove" data-id="@item.Product.id">
+                                                                                    <fa class="fas fa-trash-alt"></fa>
+                                                                                </button>
                                                                             </td>
                                                                         </tr>
                                                                     }
@@ -181,14 +186,14 @@
                                                                 <tfoot>
                                                                     <tr class="d-none d-md-table-row total-final">
                                                                         <td rowspan="1" colspan="1">
-                                                                            <b class="text-bold">Tổng tiền</b>
+                                                                            <b class="text-bold" style="font-size: 18px;">Tổng tiền:</b>
                                                                         </td>
-                                                                        <td rowspan="1" colspan="1"></td>
                                                                         <td rowspan="1" colspan="1"></td>
                                                                         <td rowspan="1" colspan="1"></td>
                                                                         <td class="text" rowspan="1" colspan="1">
-                                                                            <b class="no-wrap text-bold"></b>
+                                                                            <b class="no-wrap text-bold" style="font-size: 18px;"> 3453453 VNĐ</b>
                                                                         </td>
+                                                                        <td rowspan="1" colspan="1"></td>
                                                                         <td rowspan="1" colspan="1">&nbsp;</td>
                                                                     </tr>
                                                                 </tfoot>
@@ -211,37 +216,52 @@
     </div>
 </div>
 <!-- / Cart view section -->
-@*@section scripts{
-
-    <script>
-        function ChangeQuantity(productId) {
-            var q = $("#" + productId).val();
-            var quantity = Number(q);
-            if (quantity <= 0) {
-                alert("phải lớn hơn hoặc bằng 1");
-                $("#" + productId).val(1);
-                return;
-            }
-            $.ajax({
-                type: "put",
-                url: "/Cart/ChangQuantity",
-                data: {
-                    ProductId: productId,
-                    Quantity: quantity
-                },
-                success: function (res) {
-                    $("#TotalPrice").text(res.TotalPrices);
-                    $("#TotalItems").text(res.TotalItems);
-                    $("#total_item_cart").text(res.TotalItems);
-                    $("." + productId).text(res.Prices)
+<script>
+    $('.remove').off('click').on('click', function () {
+        $.ajax({
+            data: { id: $(this).data('id') },
+            url: '/Carts/Delete',
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if (res.status == true) {
+                    window.location.href = "/Client/Carts/Index";
                 }
-            })
-        }
+            }
+        })
+    })
 
-        function delImage(e) {
-            $(e).parent('td').remove();
-        }
-    </script>
 
-}*@
+    $('.edit').off('click').on('click', function ()
+    {
+        var listProduct = $('.aa-cart-quantity');
+        var cartList = [];
+        $.each(listProduct, function (i, item) {
+            cartList.push({
+                Quantity: $(item).val(),
+                Product: {
+                    id: $(item).data('id')
+                }
+            });
+        });
+
+
+
+        $.ajax({
+            url: '/Carts/Edit',
+            data: { cartModel: JSON.stringify(cartList) },
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if (res.status == true) {
+                    window.location.href = "/Client/Carts/Index";
+                }
+                else {
+                    alert("Số lượng nhập phải là số nguyên dương!");
+                }
+            }
+        });
+    });
+
+</script>
 

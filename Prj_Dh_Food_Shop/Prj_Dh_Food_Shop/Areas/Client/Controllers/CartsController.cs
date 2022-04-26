@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 {
@@ -61,6 +62,44 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 Session[CartSession] = list;
             }
             return RedirectToAction("Index", list );
+        }
+
+        public JsonResult Delete(int id)
+        {
+            var sessionCart = (List<CartItem>)Session[CartSession];
+            sessionCart.RemoveAll(x => x.Product.id == id);
+            Session[CartSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+             });
+        }
+
+        public JsonResult Edit(string cartModel)
+        {
+            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+            var sessionCart = (List<CartItem>)Session[CartSession];
+            foreach (var item in sessionCart)
+            {
+                var jsonItem = jsonCart.SingleOrDefault(x => x.Product.id == item.Product.id);
+                if (jsonItem != null)
+                {
+                    if (jsonItem.Quantity > 0)
+                    item.Quantity = jsonItem.Quantity;
+                    else
+                    {
+                        return Json(new
+                        {
+                            status = false
+                        });
+                    }
+                }
+            }
+            Session[CartSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+            });
         }
 
         public ActionResult CheckoutComplete()
