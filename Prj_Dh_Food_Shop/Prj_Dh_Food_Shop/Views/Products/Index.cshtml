@@ -20,6 +20,7 @@
             descriptions: $('input[name="descriptions"]').val(),
             promotion: $('input[name="promotion"]').val(),
             image: $('#imgThumbnailDisplay').attr('src'),
+            imageMore: getImageUrlMore(),
             id_category: $('#id_category_new option:selected').val(),
             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
         }
@@ -320,7 +321,7 @@
 
 <div id="myModalNew" class="modal fade" role="dialog">
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
-         style="position: absolute; height: 300px; width: 590px; top: 100px; left: 38%;">
+         style="position: absolute; width: auto; top: 100px; left: 35%;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
             <span class="ui-dialog-title">Thêm sản phẩm</span>
         </div>
@@ -335,7 +336,7 @@
                             <td style="width: 150px">
                                 <span id="Name">Tên sản phẩm</span> (<span style="color:Red;">*</span>):
                             </td>
-                            <td style="width: 300px">
+                            <td>
                                 <input type="text" maxlength="255" placeholder="" name="name" class="m_text" required />
                             </td>
                         </tr>
@@ -363,9 +364,27 @@
                                 <input type="text" maxlength="10" placeholder="" name="promotion" class="m_text" />
                             </td>
                         </tr>
+
                         <tr style="height: 25px">
                             <td>
-                                <span id="District">Loại sản phẩm</span>:
+                                <span>Ảnh sản phẩm</span>:
+                            </td>
+                            <td>
+                                <input type="file" id="imgThumbnail" name="img" accept="image/*">
+                            </td>
+                        </tr>
+                        <tr style="height: 25px">
+                            <td>
+                                <span style="visibility:hidden">Ảnh</span>
+                            </td>
+                            <td>
+                                <img src="@Model.image" id="imgThumbnailDisplay" width="100" height="100" />
+                            </td>
+                        </tr>
+
+                        <tr style="height: 25px">
+                            <td>
+                                <span>Loại sản phẩm</span>:
                             </td>
                             <td>
                                 <select id="id_category_new" class="m_text" name="id_category" required>
@@ -377,33 +396,6 @@
                                 </select>
                             </td>
                         </tr>
-                        @*<tr style="height: 25px">
-                                <td>
-                                    <span>Sản phẩm mới</span>(<span style="color:Red;">*</span>):
-                                </td>
-                                <td>
-                                    <input type="radio" name="is_new" value="1"><c>Có</c>
-                                    <input type="radio" name="is_new" value="0"><c>Không</c>
-                                </td>
-                            </tr>
-                            <tr style="height: 25px">
-                                <td>
-                                    <span>Sản phẩm bán chạy</span>(<span style="color:Red;">*</span>):
-                                </td>
-                                <td>
-                                    <input type="radio" name="is_hot" value="1"><c>Có</c>
-                                    <input type="radio" name="is_hot" value="0"><c>Không</c>
-                                </td>
-                            </tr>
-                            <tr style="height: 25px">
-                                <td>
-                                    <span>Kích hoạt</span>(<span style="color:Red;">*</span>):
-                                </td>
-                                <td>
-                                    <input type="radio" name="is_active" value="1"><c>Có</c>
-                                    <input type="radio" name="is_active" value="0"><c>Không</c>
-                                </td>
-                            </tr>*@
                         <tr style="height: 25px;">
                             <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
                                 <input type="submit" value="Lưu" id="btnSave" class="n-btn-save" onclick="addProduct()">
@@ -438,5 +430,31 @@
     function delImage(e) {
         $(e).parent('td').remove();
     }
+
+    var whiteList = ["jpg", "jpeg", "png", "svg", "bmp", "tif", "tiff", "gif"];
+
+    $("#imgThumbnail").change(function () {
+        if (window.FormData !== undefined) {
+            var fileUpload = $("#imgThumbnail").get(0);
+            var files = fileUpload.files;
+            var formData = new FormData();
+            formData.append("fileUpload", files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/Products/UploadImageThumbnail',
+                contentType: false, //No header
+                processData: false, //No process data
+                data: formData,
+                success: function (rs) {
+                    $('#imgThumbnailDisplay').attr('src', `data:image/png;base64,${rs}`);
+                },
+                error: function (err) {
+                    toastr.error("Có lỗi xảy ra khi upload");
+                },
+            });
+        };
+
+    });
+
 </script>
 

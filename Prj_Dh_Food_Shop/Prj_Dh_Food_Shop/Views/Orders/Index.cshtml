@@ -172,7 +172,7 @@
                         @Html.DisplayFor(modelItem => item.total)
                     </td>
                     <td style="text-align: center">
-                        @Html.DisplayFor(modelItem => item.order_date)
+                        @item.order_date.Value.ToString("dd/MM/yyyy")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.user_name)

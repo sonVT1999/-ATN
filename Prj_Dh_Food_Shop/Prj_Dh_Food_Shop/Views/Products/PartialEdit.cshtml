@@ -5,7 +5,7 @@
 }
 
 <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
-     style="position: absolute; height: 405px; width: auto; top: 100px; left: 38%;">
+     style="position: absolute; width: auto; top: 50px; left: 35%;">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">Chỉnh sửa thông tin sản phẩm</span>
     </div>
@@ -18,7 +18,7 @@
                     <td style="width: 150px">
                         <span>Tên sản phẩm</span> (<span style="color:Red;">*</span>):
                     </td>
-                    <td style="width: 300px">
+                    <td>
                         <input type="text" value="@Model.name" maxlength="255" placeholder="" name="name" class="m_text" required />
                     </td>
                 </tr>
@@ -106,13 +106,16 @@
 
 
                 <tr style="height: 25px" id="imageMoreDisplay">
+                    <th>
+                        <span style="visibility:hidden">Ảnh</span>
+                    </th>
                     @{
                         string[] words = Model.imageMore?.Split(',');
                         if (words != null)
                         {
                             foreach (var item in words)
                             {
-                                <td>
+                                <td style="width: 200px">
                                     <img src="@item" width="100" height="100" />
                                     <a href="#" onclick="delImage(this)">Xóa</a>
                                 </td>
@@ -202,7 +205,4 @@
 
     });
 
-    //function delImage(e) {
-    //    $(e).find('td').remove();
-    //}
 </script>
