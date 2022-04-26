@@ -20,16 +20,18 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             {
                 list = (List<CartItem>)cart;
             }
-            return View();
+            return View(list);
         }
 
         public ActionResult AddItem(int productId, int quantity)
         {
             var product = new ProductController().VỉewDetail(productId);
+
             var cart = Session[CartSession];
+
+            var list = (List<CartItem>)cart?? new List<CartItem>();
             if(cart != null)
             {
-                var list = (List<CartItem>)cart;
                 if (list.Exists(x => x.Product.id == productId))
                 {
                     foreach (var item in list)
@@ -54,12 +56,11 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 var item = new CartItem();
                 item.Product = product;
                 item.Quantity = quantity;
-                var list = new List<CartItem>();
                 list.Add(item);
-
+                
                 Session[CartSession] = list;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", list );
         }
 
         public ActionResult CheckoutComplete()

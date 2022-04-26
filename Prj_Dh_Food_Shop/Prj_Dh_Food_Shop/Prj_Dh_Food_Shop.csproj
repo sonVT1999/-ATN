@@ -625,7 +625,6 @@
     <Content Include="Views\Products\PartialEdit.cshtml" />
     <Content Include="Views\Products\PartialDetail.cshtml" />
     <Content Include="Views\Products\PartialDelete.cshtml" />
-    <Content Include="Views\Products\AddImageProduct.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\PartialDelete.cshtml" />
     <Content Include="Views\Categories\PartialEdit.cshtml" />

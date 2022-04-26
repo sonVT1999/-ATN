@@ -9,46 +9,12 @@
 <script type="text/javascript" src="~/Areas/Scripts/jquery.min.1.11.3.js"></script>
 <script type="text/javascript" src="~/Areas/Scripts/bootstrap.min.js"></script>
 
-<script>
-    function addFeedback() {
-        var model = {
-            customer_name: $('input[name="name"]').val(),
-            email: $('input[name="email"]').val(),
-            phone_number: $('input[name="phone"]').val(),
-            addresss: $('input[name="address"]').val(),
-            title: $('input[name="subject"]').val(),
-            descriptions: $('input[name="content"]').val(),
-            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
-        }
-
-        $.ajax({
-            url: '/LienHe/Create',
-            type: "POST",
-            data: model,
-            success: function (rs) {
-                if (rs != null && rs != undefined && rs != '') {
-                    if (window.confirm(rs.msg)) {
-                        if (rs.status == 1)
-                            window.location.href = '/LienHe/Index';
-                    }
-                    else {
-                        // They clicked no
-                    }
-
-                } else {
-                    toastr.error('Có lỗi xảy ra!');
-                }
-            },
-        });
-    }
-</script>
-
-
 <div class="img">
     <a href='' target='_blank' title=''>
         <img src='https://dhfoods.com.vn/vnt_upload/weblink/Banner_Web-02_1.jpg' style="padding-bottom: 5%; width: 100%" alt='' />
     </a>
 </div>
+@Html.AntiForgeryToken()
 <div id="vnt-background" class="v2">
     <div class="wrapCont">
         <div class="wrapper">
@@ -92,89 +58,122 @@
                     </div>
 
                     <div class="form-contact v2">
-                            <div class="form-group">
-                                <div class="textContact">
-                                    <p>Xin kính chào quý khách! Cảm ơn Quý Khách đã quan tâm tới <span>Dh Foods</span>.</p><p>Nếu quý khách có thắc mắc, ý kiến phản hồi hay đóng góp xin vui lòng điền vào Form dưới đây và gửi cho chúng tôi. Xin chân thành cảm ơn!</p>
-                                </div>
+                        <div class="form-group">
+                            <div class="textContact">
+                                <p>Xin kính chào quý khách! Cảm ơn Quý Khách đã quan tâm tới <span>Dh Foods</span>.</p><p>Nếu quý khách có thắc mắc, ý kiến phản hồi hay đóng góp xin vui lòng điền vào Form dưới đây và gửi cho chúng tôi. Xin chân thành cảm ơn!</p>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="name">Họ tên <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <input type="text" name="name" id="name" class="required" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <input type="text" name="email" id="email" required class="required" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Điện thoại <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <input type="text" name="phone" id="phone" class="required" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="name">Họ tên <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <input type="text" name="name" id="name" class="required" value="" />
-                                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="address">Địa chỉ <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <input type="text" name="address" id="address" class="required" value="" />
                                         </div>
-                                        <div class="clear"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">Email <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <input type="text" name="email" id="email" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required class="required" value="" />
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Điện thoại <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <input type="text" name="phone" id="phone" class="required" value="" />
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="address">Địa chỉ <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <input type="text" name="address" id="address" class="required" value="" />
-                                            </div>
+                                <div class="form-group">
+                                    <label for="subject">Tiêu đề <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <input type="text" name="subject" id="subject" class="required" value="" />
                                         </div>
-                                        <div class="clear"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="subject">Tiêu đề <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <input type="text" name="subject" id="subject" class="required" value="" />
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="content">Nội dung <span>(*)</span></label>
-                                        <div class="colRight">
-                                            <div>
-                                                <textarea class="required" id="content" name="content" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="flexRight">
-                                    <div class="gridButton">
-                                        <div class="col">
-                                            <button name="submit" id="submit" value="form_contact" style="float: right;margin-right: 1%;margin-bottom: 3%;" onclick="addFeedback()" type="submit">
-                                                <span>Gửi</span>
-                                            </button>
+                                <div class="form-group">
+                                    <label for="content">Nội dung <span>(*)</span></label>
+                                    <div class="colRight">
+                                        <div>
+                                            <textarea class="required" id="content" name="content" rows="3"></textarea>
                                         </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="flexRight">
+                                <div class="gridButton">
+                                    <div class="col">
+                                        <button name="submit" id="submit" value="form_contact" style="float: right;margin-right: 1%;margin-bottom: 3%;" onclick="addFeedback()" type="submit">
+                                            <span>Gửi</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function addFeedback() {
+        var model = {
+            customer_name: $('input[name="name"]').val(),
+            email: $('input[name="email"]').val(),
+            phone_number: $('input[name="phone"]').val(),
+            addresss: $('input[name="address"]').val(),
+            title: $('input[name="subject"]').val(),
+            descriptions: $('input[name="content"]').val(),
+            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        }
+
+        $.ajax({
+            url: '/LienHe/Create',
+            type: "POST",
+            data: model,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Client/LienHe/Index';
+                    }
+                    else {
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+</script>

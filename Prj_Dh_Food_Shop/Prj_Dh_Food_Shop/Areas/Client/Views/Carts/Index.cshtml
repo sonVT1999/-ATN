@@ -13,18 +13,6 @@
 <head>
     <style type="text/css">
 
-        .wrap > a:focus {
-            outline: none;
-        }
-
-        .header-tools > .languageMobile a {
-            padding-top: 14px;
-        }
-
-        .header-tools > .menuTop > ul > li {
-            margin-right: 35px;
-        }
-
         .menuTab ul li a, .productCart a, .info-contact .view-map-contact a, .info-contact .view-map-contact a:before, .form-contact button {
             border-radius: 5px;
         }
@@ -97,7 +85,7 @@
         }
 
         div#vnt-slide .img {
-            padding-top: 40% !important;
+            padding-top: 5% !important;
         }
     </style>
 
@@ -106,27 +94,8 @@
             display: flex;
         }
     </style>
-    <link href="https://dhfoods.com.vn/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="https://dhfoods.com.vn/js/fancybox3/jquery.fancybox.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/jquery_alerts/jquery.alerts.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/menumobile/menumobile.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/js/my_effect_scroll/animate.css" type="text/css" rel="stylesheet" />
-    <link href="https://dhfoods.com.vn/skins/default/style/screen.css?v=1.0" rel="stylesheet" type="text/css" />
 
-    <style type="text/css">
-        #vnt-navation {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
 
-        .mainFoot {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-
-        .mainHead {
-            background: url('https://dhfoods.com.vn/vnt_upload/weblink/background_1-2.png') repeat center center;
-        }
-    </style>
 </head>
 
 <!-- catg header banner section -->
@@ -141,16 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="vnt-navation" class="breadcrumb">
-                    <div class="wrapper">
-                        <div class="navation">
-                            <ul>
-                                <li><a href="https://dhfoods.com.vn/"><span>Trang chủ</span></a></li>
-
-                                <li><span>Giỏ hàng</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%; background-color: #1b5633">
                 </div>
             </div>
 
@@ -158,8 +118,8 @@
                 <div class="wrapConts">
                     <div class="">
                         <div class="box_mid v2">
-                            <div class="mid-title">
-                                <div class="titleL"><h1>Giỏ hàng</h1></div>
+                            <div class="mid-title" style="color: #1b5633;">
+                                <div class="titleL white"><h1 style="color: #1b5633;">Giỏ hàng</h1></div>
                                 <div class="titleR"></div>
                                 <div class="clear"></div>
                             </div>
@@ -170,84 +130,72 @@
                                             <div class="cart-view-area">
                                                 @if (Model == null)
                                                 {
-                                                <p class="alert alert-info">
-                                                    Bạn chưa có sản phẩm nào trong giỏ hàng!
-                                                </p>
+                                                    <p class="alert alert-info">
+                                                        Bạn chưa có sản phẩm nào trong giỏ hàng!
+                                                    </p>
                                                 }
                                                 else
                                                 {
-                                                <div class="cart-view-table">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>Sản phẩm</th>
-                                                                    <th>Giá</th>
-                                                                    <th>Số lượng</th>
-                                                                    <th>Tổng</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach (var item in Model)
-                                                                {
+                                                    <div class="cart-view-table">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
                                                                     <tr>
-                                                                        <td id="row_" + @item.Product.id>
-                                                                            <button class="remove" onclick="RemoveItem(@item.Product.id)">
-                                                                                <fa class="fa fa-close"></fa>
-                                                                            </button>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="aa-cart-title" href="#">
-                                                                                @item.Product.name
-                                                                            </a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span>
-                                                                                @item.Product.price.ToString("#,##") VNĐ
-                                                                            </span>
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <input class="aa-cart-quantity" id="@item.Product.id" type="number" value="@item.Quantity"
-                                                                                   onchange="ChangeQuantity(@item.Product.id)">
-                                                                        </td>
-                                                                        <td class="@item.Product.id">
-                                                                            @(item.Product.price * item.Quantity).ToString("#,##") VNĐ
-                                                                        </td>
+                                                                        <th></th>
+                                                                        <th>Sản phẩm</th>
+                                                                        <th>Giá</th>
+                                                                        <th>Số lượng</th>
+                                                                        <th>Tổng</th>
                                                                     </tr>
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <!-- Cart Total view -->
-                                                    <div class="cart-view-total">
-                                                        <h4>Tổng thanh toán</h4>
-                                                        <table class="aa-totals-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th>Tổng số lượng</th>
-                                                                    <td id="TotalItems">
-                                                                        @*@Model.totalItems*@
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Thành tiền</th>
-                                                                    <td id="TotalPrice">
-                                                                        @*@if (Model != null)
-                                                                            {
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model)
+                                                                    {
+                                                                        <tr>
+                                                                            <td id="row_" + @item.Product.id>
+                                                                                <button class="remove" onclick="RemoveItem(@item.Product.id)">
+                                                                                    <fa class="fa fa-close"></fa>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td>
+                                                                                <a class="aa-cart-title" href="#">
+                                                                                    @item.Product.name
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>
                                                                                 <span>
-                                                                                    @Model.totalPrices.ToString("#,##")
+                                                                                    @(string.Format("{0:#,0.#############################}", item.Product.price))<span> vnd</span>
                                                                                 </span>
-                                                                            }*@
-                                                                    </td>
-                                                                </tr>
 
-                                                            </tbody>
-                                                        </table>
-                                                        <a href="@Url.Action("CheckOut")" class="aa-cart-view-btn">Thanh toán</a>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input class="aa-cart-quantity" id="@item.Product.id" type="number" value="@item.Quantity"
+                                                                                       onchange="ChangeQuantity(@item.Product.id)">
+                                                                            </td>
+                                                                            <td class="@item.Product.id">
+                                                                                @((item.Product.price * item.Quantity).ToString("#,##")) VNĐ
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr class="d-none d-md-table-row total-final">
+                                                                        <td rowspan="1" colspan="1">
+                                                                            <b class="text-bold">Tổng tiền</b>
+                                                                        </td>
+                                                                        <td rowspan="1" colspan="1"></td>
+                                                                        <td rowspan="1" colspan="1"></td>
+                                                                        <td rowspan="1" colspan="1"></td>
+                                                                        <td class="text" rowspan="1" colspan="1">
+                                                                            <b class="no-wrap text-bold"></b>
+                                                                        </td>
+                                                                        <td rowspan="1" colspan="1">&nbsp;</td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <button href="@Url.Action("CheckOut")" style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Thanh toán</button>
                                                 }
                                             </div>
                                         </div>
@@ -265,49 +213,35 @@
 <!-- / Cart view section -->
 @*@section scripts{
 
-        <script>
-
-            function ChangeQuantity(productId) {
-                var q = $("#" + productId).val();
-                var quantity = Number(q);
-                if (quantity <= 0) {
-                    alert("phải lớn hơn hoặc bằng 1");
-                    $("#" + productId).val(1);
-                    return;
-                }
-                $.ajax({
-                    type: "put",
-                    url: "/Cart/ChangQuantity",
-                    data: {
-                        ProductId: productId,
-                        Quantity: quantity
-                    },
-                    success: function (res) {
-                        $("#TotalPrice").text(res.TotalPrices);
-                        $("#TotalItems").text(res.TotalItems);
-                        $("#total_item_cart").text(res.TotalItems);
-                        $("." + productId).text(res.Prices)
-                    }
-                })
+    <script>
+        function ChangeQuantity(productId) {
+            var q = $("#" + productId).val();
+            var quantity = Number(q);
+            if (quantity <= 0) {
+                alert("phải lớn hơn hoặc bằng 1");
+                $("#" + productId).val(1);
+                return;
             }
-
-            function RemoveItem(productId) {
-                if (confirm("Bạn có muốn xóa bản ghi đã chọn?")) {
-                    $.ajax({
-                        type: "delete",
-                        url: "/Cart/RemoveProduct",
-                        data: {
-                            ProductId: productId
-                        },
-                        success: function (res) {
-                            alert("Xóa thành công!");
-                            $("#row_" + productId).fadeOut();
-                            window.location.reload(true);
-                        }
-                    })
+            $.ajax({
+                type: "put",
+                url: "/Cart/ChangQuantity",
+                data: {
+                    ProductId: productId,
+                    Quantity: quantity
+                },
+                success: function (res) {
+                    $("#TotalPrice").text(res.TotalPrices);
+                    $("#TotalItems").text(res.TotalItems);
+                    $("#total_item_cart").text(res.TotalItems);
+                    $("." + productId).text(res.Prices)
                 }
-            }
-        </script>
+            })
+        }
 
-    }*@
+        function delImage(e) {
+            $(e).parent('td').remove();
+        }
+    </script>
+
+}*@
 

@@ -15,7 +15,8 @@ namespace Prj_Dh_Food_Shop.Controllers
             ViewData["soluongOrder"] = db.Orders.Where(x => x.statuss == 0).Count();
             ViewData["soluongKH"] = db.Customers.Where(x => x.id != 0).Count();
             ViewData["soluongKHTN"] = db.Customers_potential.Where(x => x.statuss != "Đã gọi").Count();
-            ViewData["soluongFeedback"] = db.Feedbacks.Where(x => x.is_active == 2).Count();
+            ViewData["soluongFeedback"] = db.Feedbacks.Where(x => x.is_active == 1).Count();
+
             ViewBag.Inner = new DashboardsController().SelectTop5Product();
             return View();
         }
