@@ -159,6 +159,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Client\Models\Cart.cs" />
+    <Compile Include="Areas\Client\Models\CartDetail.cs" />
+    <Compile Include="Models\GenCode.cs" />
     <Compile Include="Models_add\Login.cs" />
     <Compile Include="Models_add\ReportTurnover.cs" />
     <Compile Include="Models_add\SearchTop_Products.cs" />
@@ -218,6 +221,7 @@
     <Content Include="Areas\Client\Views\Product\productDetail.cshtml" />
     <Content Include="Areas\Client\Views\Product\product.cshtml" />
     <Content Include="Areas\Client\Views\Homes\Login.cshtml" />
+    <Content Include="Areas\Client\Views\Carts\Payment.cshtml" />
     <None Include="Areas\Content\Scripts\General\jquery-1.4.1-vsdoc.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.min.js" />

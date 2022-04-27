@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prj_Dh_Food_Shop.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -77,15 +78,19 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
         public JsonResult Edit(string cartModel)
         {
-            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+
             var sessionCart = (List<CartItem>)Session[CartSession];
-            foreach (var item in sessionCart)
+            List<string> lst = new List<string>();
+            List<int> lstInt = new List<int>();
+            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+
+            foreach (var item in jsonCart)
             {
-                var jsonItem = jsonCart.SingleOrDefault(x => x.Product.id == item.Product.id);
+                var jsonItem = sessionCart.SingleOrDefault(x => x.Product.id == item.Product.id);
                 if (jsonItem != null)
                 {
                     if (jsonItem.Quantity > 0)
-                    item.Quantity = jsonItem.Quantity;
+                        jsonItem.Quantity = item.Quantity;
                     else
                     {
                         return Json(new
@@ -95,16 +100,98 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                     }
                 }
             }
+
             Session[CartSession] = sessionCart;
-            return Json(new
+
+            foreach (var item in jsonCart)
             {
-                status = true
-            });
+                var jsonItem = sessionCart.SingleOrDefault(x => x.Product.id == item.Product.id);
+
+                var money = jsonItem.Product.price * jsonItem.Quantity;
+                var moneyStr = money.ToString("#,##");
+                lst.Add(moneyStr);
+                lstInt.Add(money);
+            }
+            var TotalMoneyString = lstInt.Sum().ToString("#,##");
+            lst.Add(TotalMoneyString);
+            return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CheckoutComplete()
         {
             return View();
         }
+
+        public ActionResult Payment()
+        {
+            var kh = (Customers)Session[CommonConstants.KH_SESSION];
+            if (kh == null)
+            {
+                return RedirectToAction("Index", "Carts");
+            }
+            else
+            {
+                var cart = Session[CartSession];
+                var list = new List<CartItem>();
+                if (cart != null)
+                {
+                    list = (List<CartItem>)cart;
+                }
+                return View(list);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Checkout()
+        {
+            var code = GenerateCodeOrder("CodeOrder");
+            var kh = (Customers)Session[CommonConstants.KH_SESSION];
+            var order = new Orders();
+            order.id_customer = kh.id;
+            order.statuss = 0;
+            order.createAt = DateTime.Now;
+            order.name = code;
+
+            try
+            {
+                var id = new Cart().Insert(order);
+                var cart = (List<CartItem>)Session[CartSession];
+                var cartDetail = new CartDetail();
+                foreach (var item in cart)
+                {
+                    var orderDetail = new Orders_detail();
+                    orderDetail.id_product = item.Product.id;
+                    orderDetail.id_order = id;
+                    orderDetail.amount = item.Quantity;
+                    cartDetail.Insert(orderDetail);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Redirect("/CheckoutComplete");
+        }
+
+
+        public string GenerateCodeOrder(string KeyCode)
+        {
+            var code = "";
+            var data = db.GenCode.Where(t => t.KeyCode == KeyCode).FirstOrDefault();
+            if (data == null) return null;
+
+            var StartValue = data.StartValue + 1;
+            var gencode = data.Prefix + (code + StartValue).PadLeft(data.LengthValue, '0');
+
+            //Cập nhật lại giá trị
+            var uItem = db.GenCode.Where(t => t.id == data.id).FirstOrDefault();
+            uItem.StartValue = StartValue;
+            db.SaveChanges();
+
+            return gencode;
+
+        }
+
     }
 }

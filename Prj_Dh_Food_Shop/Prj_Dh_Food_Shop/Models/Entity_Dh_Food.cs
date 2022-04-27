@@ -12,6 +12,8 @@ namespace Prj_Dh_Food_Shop
         {
         }
 
+
+        public virtual DbSet<GenCode> GenCode { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }

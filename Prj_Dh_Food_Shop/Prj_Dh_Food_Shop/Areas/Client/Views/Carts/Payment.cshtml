@@ -1,0 +1,259 @@
+﻿@model List<Prj_Dh_Food_Shop.Areas.Client.CartItem>
+@using Prj_Dh_Food_Shop.Common;
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
+    var KH = (Customers)Session[CommonConstants.KH_SESSION];
+}
+
+<link rel="stylesheet" href="~/Areas/Content/Css/vendor.css" />
+<link rel="stylesheet" href="~/Areas/Content/Css/style.css" />
+<link rel="Stylesheet" type="text/css" href="~/Areas/Content/Css/n-custom.css" />
+<script type="text/javascript" src="~/Areas/Scripts/jquery.min.1.11.3.js"></script>
+<script type="text/javascript" src="~/Areas/Scripts/bootstrap.min.js"></script>
+
+<head>
+    <style type="text/css">
+
+        .menuTab ul li a, .productCart a, .info-contact .view-map-contact a, .info-contact .view-map-contact a:before, .form-contact button {
+            border-radius: 5px;
+        }
+
+        div#vnt-footer > .mainFoot .grid .col:nth-child(3), div#vnt-footer > .mainFoot .grid .col:nth-child(4) {
+            margin-bottom: 25px;
+        }
+
+        .item > .productCat .tend {
+            min-height: 75px;
+        }
+
+            .item > .productCat .tend h3 {
+                font-size: 27px;
+                line-height: 35px;
+                white-space: normal;
+            }
+
+        .breadcrumb ul li:first-child {
+            display: none;
+        }
+
+        .breadcrumb ul li:nth-child(2) {
+            margin-left: 0;
+        }
+
+        .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productDes {
+            font-size: 18px;
+            line-height: 26px;
+        }
+
+        .item > .productCat .tend h3, .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a, .item > .product .tend a, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h1, .col-lg-6.col-md-6.col-sm-12.col-xs-12 > .productTitle h2, .col > .productCat .tend h3 {
+            text-transform: none;
+        }
+
+        .col-lg-4.col-md-4.col-sm-6.col-xs-6 > .product .tend a {
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        .productDes > ol, .productDes > ul {
+            list-style: disc !important;
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-inline-start: 40px;
+        }
+
+        .info-contact .view-map-contact a span {
+            padding-top: 1px;
+        }
+
+        .col-lg-4.col-md-4.col-sm-6.col-xs-12 > .recruit .tend h3 {
+            height: auto;
+        }
+
+        .recruit .des {
+            padding-top: 25px;
+        }
+
+        .recruit:hover .des {
+            padding-top: 0px;
+        }
+        /*khảng cách tiêu đề bài viết*/
+        .wrapConts .box_mid .mid-title .titleL {
+            margin-top: 30px
+        }
+
+        .productWrap_c {
+            margin-top: 30px;
+        }
+
+        div#vnt-slide .img {
+            padding-top: 5% !important;
+        }
+    </style>
+
+    <style type="text/css">
+        .bx-bct {
+            display: flex;
+        }
+    </style>
+
+
+</head>
+
+<!-- catg header banner section -->
+<div id="vnt-wrapper">
+    <div id="vnt-container">
+        <div id="vnt-content">
+            <div class="vnt-main-top">
+                <div id="vnt-slide" class="slick-init">
+                    <div class="item">
+                        <div class="img">
+                            <img src="https://dhfoods.com.vn/vnt_upload/weblink/__Banner_dai_De_dang_mua_sam_san_pham_Dh_Foods.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div id="vnt-navation" class="breadcrumb" style="padding-bottom: 2%; background-color: #1b5633">
+                </div>
+            </div>
+
+            <div id="vnt-background" class="bg bgp">
+                <div class="wrapConts">
+                    <div class="">
+                        <div class="box_mid v2">
+                            <div class="mid-title" style="color: #1b5633;">
+                                <div class="titleL white"><h1 style="color: #1b5633;">Thanh toán</h1></div>
+                                <div class="titleR"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <section id="cart-view">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="cart-view-area">
+                                                @if (Model == null)
+                                                {
+                                                    <p class="alert alert-info">
+                                                        Bạn chưa có sản phẩm nào trong giỏ hàng!
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    <div class="cart-view-table">
+                                                        <div class="table-responsive">
+                                                            <table class="b-tableDiv" style="width: 100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Sản phẩm</th>
+                                                                        <th>Đơn giá</th>
+                                                                        <th>Số lượng</th>
+                                                                        <th>Thành tiền</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var item in Model)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a class="aa-cart-title" href="#">
+                                                                                    @item.Product.name
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>
+                                                                                <span>
+                                                                                    @(string.Format("{0:#,0.#############################}", item.Product.price))<span> vnđ </span>
+                                                                                </span>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <span>
+                                                                                    @(item.Quantity) <span> thùng </span>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width: 200px" class="@item.Product.id">
+                                                                                @((item.Product.price * item.Quantity).ToString("#,##")) VNĐ
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                                @{
+                                                                    var moneyTotal = "";
+                                                                    var cal = 0;
+                                                                    foreach (var item in Model)
+                                                                    {
+                                                                        var quanti = item.Quantity;
+                                                                        var price = item.Product.price;
+                                                                        var money = quanti * price;
+                                                                        cal += money;
+                                                                    }
+                                                                    moneyTotal = cal.ToString("#,##") + " VNĐ";
+                                                                }
+                                                                <tfoot>
+                                                                    <tr class="d-none d-md-table-row total-final">
+                                                                        <td rowspan="1" colspan="1">
+                                                                            <b class="text-bold" style="font-size: 18px;">Tổng tiền:</b>
+                                                                        </td>
+                                                                        <td rowspan="1" colspan="1"></td>
+                                                                        <td rowspan="1" colspan="1"></td>
+                                                                        <td class="text" rowspan="1" colspan="1">
+                                                                            <b class="no-wrap text-bold" id="totalMoney" style="font-size: 18px;">@moneyTotal</b>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                    <table style="width: 100%; " class="frmSearch n-tbl-head-1 m-0" >
+                                                        <tbody>
+                                                            <form @*action="/Orders/Index"*@ method="post">
+                                                                <tr>
+                                                                    <td style="padding-right:18px; width: 18%; padding-top: 3%;">
+                                                                        <span name="1" style="float: left;font-size: 20px; font-weight: bold">Tên khách hàng:</span>
+                                                                    </td>
+                                                                    <td style="font-size: 20px; padding-top: 3%;">
+                                                                        @KH.name
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding-right:18px">
+                                                                        <span name="2" style="float: left; font-size: 20px; font-weight: bold">Địa chỉ nhận hàng:</span>
+                                                                    </td>
+                                                                    <td style="font-size: 20px;">
+                                                                        @KH.addresss, @KH.Provinces.name
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding-right:18px">
+                                                                        <span name="3" style="float: left; font-size: 20px; font-weight: bold">Số điện thoại:</span>
+                                                                    </td>
+                                                                    <td style="font-size: 20px;">
+                                                                        @KH.phone_number
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding-right:18px">
+                                                                        <span name="4" style="float: left; font-size: 20px; font-weight: bold">Email:</span>
+                                                                    </td>
+                                                                    <td style="font-size: 20px;">
+                                                                        @KH.email
+                                                                    </td>
+                                                                </tr>
+                                                            </form>
+                                                        </tbody>
+                                                    </table>
+                                                    <button href="/Client/Carts/Checkout" style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Gửi đơn hàng</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
