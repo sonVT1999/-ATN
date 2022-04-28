@@ -205,7 +205,7 @@
                                                 }
                                                     <table style="width: 100%; " class="frmSearch n-tbl-head-1 m-0" >
                                                         <tbody>
-                                                            <form @*action="/Orders/Index"*@ method="post">
+                                                            <form action="/Client/Carts/Checkout" method="post">
                                                                 <tr>
                                                                     <td style="padding-right:18px; width: 18%; padding-top: 3%;">
                                                                         <span name="1" style="float: left;font-size: 20px; font-weight: bold">Tên khách hàng:</span>
@@ -238,10 +238,10 @@
                                                                         @KH.email
                                                                     </td>
                                                                 </tr>
+                                                                <button style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Gửi đơn hàng</button>
                                                             </form>
                                                         </tbody>
                                                     </table>
-                                                    <button href="/Client/Carts/Checkout" style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Gửi đơn hàng</button>
                                                 </div>
                                         </div>
                                     </div>

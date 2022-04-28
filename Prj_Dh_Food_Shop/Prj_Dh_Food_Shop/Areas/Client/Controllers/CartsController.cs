@@ -144,6 +144,23 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         [HttpPost]
         public ActionResult Checkout()
         {
+            List<string> lst = new List<string>();
+            List<int> lstInt = new List<int>();
+            var cart = (List<CartItem>)Session[CartSession];
+
+            foreach (var item in cart)
+            {
+                var jsonItem = cart.SingleOrDefault(x => x.Product.id == item.Product.id);
+
+                var money = jsonItem.Product.price * jsonItem.Quantity;
+                var moneyStr = money.ToString("#,##");
+                lst.Add(moneyStr);
+                lstInt.Add(money);
+            }
+            var TotalMoneyString = lstInt.Sum().ToString("#,##");
+            lst.Add(TotalMoneyString);
+
+
             var code = GenerateCodeOrder("CodeOrder");
             var kh = (Customers)Session[CommonConstants.KH_SESSION];
             var order = new Orders();
@@ -151,18 +168,20 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             order.statuss = 0;
             order.createAt = DateTime.Now;
             order.name = code;
+            order.order_date = DateTime.Now;
+            order.total =Convert.ToDouble(TotalMoneyString);
 
             try
             {
                 var id = new Cart().Insert(order);
-                var cart = (List<CartItem>)Session[CartSession];
                 var cartDetail = new CartDetail();
                 foreach (var item in cart)
                 {
                     var orderDetail = new Orders_detail();
                     orderDetail.id_product = item.Product.id;
                     orderDetail.id_order = id;
-                    orderDetail.amount = item.Quantity;
+                    orderDetail.counts = item.Quantity;
+                    orderDetail.amount = item.Quantity * item.Product.price;
                     cartDetail.Insert(orderDetail);
                 }
             }
@@ -171,7 +190,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
                 throw;
             }
-            return Redirect("/CheckoutComplete");
+            return Redirect("/Client/Carts/CheckoutComplete");
         }
 
 

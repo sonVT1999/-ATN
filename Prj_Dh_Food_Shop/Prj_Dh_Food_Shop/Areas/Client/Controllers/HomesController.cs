@@ -38,11 +38,12 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                     if (IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 
+                    SetAlert("Đăng nhập thành công", "success");
                     return RedirectToAction("Index", "Homes");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng");
+                    SetAlert("Tên đăng nhập hoặc mật khẩu không đúng! Mời nhập lại", "error");
                 }
             }
             return View("Index");
@@ -60,6 +61,23 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             return url[0] == '/' && (url.Length == 1 || url[1] != '/' && url[1] != '\\') || // "/" or "/foo" but not "//" or "/\"
                    url.Length > 1 &&
                    url[0] == '~' && url[1] == '/'; // "~/" or "~/foo"
+        }
+
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
     }
 }
