@@ -141,7 +141,12 @@
         </header>
     </div>
     <main class="main-site">
-
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                @TempData["AlertMessage"]
+            </div>
+        }
         @RenderBody()
 
         <!--Footer-->
@@ -228,21 +233,7 @@
                 });
             });
         });
-
     </script>
-    @*<script type="text/javascript">
-            $(document).ready(function () {
-                $('#loginTest').click(function () {
-
-                    var url = $('#exampleModal').data('url');
-                    $.get(url, function (data) {
-                        $("#exampleModal").html(data);
-                        $("#exampleModal").modal('show');
-                    });
-                });
-            });
-        </script>*@
-
 
 </body>
 </html>

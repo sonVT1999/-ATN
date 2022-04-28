@@ -9,12 +9,13 @@ namespace Prj_Dh_Food_Shop
     public partial class Feedbacks
     {
         public int id { get; set; }
-        
+
         [StringLength(200)]
         public string title { get; set; }
-       
+
         public string descriptions { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? feedback_date { get; set; }
 
         public int? is_active { get; set; }
@@ -31,11 +32,13 @@ namespace Prj_Dh_Food_Shop
         [StringLength(100)]
         public string email { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? createAt { get; set; }
 
         [StringLength(200)]
         public string createBy { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? updateAt { get; set; }
 
         [StringLength(200)]

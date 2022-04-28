@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Net;
 using Prj_Dh_Food_Shop;
 using System.Text.RegularExpressions;
+using Prj_Dh_Food_Shop.Common;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
@@ -16,6 +17,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
         // GET: Users
+        [HasCredential(RoleId = "VIEW_USER")]
         public ActionResult Index(Search_Users model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();
@@ -51,7 +53,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.totalPage = (int)Math.Ceiling((decimal)model.totalRecord / model.pageSize);
             return View(model);
         }
-
+        [HasCredential(RoleId = "ADD_USER")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Users model)
@@ -91,6 +93,8 @@ namespace Prj_Dh_Food_Shop.Controllers
             return model;
         }
 
+
+        [HasCredential(RoleId = "VIEW_USER")]
         public ActionResult Detail(int? id)
         {
             if (id == null)
@@ -106,6 +110,8 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialDetail", users);
         }
 
+
+        [HasCredential(RoleId = "EDIT_USER")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -121,6 +127,8 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialEdit", users);
         }
 
+
+        [HasCredential(RoleId = "EDIT_USER")]
         [HttpPost]
         public ActionResult Edit(Users users)
         {
@@ -168,7 +176,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
-
+        [HasCredential(RoleId = "DELETE_USER")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -182,7 +190,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             return PartialView("PartialDelete", users);
         }
-
+        [HasCredential(RoleId = "DELETE_USER")]
         [HttpPost]
         public ActionResult Delete(int id)
         {

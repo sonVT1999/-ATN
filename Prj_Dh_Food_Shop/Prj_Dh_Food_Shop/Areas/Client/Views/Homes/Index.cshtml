@@ -43,12 +43,6 @@
         }
     </style>
 </head>
-@if (TempData["AlertMessage"] != null)
-{
-    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-        @TempData["AlertMessage"]
-    </div>
-}
 <body class="n-landing">
     <ul id="listMessage" class="list-message"></ul>
     <main class="main-site">

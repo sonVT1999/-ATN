@@ -27,7 +27,9 @@ namespace Prj_Dh_Food_Shop.Controllers
                 var data = db.Users.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords) && s.is_active == 1).FirstOrDefault();
                 if (data != null)
                 {
+                    var listCredentials = GetListCredential(data.username);
                     //add session
+                    Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
                     Session.Add(CommonConstants.USER_SESSION, data);
                     if (IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
@@ -69,6 +71,28 @@ namespace Prj_Dh_Food_Shop.Controllers
             return url[0] == '/' && (url.Length == 1 || url[1] != '/' && url[1] != '\\') || // "/" or "/foo" but not "//" or "/\"
                    url.Length > 1 &&
                    url[0] == '~' && url[1] == '/'; // "~/" or "~/foo"
+        }
+
+
+
+        public List<string> GetListCredential(string userName)
+        {
+            var user = db.Users.Single(x => x.username == userName);
+            var data = (from a in db.Credentials
+                        join b in db.GroupUsers on a.GroupUserId equals b.id
+                        join c in db.Roles on a.RoleId equals c.id
+                        where b.id == user.permission
+                        select new Credentials
+                        {
+                            RoleId = a.RoleId,
+                            GroupUserId = a.GroupUserId
+                        }).AsQueryable().Select(x => new Credentials()
+                        {
+                            RoleId = x.RoleId,
+                            GroupUserId = x.GroupUserId
+                        });
+            return data.Select(x => x.RoleId).ToList();
+
         }
 
     }

@@ -12,14 +12,14 @@ namespace Prj_Dh_Food_Shop
         {
         }
 
-
-        public virtual DbSet<GenCode> GenCode { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
+        public virtual DbSet<Credentials> Credentials { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Customers_potential> Customers_potential { get; set; }
         public virtual DbSet<Districts> Districts { get; set; }
         public virtual DbSet<Feedbacks> Feedbacks { get; set; }
+        public virtual DbSet<GenCode> GenCode { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Orders_detail> Orders_detail { get; set; }
         public virtual DbSet<Payment_methods> Payment_methods { get; set; }
@@ -27,6 +27,8 @@ namespace Prj_Dh_Food_Shop
         public virtual DbSet<Provinces> Provinces { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<GroupUsers> GroupUsers { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

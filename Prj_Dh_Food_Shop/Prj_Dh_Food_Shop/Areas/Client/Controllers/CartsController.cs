@@ -190,6 +190,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
                 throw;
             }
+            cart.Clear();
             return Redirect("/Client/Carts/CheckoutComplete");
         }
 
