@@ -32,7 +32,7 @@ namespace Prj_Dh_Food_Shop.Common
         {
             filterContext.Result = new ViewResult
             {
-                ViewName = "~/Areas/Admin/Views/Shared/401.cshtml"
+                ViewName = "~/Views/Shared/Error401.cshtml"
             };
         }
         private List<string> GetCredentialByLoggedInUser(string userName)

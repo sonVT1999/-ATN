@@ -27,6 +27,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 var data = db.Users.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords) && s.is_active == 1).FirstOrDefault();
                 if (data != null)
                 {
+
                     var listCredentials = GetListCredential(data.username);
                     //add session
                     Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
@@ -82,11 +83,11 @@ namespace Prj_Dh_Food_Shop.Controllers
                         join b in db.GroupUsers on a.GroupUserId equals b.id
                         join c in db.Roles on a.RoleId equals c.id
                         where b.id == user.permission
-                        select new Credentials
+                        select new
                         {
                             RoleId = a.RoleId,
                             GroupUserId = a.GroupUserId
-                        }).AsQueryable().Select(x => new Credentials()
+                        }).AsEnumerable().Select(x => new Credentials()
                         {
                             RoleId = x.RoleId,
                             GroupUserId = x.GroupUserId
