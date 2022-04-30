@@ -14,13 +14,15 @@
     <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
         <div style="display:none;" role="status" aria-hidden="true">
         </div>
-            <table class="n-tbl-head-1" style="margin-bottom: 0">
-                <tbody>
-                    <tr style="height: 25px">
-                        <td>
-                            <span>Trạng thái</span>:
-                        </td>
-                        <td style="width: 350px;">
+        <table class="n-tbl-head-1" style="margin-bottom: 0">
+            <tbody>
+                <tr style="height: 25px">
+                    <td>
+                        <span>Trạng thái</span>:
+                    </td>
+                    <td style="width: 350px;">
+                        @if (Model.statuss == 0)
+                        {
                             <select class="m_text" name="statuss" required>
                                 <option value="@Model.statuss" disabled selected>
                                     @if (Model.statuss == 0)
@@ -34,15 +36,44 @@
                                 <option value="1"> Đang vận chuyển </option>
                                 <option value="2"> Đã giao </option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr style="height: 25px;">
-                        <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
-                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save" onclick="editOrder(@Model.id)">
-                            <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        }
+                        else if (Model.statuss == 1)
+                        {
+                            <select class="m_text" name="statuss" required>
+                                <option value="@Model.statuss" disabled selected>
+                                    @if (Model.statuss == 0)
+                                    {<span>Chờ duyệt</span>}
+                                    else if (Model.statuss == 1)
+                                    {<span>Đang vận chuyển</span>}
+                                    else
+                                    {<span>Đã giao</span>}
+                                </option>
+                                <option value="1"> Đang vận chuyển </option>
+                                <option value="2"> Đã giao </option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select class="m_text" name="statuss" required>
+                                <option value="@Model.statuss" disabled selected>
+                                    @if (Model.statuss == 0)
+                                    {<span>Chờ duyệt</span>}
+                                    else if (Model.statuss == 1)
+                                    {<span>Đang vận chuyển</span>}
+                                    else
+                                    {<span>Đã giao</span>}
+                                </option>
+                            </select>
+                        }
+                    </td>
+                </tr>
+                <tr style="height: 25px;">
+                    <td colspan="2" align="center" style="padding-top: 10px; padding-left: 30%">
+                        <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save" onclick="editOrder(@Model.id)">
+                        <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -145,14 +145,21 @@ namespace Prj_Dh_Food_Shop.Controllers
             ViewBag.customer = new OrdersController().getCustomers();
             ViewBag.user = new OrdersController().getUsers();
             ViewBag.payment = new OrdersController().getPayments();
-
-            if (result != null)
+            if (result.statuss == 2)
             {
-                result.statuss = ord.statuss;
+                msg = "Đon hàng đã được vận chuyển. Không thể sửa !";
+                status = -1;
+            }
+            else
+            {
+                if (result != null)
+                {
+                    result.statuss = ord.statuss;
 
-                db.SaveChanges();
-                msg = "Cập nhật thông tin đơn hàng thành công!";
-                status = 1;
+                    db.SaveChanges();
+                    msg = "Cập nhật thông tin đơn hàng thành công!";
+                    status = 1;
+                }
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
@@ -177,6 +184,11 @@ namespace Prj_Dh_Food_Shop.Controllers
             var msgDel = "";
             var status = 0;
             Orders ord = db.Orders.Find(id);
+            if (ord.statuss != 1)
+            {
+                msgDel = "Đon hàng đã được vận chuyển. Không thể xóa !";
+                status = -1;
+            }
             db.Orders.Remove(ord);
             db.SaveChanges();
             msgDel = "Xóa đơn đặt hàng thành công!";

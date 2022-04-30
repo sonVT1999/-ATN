@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prj_Dh_Food_Shop.Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -57,6 +58,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         }
 
 
+        [HasCredential(RoleId = "ADD_CATEGORY")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Categories model)
@@ -70,7 +72,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             status = 1;
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
-
 
         public ActionResult Edit(int? id)
         {
@@ -101,6 +102,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             status = 1;
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
         }
+
 
         public ActionResult Delete(int? id)
         {

@@ -169,7 +169,7 @@
 
                                                                             </td>
                                                                             <td>
-                                                                                <input min="1" class="aa-cart-quantity" style="width: 50px" data-id="@item.Product.id" type="number" onchange="ChangeMoney(this)" value="@item.Quantity" <span> thùng </span>
+                                                                                <input min="1" max="50" class="aa-cart-quantity" style="width: 50px" data-id="@item.Product.id" type="number" onchange="ChangeMoney(this)" value="@item.Quantity" <span> thùng </span>
                                                                             </td>
                                                                             <td style="width: 200px" id="thanhtien_@count" class="@item.Product.id">
                                                                                 @((item.Product.price * item.Quantity).ToString("#,##")) VNĐ
@@ -234,6 +234,10 @@
             $(t).val(1);
             return false;
         }
+        else if (x > 50) {
+            $(t).val(50);
+            return false;
+        }
         var listProduct = $('.aa-cart-quantity');
         var cartList = [];
         $.each(listProduct, function (i, item) {
@@ -258,10 +262,6 @@
                     });
 
                     $('#totalMoney').html(`${res[res.length - 1]} VNĐ`);
-                }
-                if (res.status != undefined) {
-                    if (res.status == false)
-                        alert("Số lượng nhập phải là số nguyên dương!");
                 }
             }
         });

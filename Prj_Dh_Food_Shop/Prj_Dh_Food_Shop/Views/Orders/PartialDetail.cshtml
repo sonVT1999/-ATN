@@ -35,12 +35,6 @@
                 <th style="text-align: center">
                     Đơn giá
                 </th>
-                <th style="text-align: center">
-                    Sửa
-                </th>
-                <th style="text-align: center">
-                    Xóa
-                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -57,14 +51,14 @@
                         @Html.DisplayFor(modelItem => item.counts)
                     </td>
                     <td style="text-align: center">
-                        @Html.DisplayFor(modelItem => item.amount)
+                        @item.amount.ToString("#,##") VNĐ
                     </td>
-                    <td style="text-align: center">
+                    @*<td style="text-align: center">
                         <a href="/Orders/Edit_detail/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
                     </td>
                     <td style="text-align: center">
                         <a href="/Orders/Delete_detail/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
-                    </td>
+                    </td>*@
                 </tr>
             }
             <tr style="height: 25px;">

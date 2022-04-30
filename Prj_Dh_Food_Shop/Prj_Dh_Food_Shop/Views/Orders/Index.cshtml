@@ -129,7 +129,7 @@
                 <th>
                     Tên khách hàng
                 </th>
-                <th>
+                <th width="10%">
                     Tổng tiền
                 </th>
                 <th style="text-align: center">
@@ -153,6 +153,9 @@
                 <th style="text-align: center">
                     Xóa
                 </th>
+                <th style="text-align: center">
+                    Xuất excel
+                </th>
             </tr>
 
             @foreach (var item in Model.lstData)
@@ -169,7 +172,7 @@
                         @Html.DisplayFor(modelItem => item.customer_name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.total)
+                        @Html.DisplayFor(modelItem => item.total) VNĐ
                     </td>
                     <td style="text-align: center">
                         @item.order_date.Value.ToString("dd/MM/yyyy")
@@ -195,10 +198,7 @@
                         <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
                     </td>
                     <td style="text-align: center">
-                        @if (item.statuss == 0)
-                        {<a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>}
-                        else
-                        {<a href="/Orders/Delete/@item.id" class="btn-load" disabled="disabled"><i class="fas fa-trash-alt"></i></a>}
+                        <a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
             }

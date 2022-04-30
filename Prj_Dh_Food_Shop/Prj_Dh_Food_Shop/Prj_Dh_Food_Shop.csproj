@@ -166,6 +166,7 @@
     <Compile Include="Areas\Client\Models\Cart.cs" />
     <Compile Include="Areas\Client\Models\CartDetail.cs" />
     <Compile Include="Models_add\Login.cs" />
+    <Compile Include="Areas\Client\Models\MessageContact.cs" />
     <Compile Include="Models_add\ReportTurnover.cs" />
     <Compile Include="Models_add\SearchTop_Products.cs" />
     <Compile Include="Models_add\Search_Customers.cs" />
@@ -540,6 +541,7 @@
     <Content Include="Areas\Content\Css\vendor.css" />
     <Content Include="Areas\Scripts\bootstrap.min.js" />
     <Content Include="Areas\Scripts\jquery.min.1.11.3.js" />
+    <Content Include="assets\img\Logo_Dh_Foods.png" />
     <Content Include="bin\Prj_Dh_Food_Shop.dll" />
     <Content Include="bin\Prj_Dh_Food_Shop.pdb" />
     <Content Include="Content\css\animate.css" />
@@ -652,7 +654,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -697,7 +701,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Orders_detail\" />
     <Folder Include="Views\SessionHelper\" />
   </ItemGroup>
   <ItemGroup>

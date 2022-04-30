@@ -1,7 +1,12 @@
 ﻿using Prj_Dh_Food_Shop.Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -91,13 +96,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 {
                     if (jsonItem.Quantity > 0)
                         jsonItem.Quantity = item.Quantity;
-                    else
-                    {
-                        return Json(new
-                        {
-                            status = false
-                        });
-                    }
+
                 }
             }
 
@@ -169,6 +168,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             order.createAt = DateTime.Now;
             order.name = code;
             order.order_date = DateTime.Now;
+            order.id_payment_method = 1;
             order.total =Convert.ToDouble(TotalMoneyString);
 
             try
@@ -190,7 +190,54 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
                 throw;
             }
-            cart.Clear();
+
+            string from = ConfigurationManager.AppSettings["FromAddress"].ToString();
+            string pass = ConfigurationManager.AppSettings["PasswordFromAddress"].ToString();
+            string host = ConfigurationManager.AppSettings["HostMail"].ToString();
+            string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
+            string to = kh.email;
+
+
+            string strSubject = $"Đơn mua hàng Dh Foods!";
+            string strMsg = "<b>XIN CHÀO ANH/CHỊ!!!</b><br />" +
+                            "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyyy HH:mm:ss") + " <br /><br />" +
+                            "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
+                            "Họ và tên: " + Server.HtmlEncode(kh.name.Trim()) + " <br />" +
+
+                            "Tổng tiền: " + Server.HtmlEncode(TotalMoneyString) + " <br />" +
+                            "Trân trọng!<br /><br /><a target='_blank' href='#'>{0}</a>";
+
+            MailAddress fromAddress = new MailAddress(from, name);
+            MailAddress toAddress = new MailAddress(to, from);
+
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = host,
+                Port = 587,
+                EnableSsl = true,
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(fromAddress.Address, pass),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+            };
+
+            using (MailMessage mailMessage = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = strSubject,
+                Body = strMsg,
+                IsBodyHtml = true,
+            })
+            {
+                try
+                {
+                    mailMessage.AlternateViews.Add(GetEmbeddedImage(strMsg));
+                    smtp.Send(mailMessage);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+
             return Redirect("/Client/Carts/CheckoutComplete");
         }
 
@@ -213,5 +260,69 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
         }
 
+
+        //public void SendEmail(Orders model, int id)
+        //{
+        //    string from = ConfigurationManager.AppSettings["FromAddress"].ToString();
+        //    string pass = ConfigurationManager.AppSettings["PasswordFromAddress"].ToString();
+        //    string host = ConfigurationManager.AppSettings["HostMail"].ToString();
+        //    string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
+        //    string to = (from s in db.Customers
+        //                 where s.id == id
+        //                 select s.email).FirstOrDefault();
+
+
+        //    string strSubject = $"Đơn mua hàng Dh Foods!";
+        //    string strMsg = "<b>XIN CHÀO ANH/CHỊ!!!</b><br />" +
+        //                    "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyyy HH:mm:ss") + " <br /><br />" +
+        //                    "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
+        //                    "Họ và tên: " + Server.HtmlEncode(model.Customers.name.Trim()) + " <br />" +
+
+        //                    "Tổng tiền: " + Server.HtmlEncode(model.total.ToString()) + " <br />" +
+        //                    "Trân trọng!<br /><br /><a target='_blank' href='#'>{0}</a>";
+
+        //    MailAddress fromAddress = new MailAddress(from, name);
+        //    MailAddress toAddress = new MailAddress(to, from);
+
+        //    SmtpClient smtp = new SmtpClient
+        //    {
+        //        Host = host,
+        //        Port = 587,
+        //        EnableSsl = true,
+        //        UseDefaultCredentials = true,
+        //        Credentials = new NetworkCredential(fromAddress.Address, pass),
+        //        DeliveryMethod = SmtpDeliveryMethod.Network,
+        //    };
+
+        //    using (MailMessage mailMessage = new MailMessage(fromAddress, toAddress)
+        //    {
+        //        Subject = strSubject,
+        //        Body = strMsg,
+        //        IsBodyHtml = true,
+        //    })
+        //    {
+        //        try
+        //        {
+        //            mailMessage.AlternateViews.Add(GetEmbeddedImage(strMsg));
+        //            smtp.Send(mailMessage);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //        }
+        //    }
+        //}
+
+        public AlternateView GetEmbeddedImage(string email)
+        {
+            var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string path = Path.Combine(baseDirectory, "assets", "img", "Logo_Dh_Foods.png");
+            LinkedResource res = new LinkedResource(path);
+            res.ContentId = Guid.NewGuid().ToString();
+            string img = @"<img src='cid:" + res.ContentId + @"'/>";
+            email = String.Format(email, img);
+            AlternateView alternateView = AlternateView.CreateAlternateViewFromString(email, null, MediaTypeNames.Text.Html);
+            alternateView.LinkedResources.Add(res);
+            return alternateView;
+        }
     }
 }

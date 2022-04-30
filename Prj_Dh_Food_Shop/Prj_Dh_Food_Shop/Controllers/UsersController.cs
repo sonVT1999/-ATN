@@ -17,7 +17,6 @@ namespace Prj_Dh_Food_Shop.Controllers
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
         // GET: Users
-        [HasCredential(RoleId = "VIEW_USER")]
         public ActionResult Index(Search_Users model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();

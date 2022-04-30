@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -47,6 +52,70 @@ namespace Prj_Dh_Food_Shop.Controllers
         {
             var model = db.Customers.ToList();
             return model;
+        }
+
+
+        public void SendEmail(Feedbacks model, int id)
+        {
+            string from = ConfigurationManager.AppSettings["FromAddress"].ToString();
+            string pass = ConfigurationManager.AppSettings["PasswordFromAddress"].ToString();
+            string host = ConfigurationManager.AppSettings["HostMail"].ToString();
+            string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
+            string to = (from s in db.Feedbacks
+                         where s.id == id
+                         select s.email).FirstOrDefault();
+
+
+            string strSubject = $"Lời cảm ơn từ Dh Foods!";
+            string strMsg = "<b>XIN CHÀO ANH/CHỊ !!!</b><br />" +
+                            " Thay mặt cho công ty Dh_foods. Em xin cảm ơn anh/chị đã góp ý, phản hồi về sản phẩm và chất lượng sản phẩm của chúng tôi. Chúng tôi xin ghi nhận ý kiến của anh/chị và cố gắng hoàn thiện sản phẩm. <br /><br />" +
+                            "< b > CHÚC ANH/CHỊ MỘT NGÀY VUI VẺ!!!</ b >< br /> ";
+
+            MailAddress fromAddress = new MailAddress(from, name);
+            MailAddress toAddress = new MailAddress(to, from);
+
+            SmtpClient smtp = new SmtpClient
+            {
+                Host = host,
+                Port = 587,
+                EnableSsl = true,
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(fromAddress.Address, pass),
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+            };
+
+            using (MailMessage mailMessage = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = strSubject,
+                Body = strMsg,
+                IsBodyHtml = true,
+            })
+            {
+                try
+                {
+                    mailMessage.AlternateViews.Add(GetEmbeddedImage(strMsg));
+                    model.is_active = 2;
+                    smtp.Send(mailMessage);
+
+
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        public AlternateView GetEmbeddedImage(string email)
+        {
+            var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string path = Path.Combine(baseDirectory, "assets", "img", "Logo_Dh_Foods.png");
+            LinkedResource res = new LinkedResource(path);
+            res.ContentId = Guid.NewGuid().ToString();
+            string img = @"<img src='cid:" + res.ContentId + @"'/>";
+            email = String.Format(email, img);
+            AlternateView alternateView = AlternateView.CreateAlternateViewFromString(email, null, MediaTypeNames.Text.Html);
+            alternateView.LinkedResources.Add(res);
+            return alternateView;
         }
     }
 }
