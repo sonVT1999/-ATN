@@ -24,7 +24,7 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             var data = from f in db.Feedbacks
                        where (string.IsNullOrEmpty(model.txbName) || f.customer_name.Contains(model.txbName))
-                       && ((model.txb_is_active) == 0 || f.is_active == model.txb_is_active )
+                       && ((model.txb_is_active) == 0 || f.is_active == model.txb_is_active)
                        select new Search_Feedbacks()
                        {
                            id = f.id,
@@ -54,8 +54,25 @@ namespace Prj_Dh_Food_Shop.Controllers
             return model;
         }
 
+        [HttpPost]
+        public ActionResult Edit(int? id)
+        {
+            var msg = "";
+            var status = 0;
+            var result = db.Feedbacks.SingleOrDefault(b => b.id == id);
 
-        public void SendEmail(Feedbacks model, int id)
+            if (result != null)
+            {
+                SendEmail(result.id);
+                result.is_active = 2;
+                db.SaveChanges();
+                msg = "Gửi phản hồi thành công!";
+                status = 1;
+            }
+            return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        public void SendEmail(int id)
         {
             string from = ConfigurationManager.AppSettings["FromAddress"].ToString();
             string pass = ConfigurationManager.AppSettings["PasswordFromAddress"].ToString();
@@ -68,8 +85,8 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             string strSubject = $"Lời cảm ơn từ Dh Foods!";
             string strMsg = "<b>XIN CHÀO ANH/CHỊ !!!</b><br />" +
-                            " Thay mặt cho công ty Dh_foods. Em xin cảm ơn anh/chị đã góp ý, phản hồi về sản phẩm và chất lượng sản phẩm của chúng tôi. Chúng tôi xin ghi nhận ý kiến của anh/chị và cố gắng hoàn thiện sản phẩm. <br /><br />" +
-                            "< b > CHÚC ANH/CHỊ MỘT NGÀY VUI VẺ!!!</ b >< br /> ";
+                            " Thay mặt cho công ty Dh_foods. Em xin cảm ơn anh/chị đã góp ý, phản hồi về sản phẩm và chất lượng sản phẩm của bên em. Em xin ghi nhận ý kiến của anh/chị và cố gắng hoàn thiện sản phẩm. <br /><br />" +
+                            "<b> CHÚC ANH/CHỊ MỘT NGÀY VUI VẺ!!!</b> ";
 
             MailAddress fromAddress = new MailAddress(from, name);
             MailAddress toAddress = new MailAddress(to, from);
@@ -79,7 +96,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 Host = host,
                 Port = 587,
                 EnableSsl = true,
-                UseDefaultCredentials = true,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, pass),
                 DeliveryMethod = SmtpDeliveryMethod.Network,
             };
@@ -94,13 +111,11 @@ namespace Prj_Dh_Food_Shop.Controllers
                 try
                 {
                     mailMessage.AlternateViews.Add(GetEmbeddedImage(strMsg));
-                    model.is_active = 2;
                     smtp.Send(mailMessage);
-
-
                 }
                 catch (Exception ex)
                 {
+                    View(ex.Message);
                 }
             }
         }

@@ -12,6 +12,30 @@
     var count = 0;
 }
 
+<script>
+    function editOrder(id) {
+
+        $.ajax({
+            url: '/Feedbacks/Edit/' + id,
+            type: "POST",
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    if (window.confirm(rs.msg)) {
+                        if (rs.status == 1)
+                            window.location.href = '/Feedbacks/Index';
+                    }
+                    else {
+                        // They clicked no
+                    }
+
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        });
+    }
+</script>
+
 <div id="sitemap">
     <ul>
         <li>
@@ -127,7 +151,7 @@
                 </td>
                 <td style="text-align: center">
                     @if (item.is_active == 1)
-                    {<a href="/Feedbacks/SendEmail/@item.id" class="btn-load"><i class="far fa-envelope fa-2x"></i></a>}
+                    {<a class="btn-load"><i class="far fa-envelope fa-2x" onclick="editOrder(@item.id)"></i></a>}
                     else
                     {<a href="" class="btn-load"><i class="far fa-envelope-open fa-2x"></i></a>}
 
@@ -191,22 +215,4 @@
         @*partialView*@
     </div>
 </div>
-
-<script>
-    $('.btn-load').on('click', function (e) {
-        e.preventDefault();
-
-        var $modal = $('#myModal');
-        var $modalDialog = $('.modal_dialog');
-        var href = $(this).prop('href');
-
-        // không cho phép tắt modal khi click bên ngoài modal
-        var option = { backdrop: 'static' };
-
-        // load modal
-        $modalDialog.load(href, function () {
-            $modal.modal(option, 'show');
-        });
-    });
-</script>
 
