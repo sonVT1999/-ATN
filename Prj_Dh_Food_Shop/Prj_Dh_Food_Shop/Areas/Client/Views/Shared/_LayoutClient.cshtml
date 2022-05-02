@@ -9,22 +9,26 @@
 <head>
     <!-- include head.html -->
     <title>Dh_Foods</title>
-
     <!-- font-awesome icons -->
     <link href="/Content/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    <!-- //font-awesome icons -->
-
+        <!-- //font-awesome icons -->
     <!-- js-->
-    <script src="/Content/js/jquery-1.11.1.min.js"></script>
-    <script src="/Content/js/modernizr.custom.js"></script>
+    <link href="~/Areas/Content/Css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Content/Css/vendor.css" rel="stylesheet" />
+    <link href="~/Areas/Content/Css/n-custom.css" rel="stylesheet" />
 
-    <script src="~/Areas/Content/Scripts/bootstrap.min.js"></script>
-    <script src="~/Areas/Content/Scripts/jquery.min.1.11.3.js"></script>
-    <link rel="stylesheet" href="~/Areas/Content/Css/vendor.css" />
-    <link rel="stylesheet" href="~/Areas/Content/Css/style.css" />
-    <link rel="Stylesheet" type="text/css" href="~/Areas/Content/Css/n-custom.css" />
     <style type="text/css">
+
+        .profile_details li a i.fa.lnr {
+            color: #FFF !important;
+            top: 0% !important;
+        }
+
+        .user-name {
+            margin-top: 0 !important;
+        }
+
         .cd-top {
             right: 25px;
             bottom: 60px;
@@ -110,7 +114,7 @@
                                     <a href="~/Client/LienHe/Index">Liên hệ</a>
                                 </li>
                                 <li>
-                                    <a href="~/Client/Carts/Index"><i class="fa fa-cart-plus"></i> Giỏ hàng</a>
+                                    <a href="~/Client/Carts/Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
                                 </li>
                             </ul>
                         </nav>
@@ -123,19 +127,28 @@
                     }
                     else
                     {
-                        <div class="wrap-flex-right" style="width: 20%">
-                            <div class="header__btn_logout">
-                                <li style="list-style-type: none;"> Xin chào: @KH.name</li>
-                                <li style="list-style-type: none;">
-                                    <a href="~/Login/Logout">
-                                        <button type="button" class="item-login n-login-btn">Đăng xuất</button>
-                                    </a>
-                                </li>
+                        <div class="header-right">
+                            <div class="profile_details">
+                                <ul>
+                                    <li class="dropdown profile_details_drop">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <div class="profile_img">
+                                                <div class="user-name">
+                                                    <p>@KH.name</p>
+                                                </div>
+                                                <i class="fa fa-angle-down lnr"></i>
+                                                <i class="fa fa-angle-up lnr"></i>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu drp-mnu">
+                                            <li> <a href="~/Customers/Detail/@KH.id"><i class="fa fa-user"></i> Thông tin</a> </li>
+                                            <li> <a href="~/Login/Logout"><i class="fa fa-sign-out"></i> Đăng xuất</a> </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     }
-
-
                 </div>
             </div>
         </header>

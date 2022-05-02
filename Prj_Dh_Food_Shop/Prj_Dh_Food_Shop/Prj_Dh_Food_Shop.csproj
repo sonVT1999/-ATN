@@ -189,7 +189,9 @@
     <Compile Include="Models\Users.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Content\Css\bootstrap.css" />
     <Content Include="Areas\Content\Css\n-custom.css" />
+    <Content Include="Areas\Content\Css\style.css" />
     <Content Include="Areas\Content\Images\__Banner_Trang_chu_De_dang_mua_sam_san_pham_Dh_Foods.jpg" />
     <Content Include="Areas\Content\Images\__cau_Chuyen_Thuong_Hieu_Dh_Foods_copy.jpg" />
     <Content Include="Areas\Content\Scripts\Admin\AdminReport.js" />
@@ -537,7 +539,6 @@
     <Content Include="Areas\Content\Scripts\Variable.js" />
     <Content Include="Areas\Content\Scripts\Vtracking_V2\script.js" />
     <Content Include="Areas\Content\Scripts\Vtracking_V2\vendor.js" />
-    <Content Include="Areas\Content\Css\style.css" />
     <Content Include="Areas\Content\Css\vendor.css" />
     <Content Include="Areas\Scripts\bootstrap.min.js" />
     <Content Include="Areas\Scripts\jquery.min.1.11.3.js" />
