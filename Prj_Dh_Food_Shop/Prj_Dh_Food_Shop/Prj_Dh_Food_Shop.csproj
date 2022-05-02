@@ -167,6 +167,7 @@
     <Compile Include="Areas\Client\Models\CartDetail.cs" />
     <Compile Include="Models_add\Login.cs" />
     <Compile Include="Areas\Client\Models\MessageContact.cs" />
+    <Compile Include="Models_add\pieChart.cs" />
     <Compile Include="Models_add\ReportTurnover.cs" />
     <Compile Include="Models_add\SearchTop_Products.cs" />
     <Compile Include="Models_add\Search_Customers.cs" />

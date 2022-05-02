@@ -36,5 +36,11 @@ namespace Prj_Dh_Food_Shop.Controllers
             return model;
         }
 
+        public List<pieChart> PieChart()
+        {
+            var rs = db.Database.SqlQuery<pieChart>("select Orders.id_customer, Count(Orders.id_customer) as solan from Orders Group by Orders.id_customer").ToList();
+            return rs;
+        }
+
     }
 }

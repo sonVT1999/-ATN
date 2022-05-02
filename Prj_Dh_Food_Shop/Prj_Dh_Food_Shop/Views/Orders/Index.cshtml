@@ -135,9 +135,6 @@
                 <th style="text-align: center">
                     Ngày đặt hàng
                 </th>
-                <th>
-                    Tên người dùng
-                </th>
                 <th style="text-align: center">
                     Trạng thái
                 </th>
@@ -176,9 +173,6 @@
                     </td>
                     <td style="text-align: center">
                         @item.order_date.Value.ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.user_name)
                     </td>
                     <td style="text-align: center">
                         @if (item.statuss == 0)

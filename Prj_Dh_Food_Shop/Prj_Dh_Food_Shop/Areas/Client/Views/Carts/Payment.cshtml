@@ -130,6 +130,44 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="cart-view-area">
+                                                <table style="width: 100%; " class="frmSearch n-tbl-head-1 m-0">
+                                                    <tbody>
+                                                        <form>
+                                                            <tr>
+                                                                <td style="padding-right:18px; width: 18%; padding-top: 3%;">
+                                                                    <span name="1" style="float: left;font-size: 20px; font-weight: bold">Tên khách hàng:</span>
+                                                                </td>
+                                                                <td style="font-size: 20px; padding-top: 3%;">
+                                                                    @KH.name
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding-right:18px">
+                                                                    <span name="2" style="float: left; font-size: 20px; font-weight: bold">Địa chỉ nhận hàng:</span>
+                                                                </td>
+                                                                <td style="font-size: 20px;">
+                                                                    @KH.addresss, @KH.Provinces.name
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding-right:18px">
+                                                                    <span name="3" style="float: left; font-size: 20px; font-weight: bold">Số điện thoại:</span>
+                                                                </td>
+                                                                <td style="font-size: 20px;">
+                                                                    @KH.phone_number
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding-right:18px">
+                                                                    <span name="4" style="float: left; font-size: 20px; font-weight: bold">Email:</span>
+                                                                </td>
+                                                                <td style="font-size: 20px;">
+                                                                    @KH.email
+                                                                </td>
+                                                            </tr>
+                                                        </form>
+                                                    </tbody>
+                                                </table>
                                                 @if (Model == null)
                                                 {
                                                     <p class="alert alert-info">
@@ -138,7 +176,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <div class="cart-view-table">
+                                                    <div class="cart-view-table" style="padding-top: 20px;">
                                                         <div class="table-responsive">
                                                             <table class="b-tableDiv" style="width: 100%">
                                                                 <thead>
@@ -203,46 +241,10 @@
                                                         </div>
                                                     </div>
                                                 }
-                                                    <table style="width: 100%; " class="frmSearch n-tbl-head-1 m-0" >
-                                                        <tbody>
-                                                            <form action="/Client/Carts/Checkout" method="post">
-                                                                <tr>
-                                                                    <td style="padding-right:18px; width: 18%; padding-top: 3%;">
-                                                                        <span name="1" style="float: left;font-size: 20px; font-weight: bold">Tên khách hàng:</span>
-                                                                    </td>
-                                                                    <td style="font-size: 20px; padding-top: 3%;">
-                                                                        @KH.name
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-right:18px">
-                                                                        <span name="2" style="float: left; font-size: 20px; font-weight: bold">Địa chỉ nhận hàng:</span>
-                                                                    </td>
-                                                                    <td style="font-size: 20px;">
-                                                                        @KH.addresss, @KH.Provinces.name
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-right:18px">
-                                                                        <span name="3" style="float: left; font-size: 20px; font-weight: bold">Số điện thoại:</span>
-                                                                    </td>
-                                                                    <td style="font-size: 20px;">
-                                                                        @KH.phone_number
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-right:18px">
-                                                                        <span name="4" style="float: left; font-size: 20px; font-weight: bold">Email:</span>
-                                                                    </td>
-                                                                    <td style="font-size: 20px;">
-                                                                        @KH.email
-                                                                    </td>
-                                                                </tr>
-                                                                <button style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Gửi đơn hàng</button>
-                                                            </form>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                <form action="/Client/Carts/Checkout" method="post">
+                                                     <button style="margin-bottom: 20px;margin-left: 44%;" type="submit" class="btn btn-primary theme-button mt-4">Gửi đơn hàng</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

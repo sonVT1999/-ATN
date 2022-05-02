@@ -15,6 +15,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         private Entity_Dh_Food db = new Entity_Dh_Food();
         private static string[] whiteList = { "jpg", "jpeg", "png", "svg", "bmp", "tif", "tiff", "gif" };
 
+        [HasCredential(RoleId = "VIEW_CATEGORY")]
         public ActionResult Index(Search_Categories model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();
@@ -58,7 +59,6 @@ namespace Prj_Dh_Food_Shop.Controllers
         }
 
 
-        [HasCredential(RoleId = "ADD_CATEGORY")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Categories model)

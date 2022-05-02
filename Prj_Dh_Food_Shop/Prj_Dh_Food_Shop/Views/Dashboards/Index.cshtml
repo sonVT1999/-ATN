@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <meta charset="UTF-8">
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="~/Content/css/style.css">
@@ -108,18 +115,12 @@
         </div>
 
         <div class="col-div-4">
-            <div class="box-4" style="height: 350px;">
+            <div class="box-4">
                 <div class="content-box" style="background-color: #fcfcfc;">
-                    <p>Tỉ lệ khách hàng quay lại mua hàng</p>
 
-                    <div class="circle-wrap">
-                        <div class="circle">
-                            <div class="mask half">
-                                <div class="fill"></div>
-                            </div>
-                            <div class="inside-circle">50%</div>
-                        </div>
-                    </div>
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                    </figure>
 
 
                 </div>
@@ -155,6 +156,86 @@
             $(".nav2").css('display', 'none');
         });
 
+    </script>
+
+
+
+    <script>
+
+        var lstNumberCount = 0;
+        var lstNumberCount1 = 0;
+        var lstNumberCount2 = 0;
+
+        $.ajax({
+            url: '/Dashboards/PieChart',
+            type: 'POST',
+            data: data,
+            success: function (rs) {
+                if (rs != null && rs != undefined && rs != '') {
+                    for (const i in rs) {
+                        if (rs[i].solan == 1)
+                        {
+                            lstNumberCount += 1
+                        }
+                        else if (rs[i].solan  == 2) {
+                            lstNumberCount1 += 1
+                        }
+                        else if(rs[i].solan  >= 3) {
+                            lstNumberCount2 += 1
+                        }
+                    }
+                } else {
+                    toastr.error('Có lỗi xảy ra!');
+                }
+            },
+        }).done(function (rs) {
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Tỉ lệ khách hàng quay lại mua hàng'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Tỉ lệ',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Lần 1',
+                        y: (lstNumberCount / (lstNumberCount + lstNumberCount1 + lstNumberCount2)) * 100,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: 'Lần 2',
+                            y: (lstNumberCount1 / (lstNumberCount + lstNumberCount1 + lstNumberCount2)) * 100
+                    }, {
+                        name: 'Nhiều lần',
+                            y: (lstNumberCount2 / (lstNumberCount + lstNumberCount1 + lstNumberCount2)) * 100
+                    }]
+                }]
+            });
+
+        });
     </script>
 </body>
 

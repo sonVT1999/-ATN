@@ -203,7 +203,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                             "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyyy HH:mm:ss") + " <br /><br />" +
                             "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
                             "Họ và tên: " + Server.HtmlEncode(kh.name.Trim()) + " <br />" +
-
+                            "Thông tin đơn hàng: " + cart + " <br />" +
                             "Tổng tiền: " + Server.HtmlEncode(TotalMoneyString) + " <br />" +
                             "Trân trọng!<br /><br /><a target='_blank' href='#'>{0}</a>";
 
@@ -215,7 +215,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 Host = host,
                 Port = 587,
                 EnableSsl = true,
-                UseDefaultCredentials = true,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, pass),
                 DeliveryMethod = SmtpDeliveryMethod.Network,
             };

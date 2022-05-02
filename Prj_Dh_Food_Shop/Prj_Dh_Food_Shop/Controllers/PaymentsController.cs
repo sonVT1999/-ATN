@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prj_Dh_Food_Shop.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,8 @@ namespace Prj_Dh_Food_Shop.Controllers
     public class PaymentsController : BaseController
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
+
+        [HasCredential(RoleId = "VIEW_PAYMENT")]
         public ActionResult Index(Search_Payments model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();

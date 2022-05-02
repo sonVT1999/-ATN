@@ -225,19 +225,20 @@
                 }
             },
 
-            series: [{
-                name: 'Đơn hàng',
-                type: 'spline',
-                data: chartInfo.lstNumberCount,
-                color: '#FFB800',
-            },
-            {
-                name: 'Doanh thu',
-                data: chartInfo.lstNumberRevenue,
-                yAxis: 1,
-                color: '#008000',
-                stack: 'doanhthu',
-            },],
+            series: [
+                {
+                    name: 'Doanh thu',
+                    type: 'column',
+                    data: chartInfo.lstNumberRevenue,
+                    yAxis: 1,
+                    color: '#008000',
+                    stack: 'doanhthu',
+                }, {
+                    name: 'Đơn hàng',
+                    type: 'spline',
+                    data: chartInfo.lstNumberCount,
+                    color: '#FFB800',
+                }],
 
         });
     }
