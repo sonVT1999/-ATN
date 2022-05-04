@@ -34,7 +34,6 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             var data = from o in db.Orders
                        join c in db.Customers on o.id_customer equals c.id
-                       join u in db.Users on o.id_user equals u.id
                        join p in db.Payment_methods on o.id_payment_method equals p.id
                        where (string.IsNullOrEmpty(model.txbCustomername) || c.name.Contains(model.txbCustomername))
                        && (!model.txbDateFrom.HasValue || o.order_date >= model.txbDateFrom) && (!model.txbDateFrom.HasValue || o.order_date <= model.txbDateTo)
@@ -45,7 +44,6 @@ namespace Prj_Dh_Food_Shop.Controllers
                            total = o.total,
                            order_date = o.order_date,
                            statuss = o.statuss,
-                           user_name = u.name,
                            customer_name = c.name,
                            payment_method_name = p.name,
 
@@ -54,7 +52,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             var rs = data.OrderBy(x => x.statuss).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
 
             ViewBag.customer = new OrdersController().getCustomers();
-            ViewBag.user = new OrdersController().getUsers();
             ViewBag.payment = new OrdersController().getPayments();
 
             model.lstData = rs;
@@ -66,12 +63,6 @@ namespace Prj_Dh_Food_Shop.Controllers
         public List<Customers> getCustomers()
         {
             var model = db.Customers.ToList();
-            return model;
-        }
-
-        public List<Users> getUsers()
-        {
-            var model = db.Users.ToList();
             return model;
         }
 
@@ -126,7 +117,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             Orders ord = db.Orders.Find(id);
 
             ViewBag.customer = new OrdersController().getCustomers();
-            ViewBag.user = new OrdersController().getUsers();
             ViewBag.payment = new OrdersController().getPayments();
             if (ord == null)
             {
@@ -143,7 +133,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             var result = db.Orders.SingleOrDefault(b => b.id == ord.id);
 
             ViewBag.customer = new OrdersController().getCustomers();
-            ViewBag.user = new OrdersController().getUsers();
             ViewBag.payment = new OrdersController().getPayments();
             if (result.statuss == 2)
             {
@@ -184,16 +173,18 @@ namespace Prj_Dh_Food_Shop.Controllers
             var msgDel = "";
             var status = 0;
             Orders ord = db.Orders.Find(id);
-            if (ord.statuss != 1)
+            if (ord.statuss != 0)
             {
                 msgDel = "Đon hàng đã được vận chuyển. Không thể xóa !";
                 status = -1;
             }
-            db.Orders.Remove(ord);
-            db.SaveChanges();
-            msgDel = "Xóa đơn đặt hàng thành công!";
-            status = 1;
-
+            else
+            {
+                db.Orders.Remove(ord);
+                db.SaveChanges();
+                msgDel = "Xóa đơn đặt hàng thành công!";
+                status = 1;
+            }
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
     }

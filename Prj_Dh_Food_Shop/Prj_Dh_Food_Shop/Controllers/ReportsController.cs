@@ -106,75 +106,75 @@ namespace Prj_Dh_Food_Shop.Controllers
             return Json(lstData.OrderBy(x => x.order_date).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public List<ReportTurnover> SearchReportForTable(ReportTurnover request)
-        //{
-        //    var nowDate = DateTime.Now.Date;
-        //    var queryOrders = db.Orders.Where(x => x.id != 0);
-        //    List<ReportTurnover> data = new List<ReportTurnover>();
-        //    var tripQueryTemp = queryOrders;
-        //    var beginDate = nowDate;
-        //    var endDate = nowDate;
+        [HttpPost]
+        public JsonResult SearchReportForTable(ReportTurnover request)
+        {
+            var nowDate = DateTime.Now.Date;
+            var queryOrders = db.Orders.Where(x => x.id != 0);
+            List<ReportTurnover> data = new List<ReportTurnover>();
+            var tripQueryTemp = queryOrders;
+            var beginDate = nowDate;
+            var endDate = nowDate;
 
-        //    if (request.FilterValue == (int)OverviewFilter.Today)
-        //    {
-        //        queryOrders = queryOrders.Where(x => x.order_date == nowDate);
-        //    }
-        //    if (request.FilterValue == (int)OverviewFilter.SevenDaysRecent)
-        //    {
-        //        var sevenDaysRecent = nowDate.AddDays(-6);
-        //        beginDate = sevenDaysRecent;
-        //        queryOrders = queryOrders.Where(x => x.order_date >= sevenDaysRecent && x.order_date <= nowDate);
-        //    }
-        //    if (request.FilterValue == (int)OverviewFilter.CurrentMonth)
-        //    {
-        //        var firstDayOfMonth = new DateTime(nowDate.Year, nowDate.Month, 1);
-        //        var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-        //        beginDate = firstDayOfMonth;
-        //        endDate = lastDayOfMonth;
-        //        queryOrders = queryOrders.Where(x => x.order_date >= firstDayOfMonth && x.order_date <= lastDayOfMonth);
-        //    }
-        //    if (request.FilterValue == (int)OverviewFilter.PreviousMonth)
-        //    {
-        //        var nowDatePreviousMonth = nowDate.AddMonths(-1);
-        //        var firstDayOfMonth = new DateTime(nowDatePreviousMonth.Year, nowDatePreviousMonth.Month, 1);
-        //        var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-        //        beginDate = firstDayOfMonth;
-        //        endDate = lastDayOfMonth;
-        //        queryOrders = queryOrders.Where(x => x.order_date >= firstDayOfMonth && x.order_date <= lastDayOfMonth);
-        //    }
-        //    if (request.FilterValue == (int)OverviewFilter.ThreeMonthsRecent)
-        //    {
-        //        var threeMonthsRecent = nowDate.AddMonths(-3);
-        //        beginDate = threeMonthsRecent;
-        //        queryOrders = queryOrders.Where(x => x.order_date >= threeMonthsRecent && x.order_date <= nowDate);
-        //    }
+            if (request.FilterValue == (int)OverviewFilter.Today)
+            {
+                queryOrders = queryOrders.Where(x => x.order_date == nowDate);
+            }
+            if (request.FilterValue == (int)OverviewFilter.SevenDaysRecent)
+            {
+                var sevenDaysRecent = nowDate.AddDays(-6);
+                beginDate = sevenDaysRecent;
+                queryOrders = queryOrders.Where(x => x.order_date >= sevenDaysRecent && x.order_date <= nowDate);
+            }
+            if (request.FilterValue == (int)OverviewFilter.CurrentMonth)
+            {
+                var firstDayOfMonth = new DateTime(nowDate.Year, nowDate.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                beginDate = firstDayOfMonth;
+                endDate = lastDayOfMonth;
+                queryOrders = queryOrders.Where(x => x.order_date >= firstDayOfMonth && x.order_date <= lastDayOfMonth);
+            }
+            if (request.FilterValue == (int)OverviewFilter.PreviousMonth)
+            {
+                var nowDatePreviousMonth = nowDate.AddMonths(-1);
+                var firstDayOfMonth = new DateTime(nowDatePreviousMonth.Year, nowDatePreviousMonth.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                beginDate = firstDayOfMonth;
+                endDate = lastDayOfMonth;
+                queryOrders = queryOrders.Where(x => x.order_date >= firstDayOfMonth && x.order_date <= lastDayOfMonth);
+            }
+            if (request.FilterValue == (int)OverviewFilter.ThreeMonthsRecent)
+            {
+                var threeMonthsRecent = nowDate.AddMonths(-3);
+                beginDate = threeMonthsRecent;
+                queryOrders = queryOrders.Where(x => x.order_date >= threeMonthsRecent && x.order_date <= nowDate);
+            }
 
-        //    var rs = (from t in queryOrders
-        //              orderby t.order_date
-        //              select new ReportTurnover()
-        //              {
-        //                  id = t.id,
-        //                  name = t.name,
-        //                  statuss = t.statuss,
-        //                  id_user = t.id_user,
-        //                  id_customer = t.id_customer,
-        //                  id_payment_method = t.id_payment_method,
-        //                  order_date = t.order_date,
-        //                  total = t.total,
-        //              }).ToList() ?? new List<ReportTurnover>();
+            var rs = (from t in queryOrders
+                      orderby t.order_date
+                      select new ReportTurnover()
+                      {
+                          id = t.id,
+                          name = t.name,
+                          statuss = t.statuss,
+                          id_user = t.id_user,
+                          id_customer = t.id_customer,
+                          id_payment_method = t.id_payment_method,
+                          order_date = t.order_date,
+                          total = t.total,
+                      }).ToList() ?? new List<ReportTurnover>();
 
-        //    var lstData = new List<ReportTurnover>();
+            var lstData = new List<ReportTurnover>();
 
-        //    lstData = rs.OrderBy(x => x.order_date).GroupBy(x => x.order_date).Select(o => new ReportTurnover()
-        //    {
-        //        order_date = o.Select(x => x.order_date).FirstOrDefault(),
-        //        soluong = o.Select(x => x.id).Count(),
-        //        doanhthu = o.Sum(x => x.total),
-        //    }).ToList() ?? new List<ReportTurnover>();
+            lstData = rs.OrderBy(x => x.order_date).GroupBy(x => x.order_date).Select(o => new ReportTurnover()
+            {
+                order_date = o.Select(x => x.order_date).FirstOrDefault(),
+                soluong = o.Select(x => x.id).Count(),
+                doanhthu = o.Sum(x => x.total),
+            }).ToList() ?? new List<ReportTurnover>();
 
-        //    data = lstData.OrderBy(x => x.order_date).Skip(((request.page - 1) * request.pageSize)).Take(request.pageSize).ToList();
-        //    return data;
-        //}
+            data = lstData.OrderBy(x => x.order_date).Skip(((request.page - 1) * request.pageSize)).Take(request.pageSize).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
     }
 }

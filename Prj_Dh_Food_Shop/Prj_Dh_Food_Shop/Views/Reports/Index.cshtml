@@ -1,246 +1,303 @@
-﻿
-<link href="/Content/css/n-custom.css" rel="stylesheet">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="~/Content/css/style.css">
+﻿@model Prj_Dh_Food_Shop.ReportTurnover
+    @{
+        var count = 0;
+    }
+    <link href="/Content/css/n-custom.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/css/style.css">
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-6 subheader-solid height-65" id="kt_subheader">
-        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <h2 class="text-dark font-weight-bold my-1 mr-5 text-uppercase">Báo cáo doanh thu</h2>
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Subheader-->
+        <div class="subheader py-2 py-lg-6 subheader-solid height-65" id="kt_subheader">
+            <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                <div class="d-flex align-items-center flex-wrap mr-1">
+                    <h2 class="text-dark font-weight-bold my-1 mr-5 text-uppercase">Báo cáo doanh thu</h2>
+                    <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <!--end::Subheader-->
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class="container">
-            <!--Báo cáo vận hành-->
-            <div class="row" id="ReportOperate">
-                <div class="col-md-12">
-                    <div class="card card-custom gutter-b example example-compact">
-                        <div class="card-body ">
-                            <!--begin::Accordion-->
-                            <div class="accordion accordion-toggle-arrow" id="accordionOperate">
-                                <!--begin::collapse biểu đồ vận hành-->
-                                <div class="card">
-                                    <div class="card-header" onclick="ReloadChartReportTurnover()">
-                                        <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTurnover">Báo cáo doanh thu sản phẩm</div>
-                                    </div>
-                                    <div id="collapseTurnover" class="collapse">
-                                        <div class="card-body p-9" id="">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <div class="input-group">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-2">
-                                                            <a onclick="" class="btn btn-secondary width-full">Bộ lọc thông tin</a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <select class="form-control selectpicker" id="timeValueReportTurnover" style="border-radius: 5px" onchange="TimeSelectOnchangeOperate(this)">
-                                                                <option value="1" selected>Hôm nay</option>
-                                                                <option value="2">7 ngày gần nhất</option>
-                                                                <option value="3">Tháng này</option>
-                                                                <option value="4">Tháng trước</option>
-                                                                <option value="5">3 tháng gần nhất</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div>
-                                                                <div class="col-md-8">
-                                                                    <button class="form-control btn btn-primary" style="border-radius: 5px" id="btnFilterTurnover" onclick="ReloadChartReportTurnover()"><i class="fa fa-filter sm pl-2 pr-2" aria-hidden="true"></i> Lọc</button>
+        <!--end::Subheader-->
+        <!--begin::Entry-->
+        <div class="d-flex flex-column-fluid">
+            <!--begin::Container-->
+            <div class="container">
+                <!--Báo cáo vận hành-->
+                <div class="row" id="ReportOperate">
+                    <div class="col-md-12">
+                        <div class="card card-custom gutter-b example example-compact">
+                            <div class="card-body ">
+                                <!--begin::Accordion-->
+                                <div class="accordion accordion-toggle-arrow" id="accordionOperate">
+                                    <!--begin::collapse biểu đồ vận hành-->
+                                    <div class="card">
+                                        <div class="card-header" onclick="ReloadChartReportTurnover()">
+                                            <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTurnover">Báo cáo doanh thu sản phẩm</div>
+                                        </div>
+                                        <div id="collapseTurnover" class="collapse">
+                                            <div class="card-body p-9" id="">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-2">
+                                                                <a onclick="" class="btn btn-secondary width-full">Bộ lọc thông tin</a>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select class="form-control selectpicker" id="timeValueReportTurnover" style="border-radius: 5px" onchange="TimeSelectOnchangeOperate(this)">
+                                                                    <option value="1" selected>Hôm nay</option>
+                                                                    <option value="2">7 ngày gần nhất</option>
+                                                                    <option value="3">Tháng này</option>
+                                                                    <option value="4">Tháng trước</option>
+                                                                    <option value="5">3 tháng gần nhất</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div>
+                                                                    <div class="col-md-8">
+                                                                        <button class="form-control btn btn-primary" style="border-radius: 5px" id="btnFilterTurnover" onclick="ReloadChartReportTurnover()"><i class="fa fa-filter sm pl-2 pr-2" aria-hidden="true"></i> Lọc</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--begin::biểu đồ-->
-                                            <div class="form-group row mt-5">
-                                                <div class="col-md-12">
-                                                    <figure class="highcharts-figure">
-                                                        <div id="container"></div>
-                                                    </figure>
+                                                <!--begin::biểu đồ-->
+                                                <div class="form-group row mt-5">
+                                                    <div class="col-md-12">
+                                                        <figure class="highcharts-figure">
+                                                            <div id="container"></div>
+                                                        </figure>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!--end::biểu đồ-->
-                                            <!--begin::bảng-->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="tab-content mt-5" id="myTabContent">
-                                                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-                                                            <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_tblReportTurnover">
-
+                                                <!--end::biểu đồ-->
+                                                <!--begin::bảng-->
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="tab-content mt-5" id="myTabContent">
+                                                            <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                                                                <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_tblReportTurnover">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::bảng-->
                                             </div>
-                                            <!--end::bảng-->
                                         </div>
                                     </div>
+                                    <!--end::collapse biểu đồ vận hành-->
                                 </div>
-                                <!--end::collapse biểu đồ vận hành-->
+                                <!--end::Accordion-->
                             </div>
-                            <!--end::Accordion-->
                         </div>
                     </div>
                 </div>
             </div>
+            <!--end::Container-->
         </div>
-        <!--end::Container-->
+        <!--end::Entry-->
     </div>
-    <!--end::Entry-->
-</div>
 
-<script>
+    <script>
 
-    function ReloadChartReportTurnover() {
-        var data = {
-            FilterValue: $('#timeValueReportTurnover').val(),
-        };
+        function ReloadChartReportTurnover() {
+            var data = {
+                FilterValue: $('#timeValueReportTurnover').val(),
+            };
 
-        $.ajax({
-            url: '/Reports/SearchReportForChart',
-            type: "POST",
-            data: data,
-            success: function (rs) {
-                if (rs.length == 0) {
-                    var chartInfo = {
-                        lstDate: [],
-                        lstNumberCount: [],
-                        lstNumberRevenue: [],
+            $.ajax({
+                url: '/Reports/SearchReportForChart',
+                type: "POST",
+                data: data,
+                success: function (rs) {
+                    if (rs.length == 0) {
+                        var chartInfo = {
+                            lstDate: [],
+                            lstNumberCount: [],
+                            lstNumberRevenue: [],
+                        }
+                        LoadChart(chartInfo);
+                        return;
                     }
-                    LoadChart(chartInfo);
-                    return;
-                }
-                if (rs != null && rs != undefined && rs != '') {
-                    var lstDate1 = [];
-                    for (var i = 0; i < rs.length; i++) {
-                        var date = new Date(parseInt(rs[i].order_date.substr(6))).toLocaleDateString("en-US");
-                        lstDate1.push(date);
-                    }
-                    var lstNumberCount1 = [];
-                    for (var i = 0; i < rs.length; i++) {
-                        var date = (rs[i].soluong);
-                        lstNumberCount1.push(date);
-                    }
-                    var lstNumberRevenue1 = [];
-                    for (var i = 0; i < rs.length; i++) {
-                        var date = (rs[i].doanhthu);
-                        lstNumberRevenue1.push(date);
-                    }
-                    var chartInfo = {
-                        lstDate: lstDate1,
-                        lstNumberCount: lstNumberCount1,
-                        lstNumberRevenue: lstNumberRevenue1,
-                    }
-                    LoadChart(chartInfo);
-                } else {
-                    toastr.error('Có lỗi xảy ra!');
-                }
-            },
-            complete: function () {
-            },
-        });
-
-    }
-
-    function LoadChart(chartInfo) {
-        Highcharts.chart('container', {
-            chart: {
-                type: 'column',
-                zoomType: 'xy',
-                style: {
-                    fontFamily: 'sans-serif',
-                }
-            },
-            title: {
-                text: 'Báo cáo doanh thu sản phẩm'
-            },
-
-            subtitle: {
-                text: ''
-            },
-
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    format: '{value} đơn',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
+                    if (rs != null && rs != undefined && rs != '') {
+                        var lstDate1 = [];
+                        for (var i = 0; i < rs.length; i++) {
+                            var date = new Date(parseInt(rs[i].order_date.substr(6))).toLocaleDateString("en-US");
+                            lstDate1.push(date);
+                        }
+                        var lstNumberCount1 = [];
+                        for (var i = 0; i < rs.length; i++) {
+                            var date = (rs[i].soluong);
+                            lstNumberCount1.push(date);
+                        }
+                        var lstNumberRevenue1 = [];
+                        for (var i = 0; i < rs.length; i++) {
+                            var date = (rs[i].doanhthu);
+                            lstNumberRevenue1.push(date);
+                        }
+                        var chartInfo = {
+                            lstDate: lstDate1,
+                            lstNumberCount: lstNumberCount1,
+                            lstNumberRevenue: lstNumberRevenue1,
+                        }
+                        LoadChart(chartInfo);
+                    } else {
+                        toastr.error('Có lỗi xảy ra!');
                     }
                 },
-                title: {
-                    text: 'Số đơn hàng',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-            }, { // Secondary yAxis
-                title: {
-                    text: 'Số tiền',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
+                complete: function () {
                 },
-                labels: {
-                    format: '{value} vnd',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                opposite: true
-            }],
+            });
 
-            xAxis: [{
-                categories: chartInfo.lstDate,
-                crosshair: true,
-                min: 0,
-                max: chartInfo.lstDate.length > 5 ? 4 : chartInfo.lstDate.length - 1,
-                scrollbar: {
-                    enabled: true
-                },
-                tickLength: 0
-            }],
+        }
 
-            tooltip: {
-                shared: true
-            },
-
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
-
-            series: [
-                {
-                    name: 'Doanh thu',
+        function LoadChart(chartInfo) {
+            Highcharts.chart('container', {
+                chart: {
                     type: 'column',
-                    data: chartInfo.lstNumberRevenue,
-                    yAxis: 1,
-                    color: '#008000',
-                    stack: 'doanhthu',
-                }, {
-                    name: 'Đơn hàng',
-                    type: 'spline',
-                    data: chartInfo.lstNumberCount,
-                    color: '#FFB800',
+                    zoomType: 'xy',
+                    style: {
+                        fontFamily: 'sans-serif',
+                    }
+                },
+                title: {
+                    text: 'Báo cáo doanh thu sản phẩm'
+                },
+
+                subtitle: {
+                    text: ''
+                },
+
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        format: '{value} đơn',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Số đơn hàng',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }, { // Secondary yAxis
+                    title: {
+                        text: 'Số tiền',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    labels: {
+                        format: '{value} vnd',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    opposite: true
                 }],
 
+                xAxis: [{
+                    categories: chartInfo.lstDate,
+                    crosshair: true,
+                    min: 0,
+                    max: chartInfo.lstDate.length > 5 ? 4 : chartInfo.lstDate.length - 1,
+                    scrollbar: {
+                        enabled: true
+                    },
+                    tickLength: 0
+                }],
+
+                tooltip: {
+                    shared: true
+                },
+
+                plotOptions: {
+                    column: {
+                        stacking: 'normal'
+                    }
+                },
+
+                series: [
+                    {
+                        name: 'Doanh thu',
+                        type: 'column',
+                        data: chartInfo.lstNumberRevenue,
+                        yAxis: 1,
+                        color: '#008000',
+                        stack: 'doanhthu',
+                    }, {
+                        name: 'Đơn hàng',
+                        type: 'spline',
+                        data: chartInfo.lstNumberCount,
+                        color: '#FFB800',
+                    }],
+
+            });
+        }
+
+        function ReloadGridReportTurnover() {
+            for (const [key, value] of Object.entries(getSearchParamRevenueOperate())) {
+
+                datatableReportTurnover.setDataSourceParam(key, value);
+            }
+            $('#kt_datatable_tblReportTurnover').KTDatatable().load();
+        }
+
+        var getSearchParamRevenueOperate = function () {
+            return {
+                FilterVal: $('#timeValueReportTurnover').val(),
+            };
+        };
+
+        var datatableReportTurnover = $('#kt_datatable_tblReportTurnover').KTDatatable({
+            // datasource definition
+            data: ktDataTableOptionsData({ url: "/Reports/SearchReportForTable", pageSize: '5', params: getSearchParamRevenueOperate }),
+
+            // layout definition
+            layout: {
+                scroll: true,
+                footer: false,
+            },
+            // column sorting
+            sortable: false,
+            pagination: true,
+
+            // columns definition
+            columns: [{
+                field: 'RecordID',
+                title: '#',
+                sortable: false,
+                width: 35,
+                type: 'number',
+                selector: false,
+                textAlign: 'center',
+                autoHide: false,
+                template: function (row, index, b) {
+                    return index + 1 + ((b.API.params.pagination.page - 1) * b.API.params.pagination.perpage);
+                }
+            },
+            {
+                field: 'order_date',
+                title: 'Ngày',
+                autoHide: false,
+            }, {
+                field: 'soluong',
+                title: 'Số đơn hàng',
+                autoHide: false,
+            }, {
+                field: 'doanhthu',
+                title: 'Doanh thu',
+                autoHide: false,
+            },],
         });
-    }
-</script>
+    </script>
 
