@@ -39,7 +39,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng");
+                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng!");
                 }
             }
             return View("Index");

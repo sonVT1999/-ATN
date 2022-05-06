@@ -197,14 +197,25 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
             string to = kh.email;
 
+            string tableCart = "<table><tr><td>STT</td> <td>Tên SP</td> <td> Số lượng</td> <td>Thành tiền</td></tr>";
+            int count = 0;
+            foreach (var item in cart)
+            {
+                count++;
+                var money = (item.Quantity * item.Product.price).ToString("#,##");
+                tableCart += $"<tr><td>{count}</td><td>{item.Product.name}</td><td>{item.Quantity}</td><td>{money} vnđ</td></tr>";
+            }
+            tableCart += "</table>";
 
             string strSubject = $"Đơn mua hàng Dh Foods!";
             string strMsg = "<b>XIN CHÀO ANH/CHỊ!!!</b><br />" +
-                            "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyyy HH:mm:ss") + " <br /><br />" +
+                            "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " <br /><br />" +
                             "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
                             "Họ và tên: " + Server.HtmlEncode(kh.name.Trim()) + " <br />" +
-                            "Thông tin đơn hàng: " + cart + " <br />" +
-                            "Tổng tiền: " + Server.HtmlEncode(TotalMoneyString) + " <br />" +
+                            "Họ và tên: " + Server.HtmlEncode(kh.addresss.Trim()) + " <br />" +
+                            "Thông tin đơn hàng: <br />" +
+                            tableCart +
+                            "<br /> Tổng tiền: " + Server.HtmlEncode(TotalMoneyString) + "vnđ <br />" +
                             "Trân trọng!<br /><br /><a target='_blank' href='#'>{0}</a>";
 
             MailAddress fromAddress = new MailAddress(from, name);

@@ -43,7 +43,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 }
                 else
                 {
-                    SetAlert("Tên đăng nhập hoặc mật khẩu không đúng! Mời nhập lại", "error");
+                    return Content("<script language='javascript' type='text/javascript'>alert('Tên đăng nhập hoặc mật khẩu không đúng!'); window.location.href = '/Client/Homes/Index';</script>");
                 }
             }
             return View("Index");
