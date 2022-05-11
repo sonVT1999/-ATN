@@ -210,32 +210,40 @@
                         </div>
                     </div>
 
-                    @*<div class="box_mid v2">
-                            <div class="mid-title">
-                                <div class="titleL white"><h1>Sản phẩm cùng loại</h1></div>
-                                <div class="titleR"></div>
-                                <div class="clear"></div>
+
+                    <div class="container">
+                        <div class="row n-heading">
+                            <div class="col-md-12">
+                                <h2 style="margin-top: 5%; text-transform: uppercase; animation-delay: 0.3s; color:#16492c" class="font-heading">Sản phẩm tương tự</h2>
                             </div>
-                            <div class="mid-content">
-                                <div id="slideOther" class="slick-init">
-                                    @foreach (var item in Model)
-                                    {
-                                        <div class="item">
-                                            <div class="product">
-                                                <div class="img"><a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.image" /></a></div>
-                                                <div class="tend">
-                                                    <h3><a href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
-                                                </div>
-                                                <div class="link"><a href="~/Client/Product/productDetail?ProductId=@item.id"><span>Xem chi tiết</span></a></div>
-                                            </div>
-                                        </div>
-                                    }
+                        </div>
+
+                        <div class="owl-carousel owl-loaded owl-drag" style="overflow: hidden;">
+                            @foreach (var item in Model)
+                            {
+                                <div class="item">
+                                    <a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.image" /></a>
+                                    <h3 style="text-align: center; padding-top: 10px; font-weight:bold;"><a style="color: #000 !important" href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
                                 </div>
-                            </div>
-                        </div>*@
+                            }
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 150,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+    });
+</script>

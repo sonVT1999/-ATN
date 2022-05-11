@@ -23,8 +23,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             return db.Products.Find(ProductId);
         }
 
-
-    public ActionResult product(int CategoryId)
+        public ActionResult product(int CategoryId)
         {
             ViewBag.category = db.Categories.FirstOrDefault(x => x.id == CategoryId);
 

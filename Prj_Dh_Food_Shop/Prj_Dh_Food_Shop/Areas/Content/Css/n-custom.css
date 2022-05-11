@@ -8,10 +8,6 @@
     src: local('Beau Sans'), local('Beau Sans'), url("../Styles/fonts/PFBeauSansPro-Bold.woff") format("woff"), url("../Styles/fonts/PFBeauSansPro-Bold.otf") format("opentype"), url("../Styles/fonts/PFBeauSansPro-Bold.svg#grablau") format("svg");
 }
 
-.font-heading {
-    font-family: Beau Sans !important;
-}
-
 .font-opensan {
     font-family: 'Open Sans', sans-serif !important;
 }
@@ -119,7 +115,6 @@ table td {
     text-decoration: none;
     height: 40px
 }
-
 
 .box_mid .mid-title {
     width: auto;

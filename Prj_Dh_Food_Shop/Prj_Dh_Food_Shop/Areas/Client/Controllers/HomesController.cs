@@ -16,6 +16,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         public ActionResult Index()
         {
             ViewBag.categoryList = db.Categories.ToList();
+            ViewBag.Inner = db.Products.Where(x => x.is_hot == 1).ToList();
             return View();
         }
 

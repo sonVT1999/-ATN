@@ -249,6 +249,8 @@
     <Content Include="Areas\Content\Scripts\howler\howler.min.js" />
     <Content Include="Areas\Content\Scripts\howler\howler.spatial.min.js" />
     <Content Include="Areas\Content\Scripts\animate.css.js" />
+    <Content Include="Areas\Content\Scripts\owl.carousel.js" />
+    <Content Include="Areas\Content\Scripts\owl.carousel.min.js" />
     <Content Include="Areas\Content\Scripts\style.js" />
     <Content Include="Areas\Content\Scripts\jquery.alerts.js" />
     <Content Include="Areas\Content\Scripts\my_effect_scroll.js" />
