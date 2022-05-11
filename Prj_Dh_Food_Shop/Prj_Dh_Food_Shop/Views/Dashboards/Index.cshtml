@@ -105,7 +105,7 @@
                                     @Html.DisplayFor(modelItem => item.category_name)
                                 </td>
                                 <td style="text-align: center">
-                                    @Html.DisplayFor(modelItem => item.doanhthu)
+                                    @(string.Format("{0:#,0.#############################}", item.doanhthu)) vnđ
                                 </td>
                             </tr>
                         }
@@ -218,10 +218,10 @@
                                     selected: true
                                 }, {
                                     name: 'Lần 2',
-                                    y: 21.3
+                                        y: (lstNumberCount1 / (lstNumberCount + lstNumberCount1 + lstNumberCount2)) * 100,
                                 }, {
                                     name: 'Nhiều lần',
-                                    y: 12.2
+                                        y: (lstNumberCount2 / (lstNumberCount + lstNumberCount1 + lstNumberCount2)) * 100,
                                 }]
                             }]
                         });

@@ -19,7 +19,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.txbPhone = model.txbPhone == null ? string.Empty : model.txbPhone.Trim();
 
             model.page = model.page == 0 ? 1 : model.page;
-            model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
+            model.pageSize = model.pageSize == 0 ? 5 : model.pageSize;
 
             var data = from c in db.Customers_potential
                        where (string.IsNullOrEmpty(model.txbName) || c.name.Contains(model.txbName))

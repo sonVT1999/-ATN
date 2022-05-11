@@ -154,19 +154,13 @@
         </header>
     </div>
     <main class="main-site">
-        @if (TempData["AlertMessage"] != null)
-        {
-            <div id="AlertBox" class="alert @TempData["AlertType"] hide">
-                @TempData["AlertMessage"]
-            </div>
-        }
         @RenderBody()
 
         <!--Footer-->
         <div id="vnt-footer">
             <div class="mainFoot" style="padding-top: 100px;">
                 <div class="wrapper">
-                    <div class="row">
+                    <div class="row"> 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="title">Thông tin liên hệ</div>
                             <div class="grid">

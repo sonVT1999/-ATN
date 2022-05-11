@@ -13,6 +13,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         public ActionResult Index()
         {
             ViewBag.category = db.Categories.ToList();
+            ViewBag.categoryList = db.Categories.ToList();
             return View();
         }
     }

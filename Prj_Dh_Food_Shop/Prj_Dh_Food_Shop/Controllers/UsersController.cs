@@ -25,7 +25,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             model.txbPhoneNumber = model.txbPhoneNumber == null ? string.Empty : model.txbPhoneNumber.Trim();
 
             model.page = model.page == 0 ? 1 : model.page;
-            model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
+            model.pageSize = model.pageSize == 0 ? 5 : model.pageSize;
 
             var data = from c in db.Users
                        join p in db.Provinces on c.id_province equals p.id

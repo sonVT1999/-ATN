@@ -37,8 +37,6 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                     Session.Add(CommonConstants.KH_SESSION, data);
                     if (IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
-
-                    SetAlert("Đăng nhập thành công", "success");
                     return RedirectToAction("Index", "Homes");
                 }
                 else
@@ -63,21 +61,5 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                    url[0] == '~' && url[1] == '/'; // "~/" or "~/foo"
         }
 
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "warning")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }

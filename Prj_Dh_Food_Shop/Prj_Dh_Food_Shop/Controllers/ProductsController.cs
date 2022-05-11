@@ -37,7 +37,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
 
             model.page = model.page == 0 ? 1 : model.page;
-            model.pageSize = model.pageSize == 0 ? 3 : model.pageSize;
+            model.pageSize = model.pageSize == 0 ? 5 : model.pageSize;
 
             var data = from c in db.Products
                        join p in db.Categories on c.id_category equals p.id

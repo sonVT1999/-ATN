@@ -21,6 +21,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         public ActionResult Index()
         {
             ViewBag.categoryList = db.Categories.ToList();
+            var kh = (Customers)Session[CommonConstants.KH_SESSION];
             var cart = Session[CartSession];
             var list = new List<CartItem>();
             if (cart != null)
@@ -212,7 +213,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                             "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " <br /><br />" +
                             "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
                             "Họ và tên: " + Server.HtmlEncode(kh.name.Trim()) + " <br />" +
-                            "Họ và tên: " + Server.HtmlEncode(kh.addresss.Trim()) + " <br />" +
+                            "Địa chỉ: " + Server.HtmlEncode(kh.addresss.Trim()) + " <br />" +
                             "Thông tin đơn hàng: <br />" +
                             tableCart +
                             "<br /> Tổng tiền: " + Server.HtmlEncode(TotalMoneyString) + "vnđ <br />" +
@@ -248,7 +249,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 }
             }
 
-
+            cart.Clear();
             return Redirect("/Client/Carts/CheckoutComplete");
         }
 

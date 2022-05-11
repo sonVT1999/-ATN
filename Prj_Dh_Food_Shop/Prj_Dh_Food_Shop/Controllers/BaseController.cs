@@ -6,6 +6,19 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
+using Prj_Dh_Food_Shop.Common;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+
 namespace Prj_Dh_Food_Shop.Controllers
 {
     public class BaseController : Controller
@@ -30,7 +43,6 @@ namespace Prj_Dh_Food_Shop.Controllers
                     fillterContext.Result = new RedirectResult(redirectTo);
                     return;
                 }
-                //fillterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login" }));
             }
 
             base.OnActionExecuting(fillterContext);

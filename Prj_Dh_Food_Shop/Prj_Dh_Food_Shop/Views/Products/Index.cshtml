@@ -74,7 +74,6 @@
             price: $('input[name="price"]').val(),
             descriptions: $('input[name="descriptions"]').val(),
             promotion: $('input[name="promotion"]').val(),
-            is_hot: $('input[name="is_hot"]:checked').val(),
             is_new: $('input[name="is_new"]:checked').val(),
             is_active: $('input[name="is_active"]:checked').val(),
             image: $('#imgThumbnailDisplay').attr('src'),
@@ -227,7 +226,7 @@
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
                     <td style="text-align: center">
-                        @Html.DisplayFor(modelItem => item.price)
+                        @(string.Format("{0:#,0.#############################}", item.price))
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.category_name)
