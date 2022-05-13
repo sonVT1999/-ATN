@@ -12,7 +12,6 @@ namespace Prj_Dh_Food_Shop.Controllers
     {
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
-        [HasCredential(RoleId = "VIEW_CUS")]
         public ActionResult Index(Search_CustomersPotential model)
         {
             model.txbName = model.txbName == null ? string.Empty : model.txbName.Trim();
@@ -41,7 +40,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return View(model);
         }
 
-        [HasCredential(RoleId = "EDIT_CUS")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -56,7 +54,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialEdit", cus_pot);
         }
 
-        [HasCredential(RoleId = "EDIT_CUS")]
         [HttpPost]
         public ActionResult Edit(Customers_potential cus_pot)
         {
@@ -77,7 +74,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         }
 
 
-        [HasCredential(RoleId = "DEL_CUS")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -92,7 +89,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialDelete", cus_pot);
         }
 
-        [HasCredential(RoleId = "DEL_CUS")]
+
         [HttpPost]
         public ActionResult Delete(int id)
         {

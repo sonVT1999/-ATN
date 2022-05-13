@@ -17,7 +17,6 @@ namespace Prj_Dh_Food_Shop.Controllers
         private static string[] whiteList = { "jpg", "jpeg", "png", "svg", "bmp", "tif", "tiff", "gif" };
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
-        [HasCredential(RoleId = "VIEW_SP")]
         public ActionResult Index(Search_Products model)
         {
             model.txbProductname = model.txbProductname == null ? string.Empty : model.txbProductname.Trim();
@@ -74,7 +73,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return View(model);
         }
 
-        [HasCredential(RoleId = "ADD_SP")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Products model)
@@ -106,7 +104,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return model;
         }
 
-        [HasCredential(RoleId = "VIEW_SP")]
         public ActionResult Detail(int? id)
         {
             if (id == null)
@@ -122,7 +119,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialDetail", pros);
         }
 
-        [HasCredential(RoleId = "EDIT_SP")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -138,7 +134,6 @@ namespace Prj_Dh_Food_Shop.Controllers
             return PartialView("PartialEdit", pros);
         }
 
-        [HasCredential(RoleId = "EDIT_SP")]
         [HttpPost]
         public ActionResult Edit(Products pros)
         {

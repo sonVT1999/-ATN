@@ -545,7 +545,10 @@
     <Content Include="Areas\Content\Css\vendor.css" />
     <Content Include="Areas\Scripts\bootstrap.min.js" />
     <Content Include="Areas\Scripts\jquery.min.1.11.3.js" />
+    <Content Include="assets\img\Banner_Web_NPP_Gio_Qua-01.jpg" />
+    <Content Include="assets\img\dhfood_logo.png" />
     <Content Include="assets\img\Logo_Dh_Foods.png" />
+    <Content Include="assets\img\__Banner_Website_Trang_Chu_NATURAL_Gia_vi_tu_nhien.jpg" />
     <Content Include="bin\Prj_Dh_Food_Shop.dll" />
     <Content Include="bin\Prj_Dh_Food_Shop.pdb" />
     <Content Include="Content\css\animate.css" />

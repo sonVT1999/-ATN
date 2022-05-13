@@ -56,10 +56,10 @@
                     </tr>
                     <tr style="height: 25px">
                         <td>
-                            <span>Kích hoạt</span>(<span id="ctl00_MainContent_Label2" style="color:Red;">*</span>):
+                            <span>Kích hoạt</span>(<span style="color:Red;">*</span>):
                         </td>
                         <td>
-                            <input type="radio" @(Model.is_active == 1 ? "checked=checked" : "") name="is_active" value="1" ><c>Có</c>
+                            <input type="radio" @(Model.is_active == 1 ? "checked=checked" : "") name="is_active" value="1"><c>Có</c>
                             <input type="radio" @(Model.is_active != 1 ? "checked=checked" : "") name="is_active" value="0"><c>Không</c>
                         </td>
                     </tr>
