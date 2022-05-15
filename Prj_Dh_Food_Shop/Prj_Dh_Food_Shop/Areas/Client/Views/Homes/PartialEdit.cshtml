@@ -1,0 +1,88 @@
+﻿
+@model Prj_Dh_Food_Shop.Customers
+@{
+    var provinces = (List<Prj_Dh_Food_Shop.Provinces>)ViewBag.province;
+}
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: 405px; width: auto; top: 100px; left: 38%;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span class="ui-dialog-title">Chỉnh sửa thông tin khách hàng</span>
+    </div>
+    <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div style="display:none;" role="status" aria-hidden="true">
+        </div>
+            <table class="n-tbl-head-1" style="margin-bottom: 0">
+                <tbody>
+                    <tr style="height: 25px">
+                        <td style="width: 150px">
+                            <span>Tên khách hàng</span> :
+                        </td>
+                        <td style="width: 300px">
+                            <input type="text" value="@Model.name" maxlength="255" placeholder="" name="name" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Mật khẩu</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.passwords" maxlength="255" placeholder="" name="passwords" class="m_text" required />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Ngày sinh</span>(<span style="color:Red;">*</span>):
+                        </td>
+                        <td>
+                            <input type="date" value="@(Model.birth_date.Value.ToString("yyyy-MM-dd"))" maxlength="10" style="width: calc(100% - 12px);color: #172B47;" placeholder="" name="birth_date" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Email</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.email" maxlength="50" placeholder="" name="email" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Số điện thoại</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.phone_number" maxlength="10" placeholder="" name="phone_number" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Địa chỉ</span>:
+                        </td>
+                        <td>
+                            <input type="text" value="@Model.addresss" maxlength="255" placeholder="" name="addresss" class="m_text" />
+                        </td>
+                    </tr>
+                    <tr style="height: 25px">
+                        <td>
+                            <span>Tỉnh thành</span>:
+                        </td>
+                        <td>
+                            <select class="m_text" name="id_province" required>
+                                <option value="@Model.id_province">@Model.Provinces.name</option>
+                                @foreach (Provinces item in provinces)
+                                {
+                                    <option value=@item.id>@item.name</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 25px;">
+                        <td colspan="2" align="center" style="padding-top: 10px;">
+                            <input type="submit" value="Cập nhật" id="btnSave" class="n-btn-save" onclick="editCustomer(@Model.id)">
+                            <input type="submit" value="Hủy" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

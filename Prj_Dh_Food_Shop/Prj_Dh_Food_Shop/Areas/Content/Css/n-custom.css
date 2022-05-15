@@ -1917,7 +1917,7 @@ table td {
 }
 
 .n-btn-save {
-    background: #EA0D34;
+    background: #007243;
     color: #fff;
     text-align: center;
     border: 0;
@@ -1928,12 +1928,12 @@ table td {
     font-size: 14px;
     cursor: pointer;
     margin: 0px 5px;
-    border: 1px solid #EA0D34
+    border: 1px solid #007243
 }
 
 .n-btn-cancel {
     background: #fff;
-    color: #EA0D34;
+    color: #007243;
     text-align: center;
     border: 0;
     border-radius: 6px;
@@ -1943,7 +1943,7 @@ table td {
     font-size: 14px;
     cursor: pointer;
     margin: 0px 5px;
-    border: 1px solid #EA0D34;
+    border: 1px solid #007243;
 }
 
 .n-list-ico {
@@ -2642,7 +2642,7 @@ ul.b-ul-settingreport::-webkit-scrollbar {
 }
 
 .ui-draggable .ui-dialog-titlebar {
-    background: linear-gradient( 270deg, #BA1318 0%, #E61A45 60.42%, #EE0000 100%) !important;
+    background: #007243 !important;
     height: 40px;
     border-bottom: 0;
     border: 0;

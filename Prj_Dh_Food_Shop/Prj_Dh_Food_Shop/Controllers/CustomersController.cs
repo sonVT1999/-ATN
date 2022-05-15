@@ -76,6 +76,11 @@ namespace Prj_Dh_Food_Shop.Controllers
                 msg = "Tạo mới không thành công! Số điện thoại của quý khách không đúng định dạng!";
                 status = -1;
             }
+            else if (!Regex.Match(model.email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
+            {
+                msg = "Cập nhật không thành công! Email không đúng định dạng!";
+                status = -1;
+            }
             else if (sqlSDT != null)
             {
                 msg = "Tạo mới không thành công! Số điện thoại của quý khách đã được đăng ký!";
@@ -156,6 +161,11 @@ namespace Prj_Dh_Food_Shop.Controllers
                     else if (sqlSDT.Count() > 1)
                     {
                         msg = "Cập nhật không thành công! Số điện thoại của quý khách đã được đăng ký!";
+                        status = -1;
+                    }
+                    else if (!Regex.Match(cus.email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
+                    {
+                        msg = "Cập nhật không thành công! Email không đúng định dạng!";
                         status = -1;
                     }
                     else

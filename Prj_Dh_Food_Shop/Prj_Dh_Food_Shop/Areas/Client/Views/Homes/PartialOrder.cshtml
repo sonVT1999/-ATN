@@ -1,0 +1,71 @@
+﻿
+@model IEnumerable<Prj_Dh_Food_Shop.Search_Orders>
+@{
+    var count = 0;
+}
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-divEditCustomer"
+     style="position: absolute; height: auto; width: 60%; top: 140px; left: 23%;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span class="ui-dialog-title">Lịch sử đặt hàng</span>
+    </div>
+    <div style="background-color:#FFF; width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+        <div style="display:none;" role="status" aria-hidden="true">
+        </div>
+
+        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+            <tr style="background-color: #EDEDED">
+                <th style="text-align: center">
+                    STT
+                </th>
+                <th>
+                    Tên đơn hàng
+                </th>
+                <th style="text-align: center">
+                    Ngày đặt
+                </th>
+                <th style="text-align: center">
+                    Tổng tiền
+                </th>
+                @*<th style="text-align: center">
+                    Xem chi tiết
+                </th>*@
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td style="text-align: center">
+                        @count
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td style="text-align: center">
+                        @item.order_date.Value.ToString("dd/MM/yyyy")
+                    </td>
+                    <td style="text-align: center">
+                        @(string.Format("{0:#,0.#############################}", item.total))<span> vnđ </span>
+                    </td>
+                    @*<td style="text-align: center">
+                        <a id="OrderHistoryDetail" href="#"><i class="fa fa-eye"></i></a>
+                    </td>*@
+                </tr>
+            }
+            <tr style="height: 25px;">
+                <td colspan="2" align="center" style="padding-top: 20px; padding-left: 45%">
+                    <input type="submit" value="Quay lại" id="btnBack" data-dismiss="modal" class="n-btn-cancel">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

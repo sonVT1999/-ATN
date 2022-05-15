@@ -18,6 +18,11 @@ using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using FlexCel.Core;
+using FlexCel.Render;
+using FlexCel.Pdf;
+using OfficeOpenXml;
+using FlexCel.XlsAdapter;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
@@ -47,5 +52,84 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             base.OnActionExecuting(fillterContext);
         }
+
+
+        protected ActionResult ViewReport(ExcelFile xls, string fileName /*, bool? exportExcel*/)
+        {
+            try
+            {
+                //if (exportExcel != null && exportExcel == true)
+                //{
+                if (xls == null)
+                    return new EmptyResult();
+
+                using (var ms = new MemoryStream())
+                    {
+                    xls.Save(ms);
+                    ms.Position = 0;
+                    return File(ms.ToArray(), "application/vnd.xlsx", fileName + ".xlsx");
+                }
+                //}
+
+                //if (xls == null)
+                //    return new EmptyResult();
+
+                //using (var pdf = new FlexCelPdfExport())
+                //{
+                //    pdf.Workbook = xls;
+                //    pdf.FontEmbed = TFontEmbed.Embed;
+                //    pdf.FontMapping = TFontMapping.ReplaceAllFonts;
+                //    using (var ms = new MemoryStream())
+                //    {
+                //        pdf.BeginExport(ms);
+                //        pdf.ExportAllVisibleSheets(false, "BaoCao");
+                //        pdf.EndExport();
+                //        ms.Position = 0;
+                //        return File(ms.ToArray(), "application/pdf");
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                return new EmptyResult();
+            }
+        }
+
+        protected XlsFile CreateXlsFile(ExcelPackage excel)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            var result = new XlsFile(true);
+            try
+            {
+                using (var memoryStream = new MemoryStream(excel.GetAsByteArray()))
+                {
+                    result.Open(memoryStream);
+                }
+            }
+            finally
+            {
+                ReleaseObjectReport(excel.Workbook);
+                excel.Dispose();
+            }
+            return result;
+        }
+
+        protected void ReleaseObjectReport(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch
+            {
+                obj = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
     }
 }

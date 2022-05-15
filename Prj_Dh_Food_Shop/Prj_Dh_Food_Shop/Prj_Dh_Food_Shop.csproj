@@ -51,6 +51,13 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="FlexCel, Version=6.18.5.0, Culture=neutral, PublicKeyToken=cb8f6080e6d5a4d6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FlexCel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -230,6 +237,9 @@
     <Content Include="Areas\Client\Views\Product\product.cshtml" />
     <Content Include="Areas\Client\Views\Homes\Login.cshtml" />
     <Content Include="Areas\Client\Views\Carts\Payment.cshtml" />
+    <Content Include="Areas\Client\Views\Homes\PartialEdit.cshtml" />
+    <Content Include="Areas\Client\Views\Homes\PartialDetail.cshtml" />
+    <Content Include="Areas\Client\Views\Homes\PartialOrder.cshtml" />
     <None Include="Areas\Content\Scripts\General\jquery-1.4.1-vsdoc.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.js" />
     <Content Include="Areas\Content\Scripts\General\jquery-1.4.1.min.js" />
@@ -650,6 +660,7 @@
     <Content Include="Areas\Content\Scripts\Supervision\select2-3.5.3\select2.jquery.json" />
     <Content Include="Areas\Content\Scripts\Supervision\select2-3.5.3\select2_locale_en.js.template" />
     <Content Include="Areas\Content\Scripts\Supervision\Supervision.zip" />
+    <Content Include="Common\DanhSachDonHang-Order.xlsx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

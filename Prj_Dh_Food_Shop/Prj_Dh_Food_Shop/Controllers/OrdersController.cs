@@ -1,5 +1,9 @@
-﻿using System;
+﻿using FlexCel.Report;
+using OfficeOpenXml;
+using Prj_Dh_Food_Shop.Common;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,6 +13,7 @@ namespace Prj_Dh_Food_Shop.Controllers
 {
     public class OrdersController : BaseController
     {
+
         private Entity_Dh_Food db = new Entity_Dh_Food();
 
         public ActionResult Index(Search_Orders model)
@@ -101,11 +106,11 @@ namespace Prj_Dh_Food_Shop.Controllers
             var rs = ord.OrderBy(x => x.id).ToList() ?? new List<Search_Orders_Detail>();
 
             ViewBag.product = new OrdersController().getProducts();
-            if (ord == null)
+            if ( rs == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("PartialDetail", ord);
+            return PartialView("PartialDetail", rs);
         }
 
         public ActionResult Edit(int? id)
@@ -130,6 +135,7 @@ namespace Prj_Dh_Food_Shop.Controllers
         {
             var msg = "";
             var status = 0;
+            var US = (Users)Session[CommonConstants.USER_SESSION];
             var result = db.Orders.SingleOrDefault(b => b.id == ord.id);
 
             ViewBag.customer = new OrdersController().getCustomers();
@@ -144,6 +150,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 if (result != null)
                 {
                     result.statuss = ord.statuss;
+                    result.id_user = US.id;
 
                     db.SaveChanges();
                     msg = "Cập nhật thông tin đơn hàng thành công!";
@@ -186,6 +193,43 @@ namespace Prj_Dh_Food_Shop.Controllers
                 status = 1;
             }
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult DownLoadOrderDetails(int id)
+        {
+            var order = db.Orders.Where(x => x.id == id).FirstOrDefault() ?? new Orders();
+            var lstOrder = from od in db.Orders_detail
+                           join o in db.Orders on od.id_order equals o.id
+                           join p in db.Products on od.id_product equals p.id
+                           where od.id_order == o.id
+                           where od.id_product == p.id
+                           where od.id_order == id
+                           select new Search_Orders_Detail()
+                           {
+                               id = od.id,
+                               product_name = p.name,
+                               price = p.price,
+                               counts = od.counts,
+                               amount = od.amount,
+                           };
+            var rs = lstOrder.OrderBy(x => x.id).ToList() ?? new List<Search_Orders_Detail>();
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            var path = Path.Combine(Server.MapPath("~/Common"), "DanhSachDonHang-Order.xlsx");
+            var file = new FileInfo(path);
+            var excel = new ExcelPackage(file);
+            var fr = new FlexCelReport();
+            var result = CreateXlsFile(excel);
+
+            fr.SetValue("TripCode", order.name);
+            fr.SetValue("CustomerName", order.Customers.name);
+            fr.SetValue("Address", order.Customers.addresss);
+            fr.SetValue("Payment", order.Payment_methods.name);
+            fr.SetValue("Total", order.total.ToString("#,##"));
+            fr.AddTable("lstOrder", rs);
+            fr.Run(result);
+            fr.Dispose();
+            return ViewReport(result, $"Danh sách sản phẩm của đơn hàng {order.name}");
         }
     }
 }

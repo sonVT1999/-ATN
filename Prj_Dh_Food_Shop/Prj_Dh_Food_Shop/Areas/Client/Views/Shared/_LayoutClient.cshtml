@@ -2,6 +2,9 @@
 @{
     var categoryLists = (List<Prj_Dh_Food_Shop.Categories>)ViewBag.categoryList;
     var KH = (Customers)Session[CommonConstants.KH_SESSION];
+    var id = 0;
+    if (KH != null)
+    { id = KH.id; }
 }
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -141,7 +144,8 @@
                                             </div>
                                         </a>
                                         <ul class="dropdown-menu drp-mnu">
-                                            <li> <a href="~/Customers/Detail/@KH.id"><i class="fa fa-user"></i> Thông tin</a> </li>
+                                            <li> <a id="OrderHistory" href="#"><i class="fa fa-book"></i> Lịch sử đặt hàng</a> </li>
+                                            <li> <a id="EditTest" href="#"><i class="fa fa-user"></i> Thông tin</a> </li>
                                             <li> <a href="~/Login/Logout"><i class="fa fa-sign-out"></i> Đăng xuất</a> </li>
                                         </ul>
                                     </li>
@@ -160,7 +164,7 @@
         <div id="vnt-footer">
             <div class="mainFoot" style="padding-top: 100px;">
                 <div class="wrapper">
-                    <div class="row"> 
+                    <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="title">Thông tin liên hệ</div>
                             <div class="grid">
@@ -227,6 +231,18 @@
         </div>
     </div>
 
+    <div id="myModalEdit" class="modal fade" role="dialog" data-url='@Url.Action("Edit", "Homes", new {id = id})'>
+        <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
+            @*partialView*@
+        </div>
+    </div>
+
+    <div id="myModalDetail" class="modal fade" role="dialog" data-url='@Url.Action("Order", "Homes", new {id = id})'>
+        <div class="modal_dialog" style="width:45%; margin-left:auto; margin-right: auto">
+            @*partialView*@
+        </div>
+    </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#loginTest').click(function () {
@@ -240,6 +256,68 @@
                 });
             });
         });
+
+        $(document).ready(function () {
+            $('#EditTest').click(function () {
+                event.preventDefault();
+                jQuery.noConflict();
+                var url = $('#myModalEdit').data('url');
+                $.get(url, function (data) {
+
+                    $("#myModalEdit").html(data);
+                    $("#myModalEdit").modal('show');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#OrderHistory').click(function () {
+                event.preventDefault();
+                jQuery.noConflict();
+                var url = $('#myModalDetail').data('url');
+                $.get(url, function (data) {
+
+                    $("#myModalDetail").html(data);
+                    $("#myModalDetail").modal('show');
+                });
+            });
+        });
+
+    </script>
+
+
+    <script>
+        function editCustomer(id) {
+            var model = {
+                name: $('input[name="name"]').val(),
+                passwords: $('input[name="passwords"]').val(),
+                birth_date: $('input[name="birth_date"]').val(),
+                email: $('input[name="email"]').val(),
+                phone_number: $('input[name="phone_number"]').val(),
+                addresss: $('input[name="addresss"]').val(),
+                id_province: $('select[name="id_province"]').val(),
+            }
+
+            $.ajax({
+                url: '/Homes/Edit/' + id,
+                type: "POST",
+                data: model,
+                success: function (rs) {
+                    if (rs != null && rs != undefined && rs != '') {
+                        if (window.confirm(rs.msg)) {
+                            if (rs.status == 1)
+                                window.location.href = '/Client/Homes/Index';
+                        }
+                        else {
+                            // They clicked no
+                        }
+
+                    } else {
+                        toastr.error('Có lỗi xảy ra!');
+                    }
+                },
+            });
+        }
     </script>
 
 </body>

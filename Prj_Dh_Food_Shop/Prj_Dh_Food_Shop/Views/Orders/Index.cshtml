@@ -157,43 +157,46 @@
             @foreach (var item in Model.lstData)
             {
                 count++;
-                <tr>
-                    <td style="text-align: center">
-                        @((Model.page - 1) * Model.pageSize + count)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.customer_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.total) VNĐ
-                    </td>
-                    <td style="text-align: center">
-                        @item.order_date.Value.ToString("dd/MM/yyyy")
-                    </td>
-                    <td style="text-align: center">
-                        @if (item.statuss == 0)
-                        {<span>Chờ duyệt</span>}
-                        else if (item.statuss == 1)
-                        {<span>Đang vận chuyển</span>}
-                        else
-                        {<span>Đã giao</span>}
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.payment_method_name)
-                    </td>
-                    <td style="text-align: center">
-                        <a href="/Orders/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
-                    </td>
-                    <td style="text-align: center">
-                        <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
-                    </td>
-                    <td style="text-align: center">
-                        <a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <td style="text-align: center">
+                    @((Model.page - 1) * Model.pageSize + count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_name)
+                </td>
+                <td>
+                    @(string.Format("{0:#,0.#############################}", item.total))<span> vnđ </span>
+                </td>
+                <td style="text-align: center">
+                    @item.order_date.Value.ToString("dd/MM/yyyy")
+                </td>
+                <td style="text-align: center">
+                    @if (item.statuss == 0)
+                    {<span>Chờ duyệt</span>}
+                    else if (item.statuss == 1)
+                    {<span>Đang vận chuyển</span>}
+                    else
+                    {<span>Đã giao</span>}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment_method_name)
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Detail/@item.id" class="btn-load"><i class="fa fa-eye"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Edit/@item.id" class="btn-load"><i class="fa fa-wrench"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="/Orders/Delete/@item.id" class="btn-load"><i class="fas fa-trash-alt"></i></a>
+                </td>
+                <td style="text-align: center">
+                    <a href="#" onclick="DownLoadOrderDetails(@item.id)" class="btn-load"><i class="fas fa-download"></i></a>
+                </td>
+            </tr>
             }
         </table>
 
@@ -269,5 +272,9 @@
             $modal.modal(option, 'show');
         });
     });
+
+    function DownLoadOrderDetails(id) {
+        window.location.href = '/Orders/DownLoadOrderDetails?id=' + id;
+    }
 </script>
 

@@ -127,7 +127,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             var kh = (Customers)Session[CommonConstants.KH_SESSION];
             if (kh == null)
             {
-                return RedirectToAction("Index", "Carts");
+                return Content("<script language='javascript' type='text/javascript'>alert('Bạn cần phải đăng nhập trước khi thanh toán!'); window.location.href = '/Client/Carts/Index';</script>");
             }
             else
             {
