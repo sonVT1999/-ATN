@@ -45,6 +45,58 @@ table td {
     background-color: #fff;
 }
 
+.searchTop .icon {
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.searchTop.active {
+    opacity: 1;
+    visibility: initial;
+    transform: initial;
+    pointer-events: auto;
+}
+
+.searchTop.active .popup {
+    opacity: 1;
+    visibility: initial;
+    transform: initial;
+    pointer-events: auto;
+}
+
+.searchTop .popup input {
+    width: 100%;
+    height: 45px;
+    background: none;
+    border: none;
+    padding-left: 15px;
+}
+
+.searchTop .popup button {
+    background: none;
+    position: absolute;
+    border: none;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.searchTop {
+    position: relative;
+}
+
+.searchTop .popup {
+    background: rgba(255,255,255,0.75);
+    min-width: 250px;
+    right: 0;
+    top: 40px;
+    position: absolute;
+    z-index: 1;
+    transition: all 0.3s linear;
+}
+
 .info-contact {
     position: relative;
     margin-bottom: 30px;
