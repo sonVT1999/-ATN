@@ -1,10 +1,12 @@
 ﻿@{
-      ViewBag.Title = "productDetail";
-     Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "productDetail";
+    Layout = "~/Areas/Client/Views/Shared/_LayoutClient.cshtml";
 }
 
 @model Prj_Dh_Food_Shop.Search_Products
-
+@{
+    var categories = (Prj_Dh_Food_Shop.Categories)ViewBag.categoryList;
+}
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -103,7 +105,8 @@
             background-color: #1b5633;
             max-width: 380px;
         }
-            .recruit:hover .des {
+
+        .recruit:hover .des {
             padding-top: 0px;
         }
 
@@ -212,22 +215,22 @@
 
 
                     @*<div class="container">
-                        <div class="row n-heading">
-                            <div class="col-md-12">
-                                <h2 style="margin-top: 5%; text-transform: uppercase; animation-delay: 0.3s; color:#16492c" class="font-heading">Sản phẩm tương tự</h2>
-                            </div>
-                        </div>
-
-                        <div class="owl-carousel owl-loaded owl-drag" style="overflow: hidden;">
-                            @foreach (var item in Model)
-                            {
-                                <div class="item">
-                                    <a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.image" /></a>
-                                    <h3 style="text-align: center; padding-top: 10px; font-weight:bold;"><a style="color: #000 !important" href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
+                            <div class="row n-heading">
+                                <div class="col-md-12">
+                                    <h2 style="margin-top: 5%; text-transform: uppercase; animation-delay: 0.3s; color:#16492c" class="font-heading">Sản phẩm tương tự</h2>
                                 </div>
-                            }
-                        </div>
-                    </div>*@
+                            </div>
+
+                            <div class="owl-carousel owl-loaded owl-drag" style="overflow: hidden;">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="item">
+                                        <a href="~/Client/Product/productDetail?ProductId=@item.id"><img src="@item.image" /></a>
+                                        <h3 style="text-align: center; padding-top: 10px; font-weight:bold;"><a style="color: #000 !important" href="~/Client/Product/productDetail?ProductId=@item.id">@item.name</a></h3>
+                                    </div>
+                                }
+                            </div>
+                        </div>*@
 
 
                 </div>
@@ -237,13 +240,13 @@
 </body>
 
 @*<script type="text/javascript">
-    var owl = $('.owl-carousel');
-    owl.owlCarousel({
-        items: 3,
-        loop: true,
-        margin: 150,
-        autoplay: true,
-        autoplayTimeout: 2000,
-        autoplayHoverPause: true,
-    });
-</script>*@
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 150,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true,
+        });
+    </script>*@

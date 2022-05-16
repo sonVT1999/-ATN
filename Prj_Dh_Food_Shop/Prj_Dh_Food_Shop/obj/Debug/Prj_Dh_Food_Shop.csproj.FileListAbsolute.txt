@@ -79,4 +79,3 @@ D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.pdb
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\EPPlus.dll
 D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\bin\FlexCel.dll
-D:\ĐATN\Prj_Dh_Food_Shop\Prj_Dh_Food_Shop\obj\Debug\Prj_Dh_Food_Shop.csprojAssemblyReference.cache
