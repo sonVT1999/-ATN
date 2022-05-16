@@ -17,7 +17,6 @@
         var model = {
             name: $('input[name="name"]').val(),
             username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
             permission: $('select[name="permission"]').val(),
@@ -72,7 +71,6 @@
         var model = {
             name: $('input[name="name"]').val(),
             username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
             addresss: $('input[name="addresss"]').val(),
             is_active: $('input[name="is_active"]:checked').val(),
@@ -171,9 +169,6 @@
                 <th>
                     Tài khoản
                 </th>
-                <th>
-                    Mật khẩu
-                </th>
                 <th style="text-align: center">
                     Quyền
                 </th>
@@ -203,9 +198,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.username)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.passwords)
                     </td>
                     <td style="text-align: center">
                         @Html.DisplayFor(modelItem => item.permission)

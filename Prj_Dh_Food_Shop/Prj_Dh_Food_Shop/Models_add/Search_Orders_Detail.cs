@@ -13,7 +13,7 @@ namespace Prj_Dh_Food_Shop
 
         public double amount { get; set; }
 
-        public double price { get; set; }
+        public double prices { get; set; }
 
         public int? id_order { get; set; }
 

@@ -186,10 +186,11 @@
                     title: {
                         text: 'Số đơn hàng',
                         style: {
-                            color: Highcharts.getOptions().colors[1]
+                            color: Highcharts.getOptions().colors[1],
                         }
-                    }
-                }, { // Secondary yAxis
+                    },
+                    softMin: 0,
+                },{ // Secondary yAxis
                     title: {
                         text: 'Số tiền',
                         style: {
@@ -202,7 +203,7 @@
                             color: Highcharts.getOptions().colors[1]
                         }
                     },
-                    opposite: true
+                        opposite: true,
                 }],
 
                 xAxis: [{
@@ -225,7 +226,6 @@
                         stacking: 'normal'
                     }
                 },
-
                 series: [
                     {
                         name: 'Doanh thu',

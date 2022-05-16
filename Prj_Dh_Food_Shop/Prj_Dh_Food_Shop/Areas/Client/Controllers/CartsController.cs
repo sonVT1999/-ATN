@@ -182,6 +182,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                     orderDetail.id_product = item.Product.id;
                     orderDetail.id_order = id;
                     orderDetail.counts = item.Quantity;
+                    orderDetail.prices = item.Product.price;
                     orderDetail.amount = item.Quantity * item.Product.price;
                     cartDetail.Insert(orderDetail);
                 }
@@ -198,13 +199,13 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
             string to = kh.email;
 
-            string tableCart = "<table><tr><td>STT</td> <td>Tên SP</td> <td> Số lượng</td> <td>Thành tiền</td></tr>";
+            string tableCart = "<table style='border: double'><tr><td>STT</td> <td style='text-align: center'>Tên SP</td> <td> Số lượng</td> <td>Thành tiền</td></tr>";
             int count = 0;
             foreach (var item in cart)
             {
                 count++;
                 var money = (item.Quantity * item.Product.price).ToString("#,##");
-                tableCart += $"<tr><td>{count}</td><td>{item.Product.name}</td><td>{item.Quantity}</td><td>{money} vnđ</td></tr>";
+                tableCart += $"<tr><td style='text-align: center'>{count}</td><td>{item.Product.name}</td><td style='text-align: center'>{item.Quantity}</td><td>{money} vnđ</td></tr>";
             }
             tableCart += "</table>";
 
@@ -272,57 +273,6 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
         }
 
-
-        //public void SendEmail(Orders model, int id)
-        //{
-        //    string from = ConfigurationManager.AppSettings["FromAddress"].ToString();
-        //    string pass = ConfigurationManager.AppSettings["PasswordFromAddress"].ToString();
-        //    string host = ConfigurationManager.AppSettings["HostMail"].ToString();
-        //    string name = ConfigurationManager.AppSettings["NameDisplayEmail"].ToString();
-        //    string to = (from s in db.Customers
-        //                 where s.id == id
-        //                 select s.email).FirstOrDefault();
-
-
-        //    string strSubject = $"Đơn mua hàng Dh Foods!";
-        //    string strMsg = "<b>XIN CHÀO ANH/CHỊ!!!</b><br />" +
-        //                    "Anh/Chị đã đặt mua một đơn hàng vào lúc " + DateTime.Now.ToString("dd/MM/yyyyy HH:mm:ss") + " <br /><br />" +
-        //                    "<b>Thông tin chi tiết đơn hàng của anh/chị là:</b><br />" +
-        //                    "Họ và tên: " + Server.HtmlEncode(model.Customers.name.Trim()) + " <br />" +
-
-        //                    "Tổng tiền: " + Server.HtmlEncode(model.total.ToString()) + " <br />" +
-        //                    "Trân trọng!<br /><br /><a target='_blank' href='#'>{0}</a>";
-
-        //    MailAddress fromAddress = new MailAddress(from, name);
-        //    MailAddress toAddress = new MailAddress(to, from);
-
-        //    SmtpClient smtp = new SmtpClient
-        //    {
-        //        Host = host,
-        //        Port = 587,
-        //        EnableSsl = true,
-        //        UseDefaultCredentials = true,
-        //        Credentials = new NetworkCredential(fromAddress.Address, pass),
-        //        DeliveryMethod = SmtpDeliveryMethod.Network,
-        //    };
-
-        //    using (MailMessage mailMessage = new MailMessage(fromAddress, toAddress)
-        //    {
-        //        Subject = strSubject,
-        //        Body = strMsg,
-        //        IsBodyHtml = true,
-        //    })
-        //    {
-        //        try
-        //        {
-        //            mailMessage.AlternateViews.Add(GetEmbeddedImage(strMsg));
-        //            smtp.Send(mailMessage);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //        }
-        //    }
-        //}
 
         public AlternateView GetEmbeddedImage(string email)
         {

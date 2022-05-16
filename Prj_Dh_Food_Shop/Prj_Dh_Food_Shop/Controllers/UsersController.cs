@@ -38,7 +38,6 @@ namespace Prj_Dh_Food_Shop.Controllers
                            id = c.id,
                            name = c.name,
                            username = c.username,
-                           passwords = c.passwords,
                            phone_number = c.phone_number,
                            addresss = c.addresss,
                            is_active = c.is_active,
@@ -142,36 +141,27 @@ namespace Prj_Dh_Food_Shop.Controllers
             {
                 result.name = users.name;
                 result.username = users.username;
-                if (users.passwords.Length < 8)
+                if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0,+84][0-9]{9}$").Success || users.phone_number.Length != 10)
                 {
-                    msg = "Cập nhật không thành công! Password phải có nhiều hơn 8 kí tự!";
+                    msg = "Cập nhật không thành công! Số điện thoại của người dùng không đúng định dạng!";
+                    status = -1;
+                }
+                else if (sqlSDT.Count() > 1)
+                {
+                    msg = "Cập nhật không thành công! Số điện thoại này của người dùng đã được đăng ký!";
                     status = -1;
                 }
                 else
                 {
-                    result.passwords = Encryption.EncryptPassword(users.passwords);
-                    if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0,+84][0-9]{9}$").Success || users.phone_number.Length != 10)
-                    {
-                        msg = "Cập nhật không thành công! Số điện thoại của người dùng không đúng định dạng!";
-                        status = -1;
-                    }
-                    else if (sqlSDT.Count() > 1)
-                    {
-                        msg = "Cập nhật không thành công! Số điện thoại này của người dùng đã được đăng ký!";
-                        status = -1;
-                    }
-                    else
-                    {
-                        result.phone_number = users.phone_number;
-                        result.addresss = users.addresss;
-                        result.is_active = users.is_active;
-                        result.permission = users.permission;
-                        result.id_province = users.id_province;
+                    result.phone_number = users.phone_number;
+                    result.addresss = users.addresss;
+                    result.is_active = users.is_active;
+                    result.permission = users.permission;
+                    result.id_province = users.id_province;
 
-                        db.SaveChanges();
-                        msg = "Cập nhật thông tin người dùng thành công!";
-                        status = 1;
-                    }
+                    db.SaveChanges();
+                    msg = "Cập nhật thông tin người dùng thành công!";
+                    status = 1;
                 }
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);

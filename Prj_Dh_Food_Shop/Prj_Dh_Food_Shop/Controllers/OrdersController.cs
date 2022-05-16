@@ -54,7 +54,7 @@ namespace Prj_Dh_Food_Shop.Controllers
 
                        };
 
-            var rs = data.OrderBy(x => x.statuss).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
+            var rs = data.OrderBy(x => x.statuss).OrderByDescending(x => x.order_date).Skip(((model.page - 1) * model.pageSize)).Take(model.pageSize).ToList() ?? new List<Search_Orders>();
 
             ViewBag.customer = new OrdersController().getCustomers();
             ViewBag.payment = new OrdersController().getPayments();
@@ -100,6 +100,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                           id = od.id,
                           product_name = p.name,
                           counts = od.counts,
+                          prices = od.prices,
                           amount = od.amount,
                       };
 
@@ -209,7 +210,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                            {
                                id = od.id,
                                product_name = p.name,
-                               price = p.price,
+                               prices = od.prices,
                                counts = od.counts,
                                amount = od.amount,
                            };

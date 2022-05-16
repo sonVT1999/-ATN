@@ -14,6 +14,8 @@ namespace Prj_Dh_Food_Shop
 
         public double amount { get; set; }
 
+        public double prices { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime? createAt { get; set; }
 
