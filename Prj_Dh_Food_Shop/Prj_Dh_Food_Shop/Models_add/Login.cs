@@ -10,20 +10,16 @@ namespace Prj_Dh_Food_Shop
     public class Login
     {
 
-        public Login()
-        {
-            FailedLogins = 0;
-        }
+        [Key]
+        [Display(Name = "Tên đăng nhập")]
+        [Required(ErrorMessage = "Tài khoản không được để trống")]
+        public string username { set; get; }
 
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [Display(Name = "Mật khẩu")]
+        public string passwords { set; get; }
 
-        public string Password { get; set; }
-
-        public bool RememberMe { get; set; }
-
-        public int FailedLogins { get; set; }
-
-        public string Captcha { get; set; }
+        public bool RememberMe { set; get; }
 
     }
 }

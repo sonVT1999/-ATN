@@ -9,6 +9,8 @@ using System.Net;
 using Prj_Dh_Food_Shop;
 using System.Text.RegularExpressions;
 using Prj_Dh_Food_Shop.Common;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Prj_Dh_Food_Shop.Controllers
 {
@@ -79,6 +81,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             else
             {
+                model.passwords = Encryption.EncryptPassword(model.passwords);
                 model.is_active = 1;
                 model.create_date = DateTime.Now;
                 db.SaveChanges();
@@ -146,7 +149,7 @@ namespace Prj_Dh_Food_Shop.Controllers
                 }
                 else
                 {
-                    result.passwords = users.passwords;
+                    result.passwords = Encryption.EncryptPassword(users.passwords);
                     if (users.phone_number == null || !Regex.Match(users.phone_number, @"^[0,+84][0-9]{9}$").Success || users.phone_number.Length != 10)
                     {
                         msg = "Cập nhật không thành công! Số điện thoại của người dùng không đúng định dạng!";
@@ -218,5 +221,24 @@ namespace Prj_Dh_Food_Shop.Controllers
 
             return Json(new { msg = msgDel, status = status }, JsonRequestBehavior.AllowGet);
         }
+
+        public static string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            // Convert the byte array to hexadecimal string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                sb.Append(hashBytes[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
+
+
     }
 }

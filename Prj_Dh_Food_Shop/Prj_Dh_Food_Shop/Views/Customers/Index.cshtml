@@ -74,7 +74,6 @@
         var model = {
             name: $('input[name="name"]').val(),
             username: $('input[name="username"]').val(),
-            passwords: $('input[name="passwords"]').val(),
             birth_date: $('input[name="birth_date"]').val(),
             email: $('input[name="email"]').val(),
             phone_number: $('input[name="phone_number"]').val(),
@@ -190,9 +189,6 @@
                     Tài khoản
                 </th>
                 <th>
-                    Mật khẩu
-                </th>
-                <th>
                     Email
                 </th>
                 <th>
@@ -227,9 +223,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.passwords)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.email)

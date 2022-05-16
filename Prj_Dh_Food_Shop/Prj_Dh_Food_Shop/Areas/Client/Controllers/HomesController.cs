@@ -29,18 +29,27 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string username, string passwords, string returnUrl)
+        public ActionResult Login(Login login, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var data = db.Customers.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords) && s.is_active == 1).FirstOrDefault();
+                var data = db.Customers.Where(s => s.username.Equals(login.username) && s.is_active == 1).FirstOrDefault();
                 if (data != null)
                 {
-                    //add session
-                    Session.Add(CommonConstants.KH_SESSION, data);
-                    if (IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-                    return RedirectToAction("Index", "Homes");
+                    bool authenSuccess;
+                    authenSuccess = Encryption.CheckPassword(login.passwords, data.passwords, "");
+                    if (authenSuccess)
+                    {
+                        //add session
+                        Session.Add(CommonConstants.KH_SESSION, data);
+                        if (IsLocalUrl(returnUrl))
+                            return Redirect(returnUrl);
+                        return RedirectToAction("Index", "Homes");
+                    }
+                    else
+                    {
+                        return Content("<script language='javascript' type='text/javascript'>alert('Tên đăng nhập hoặc mật khẩu không đúng!'); window.location.href = '/Client/Homes/Index';</script>");
+                    }
                 }
                 else
                 {
@@ -49,6 +58,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
             }
             return View("Index");
         }
+
 
         public ActionResult Edit(int? id)
         {
@@ -84,7 +94,8 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
                 }
                 else
                 {
-                    result.passwords = cus.passwords;
+
+                    result.passwords = Encryption.EncryptPassword(cus.passwords);
                     if (cus.phone_number == null || !Regex.Match(cus.phone_number, @"^[0-9]+$").Success || cus.phone_number.Length != 10)
                     {
                         msg = "Cập nhật không thành công! Số điện thoại của quý khách không đúng định dạng!";

@@ -142,6 +142,8 @@
     <Compile Include="Areas\Client\Controllers\ProductController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductTypeController.cs" />
     <Compile Include="Areas\Client\Models\CartItem.cs" />
+    <Compile Include="Common\Encryption.cs" />
+    <Compile Include="Common\SecurityUtility.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Cities.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />

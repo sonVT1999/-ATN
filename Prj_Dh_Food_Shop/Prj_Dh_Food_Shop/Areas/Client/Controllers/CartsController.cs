@@ -327,7 +327,7 @@ namespace Prj_Dh_Food_Shop.Areas.Client.Controllers
         public AlternateView GetEmbeddedImage(string email)
         {
             var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            string path = Path.Combine(baseDirectory, "assets", "img", "Logo_Dh_Foods.png");
+            string path = Path.Combine(baseDirectory, "assets", "img", "dhfood_logo.png");
             LinkedResource res = new LinkedResource(path);
             res.ContentId = Guid.NewGuid().ToString();
             string img = @"<img src='cid:" + res.ContentId + @"'/>";

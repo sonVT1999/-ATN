@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prj_Dh_Food_Shop.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,6 @@ namespace Prj_Dh_Food_Shop.Controllers
                            id = c.id,
                            name = c.name,
                            username = c.username,
-                           passwords = c.passwords,
                            email = c.email,
                            gender = c.gender,
                            phone_number = c.phone_number,
@@ -94,6 +94,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             else
             {
                 model.is_active = 1;
+                model.passwords = Encryption.EncryptPassword(model.passwords);
                 model.createAt = DateTime.Now;
                 db.SaveChanges();
                 msg = "Thêm mới khách hàng thành công!";
@@ -145,43 +146,34 @@ namespace Prj_Dh_Food_Shop.Controllers
             {
                 result.name = cus.name;
                 result.username = cus.username;
-                if (cus.passwords.Length < 8)
+                if (cus.phone_number == null || !Regex.Match(cus.phone_number, @"^[0-9]+$").Success || cus.phone_number.Length != 10)
                 {
-                    msg = "Cập nhật không thành công! Password phải có nhiều hơn 8 kí tự!";
+                    msg = "Cập nhật không thành công! Số điện thoại của quý khách không đúng định dạng!";
+                    status = -1;
+                }
+                else if (sqlSDT.Count() > 1)
+                {
+                    msg = "Cập nhật không thành công! Số điện thoại của quý khách đã được đăng ký!";
+                    status = -1;
+                }
+                else if (!Regex.Match(cus.email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
+                {
+                    msg = "Cập nhật không thành công! Email không đúng định dạng!";
                     status = -1;
                 }
                 else
                 {
-                    result.passwords = cus.passwords;
-                    if (cus.phone_number == null || !Regex.Match(cus.phone_number, @"^[0-9]+$").Success || cus.phone_number.Length != 10)
-                    {
-                        msg = "Cập nhật không thành công! Số điện thoại của quý khách không đúng định dạng!";
-                        status = -1;
-                    }
-                    else if (sqlSDT.Count() > 1)
-                    {
-                        msg = "Cập nhật không thành công! Số điện thoại của quý khách đã được đăng ký!";
-                        status = -1;
-                    }
-                    else if (!Regex.Match(cus.email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
-                    {
-                        msg = "Cập nhật không thành công! Email không đúng định dạng!";
-                        status = -1;
-                    }
-                    else
-                    {
-                        result.phone_number = cus.phone_number;
-                        result.birth_date = cus.birth_date;
-                        result.email = cus.email;
-                        result.addresss = cus.addresss;
-                        result.gender = cus.gender;
-                        result.is_active = cus.is_active;
-                        result.id_province = cus.id_province;
+                    result.phone_number = cus.phone_number;
+                    result.birth_date = cus.birth_date;
+                    result.email = cus.email;
+                    result.addresss = cus.addresss;
+                    result.gender = cus.gender;
+                    result.is_active = cus.is_active;
+                    result.id_province = cus.id_province;
 
-                        db.SaveChanges();
-                        msg = "Cập nhật thông tin khách hàng thành công!";
-                        status = 1;
-                    }
+                    db.SaveChanges();
+                    msg = "Cập nhật thông tin khách hàng thành công!";
+                    status = 1;
                 }
             }
             return Json(new { msg = msg, status = status }, JsonRequestBehavior.AllowGet);

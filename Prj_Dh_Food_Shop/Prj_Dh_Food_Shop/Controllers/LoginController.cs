@@ -3,6 +3,8 @@ using Prj_Dh_Food_Shop.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,22 +23,30 @@ namespace Prj_Dh_Food_Shop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string username, string passwords , string returnUrl)
+        public ActionResult Login(Login login, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var data = db.Users.Where(s => s.username.Equals(username) && s.passwords.Equals(passwords) && s.is_active == 1).FirstOrDefault();
+                var data = db.Users.Where(s => s.username.Equals(login.username) && s.is_active == 1).FirstOrDefault();
                 if (data != null)
                 {
+                    bool authenSuccess;
+                    authenSuccess = Encryption.CheckPassword(login.passwords, data.passwords, "");
+                    if (authenSuccess)
+                    {
+                        var listCredentials = GetListCredential(data.username);
+                        //add session
+                        Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
+                        Session.Add(CommonConstants.USER_SESSION, data);
+                        if (IsLocalUrl(returnUrl))
+                            return Redirect(returnUrl);
 
-                    var listCredentials = GetListCredential(data.username);
-                    //add session
-                    Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
-                    Session.Add(CommonConstants.USER_SESSION, data);
-                    if (IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-
-                    return RedirectToAction("Index", "Dashboards");
+                        return RedirectToAction("Index", "Dashboards");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng!");
+                    }
                 }
                 else
                 {
@@ -45,6 +55,7 @@ namespace Prj_Dh_Food_Shop.Controllers
             }
             return View("Index");
         }
+
 
         //Logout
         public ActionResult Logout()

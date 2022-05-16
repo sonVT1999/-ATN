@@ -17,6 +17,8 @@ namespace Prj_Dh_Food_Shop.Common
 
         public static string QuanLy = "Quản lý";
 
+        public const string KeyPassWord = "GKHTDGDS";
+
 
     }
 }

@@ -26,10 +26,10 @@
                         @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" });
                         <div class="form-input">
                             @Html.Hidden("ReturnUrl", ViewBag.ReturnUrl as string)
-                            @Html.TextBoxFor(model => model.username, new { @class = "form-control", @placeholder = "Username", @name = "username", @autofocus = "autofocus" })
+                            @Html.TextBoxFor(model => model.username, new { @class = "form-control", @placeholder = "Tên đăng nhập", @name = "username", @autofocus = "autofocus" })
                         </div>
                         <div class="form-input">
-                            @Html.PasswordFor(model => model.passwords, new { @class = "form-control", @placeholder = "Password", @name = "passwords", @type = "password" })
+                            @Html.PasswordFor(model => model.passwords, new { @class = "form-control", @placeholder = "Mật khẩu", @name = "passwords", @type = "password" })
                         </div>
                         <!-- Change this to a button or input when using this as a form -->
                         <button type="submit" class="btn btn-primary theme-button mt-4">Đăng nhập</button>
