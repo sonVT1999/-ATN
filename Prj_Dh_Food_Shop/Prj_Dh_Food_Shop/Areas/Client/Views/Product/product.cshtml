@@ -6,6 +6,7 @@
 @model List<Prj_Dh_Food_Shop.Search_Products>
 @{
     var categories = (Prj_Dh_Food_Shop.Categories)ViewBag.categoryList;
+    var category = (Prj_Dh_Food_Shop.Categories)ViewBag.category;
 }
 
 <!DOCTYPE html>
@@ -140,7 +141,7 @@
                         <div class="wrapper">
                             <div class="box_mid v2">
                                 <div class="mid-title" style="margin-top: 8%;">
-                                    <div class="titleL white"><h1 style="color: #1b5633;">@categories.name</h1></div>
+                                    <div class="titleL white"><h1 style="color: #1b5633;">@category.name</h1></div>
                                     <div class="titleR"></div>
                                     <div class="clear"></div>
                                 </div>
